@@ -94,3 +94,31 @@ export type StockMovement = {
     createdBy: string;
     createdAt: string;
 };
+
+export type RecipeIngredient = {
+    id: string;
+    productId: string;
+    /** In the product's stockUnit. */
+    quantity: number;
+};
+
+export type Recipe = {
+    id: string;
+    name: string;
+    category?: string;
+    ingredients: RecipeIngredient[];
+    createdAt: string;
+    updatedAt: string;
+};
+
+export type AuditLogEntry = {
+    id: string;
+    scope: string;
+    action: string;
+    description: string;
+    actorRole: string;
+    actorName: string;
+    ip: string;
+    userAgent: string;
+    createdAt: string;
+};
