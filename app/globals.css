@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7fff7;
+  --foreground: #0B2F0B;
+  --penza-green: #00A300;
+  --penza-green-deep: #007A00;
+  --penza-mint: #e8fbe8;
+  --penza-soft: #fbfffb;
+  --penza-border: rgba(0, 163, 0, 0.16);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, rgba(0, 163, 0, 0.12), transparent 32rem),
+    radial-gradient(circle at bottom left, rgba(148, 230, 148, 0.20), transparent 28rem),
+    #ffffff;
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: rgba(0, 163, 0, 0.18);
+}
+
+.penza-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(0, 163, 0, 0.10), transparent 24rem),
+    radial-gradient(circle at 90% 0%, rgba(148, 230, 148, 0.18), transparent 28rem),
+    linear-gradient(180deg, #ffffff 0%, #f7fff7 100%);
+  color: #0B2F0B;
+}
+
+.penza-hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--penza-border);
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at 88% 10%, rgba(0, 163, 0, 0.14), transparent 18rem),
+    linear-gradient(135deg, #ffffff 0%, #f2fff2 100%);
+  color: #0B2F0B;
+  box-shadow: 0 22px 60px rgba(0, 163, 0, 0.10);
+}
+
+.penza-hero::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: -34% auto auto -12%;
+  width: 25rem;
+  height: 25rem;
+  border-radius: 999px;
+  background: rgba(0, 163, 0, 0.08);
+}
+
+.penza-hero::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  right: 3rem;
+  bottom: -6rem;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 163, 0, 0.12);
+  background: rgba(0, 163, 0, 0.06);
+}
+
+.penza-card {
+  border: 1px solid var(--penza-border);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 14px 38px rgba(0, 163, 0, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.penza-card-hover {
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.penza-card-hover:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 163, 0, 0.34);
+  box-shadow: 0 22px 46px rgba(0, 163, 0, 0.14);
+}
+
+.penza-pill {
+  border: 1px solid rgba(0, 163, 0, 0.16);
+  background: rgba(232, 248, 238, 0.95);
+  color: #007A00;
+}
+
+.penza-button {
+  background: var(--penza-green);
+  color: white;
+  box-shadow: 0 12px 26px rgba(0, 163, 0, 0.20);
+  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.penza-button:hover {
+  transform: translateY(-1px);
+  background: #008A00;
+  box-shadow: 0 16px 34px rgba(0, 163, 0, 0.25);
+}
+
+.penza-ghost-button {
+  border: 1px solid rgba(0, 163, 0, 0.18);
+  background: rgba(255, 255, 255, 0.86);
+  color: #007A00;
+}
+
+.penza-live-dot {
+  display: inline-flex;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: #00A300;
+  box-shadow: 0 0 0 6px rgba(0, 163, 0, 0.14);
+}
+
+.penza-table-head {
+  background: #f2fff2;
+  color: rgba(11, 47, 11, 0.68);
+}
+
+/* Safety override: old dark hero utility classes should not turn Penza pages black again. */
+.penza-hero .text-white,
+.penza-hero .text-green-50,
+.penza-hero .text-green-50\/80,
+.penza-hero .text-green-50\/60 {
+  color: #0B2F0B !important;
+}
+
+.penza-hero .bg-white\/10 {
+  background-color: rgba(0, 163, 0, 0.08) !important;
+}
+
+.penza-hero .border-white\/25,
+.penza-hero .border-white\/20 {
+  border-color: rgba(0, 163, 0, 0.18) !important;
+}

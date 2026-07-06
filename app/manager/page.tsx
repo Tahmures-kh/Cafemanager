@@ -1,0 +1,62 @@
+"use client";
+
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { BackButton } from "../../components/BackButton";
+import { RoleGuard } from "../../components/RoleGuard";
+import { clearActivePenzaRole } from "../../lib/role-session";
+
+export default function ManagerMainPage() {
+    const router = useRouter();
+
+    const actionCards = [
+        { href: "/manager/dashboard", title: "داشبورد", eyebrow: "دید زنده" },
+        { href: "/manager/orders", title: "درخواست‌ها", eyebrow: "کنترل سفارش" },
+        { href: "/manager/inventory", title: "موجودی انبار", eyebrow: "انبار مدیریتی" },
+    ];
+
+    function handleLogout() {
+        clearActivePenzaRole();
+        router.push("/");
+    }
+
+    return (
+        <RoleGuard role="manager">
+            <main className="penza-page">
+                <div className="mx-auto max-w-7xl p-5 lg:p-6">
+                    <section className="penza-hero p-6 lg:p-8">
+                        <div className="relative z-10">
+                            <p className="inline-flex items-center gap-2 rounded-full border border-green-900/10 bg-white px-4 py-2 text-sm font-black text-[#007A00] shadow-sm"><span className="penza-live-dot" />Penza · مدیر</p>
+                            <h1 className="mt-4 text-3xl font-black tracking-tight text-[#0B2F0B] lg:text-4xl">داشبورد مدیر</h1>
+                            <div className="mt-6 flex flex-wrap gap-3">
+                                <BackButton />
+                                <Link href="/manager/dashboard" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">داشبورد</Link>
+                                <Link href="/manager/orders" className="penza-ghost-button rounded-2xl px-5 py-3 text-sm font-black hover:bg-green-50">درخواست‌ها</Link>
+                                <Link href="/manager/reports" className="penza-ghost-button rounded-2xl px-5 py-3 text-sm font-black hover:bg-green-50">گزارش</Link>
+                                <button type="button" onClick={handleLogout} className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-red-600 hover:bg-red-50">خروج</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="mt-5 grid gap-4 md:grid-cols-3">
+                        {actionCards.map((card) => (
+                            <Link key={card.href} href={card.href} className="penza-card penza-card-hover rounded-[1.5rem] p-6">
+                                <p className="text-sm font-black text-[#007A00]">{card.eyebrow}</p>
+                                <h2 className="mt-3 text-2xl font-black text-[#0B2F0B]">{card.title}</h2>
+                            </Link>
+                        ))}
+                    </section>
+
+                    <section className="mt-5">
+                        <div className="penza-card rounded-[1.5rem] p-6">
+                            <div className="flex items-center justify-between gap-3">
+                                <h2 className="text-xl font-black text-[#0B2F0B]">گزارش</h2>
+                                <Link href="/manager/reports" className="rounded-full bg-[#00A300] px-3 py-1 text-xs font-black text-white">مشاهده</Link>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </RoleGuard>
+    );
+}
