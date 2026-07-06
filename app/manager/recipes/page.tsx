@@ -1,13 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import * as XLSX from "xlsx";
 import { BackButton } from "../../../components/BackButton";
 import { RoleGuard } from "../../../components/RoleGuard";
 import { fetchAuditLog, logAuditEvent } from "../../../lib/audit-log";
 import { getActorName, setActorName } from "../../../lib/actor-name";
 import { formatDateTime, useCafeStorageStore } from "../../../lib/local-store";
+import {
+    fetchExchangeRates,
+    fetchIngredientPrices,
+    saveIngredientPrice,
+    type ExchangeRatesResult,
+    type IngredientPrice,
+} from "../../../lib/pricing-api";
 import { formatStockQuantity, getStockUnit } from "../../../lib/product-units";
 import { parseRecipeExcelRows, type ParsedRecipePreview } from "../../../lib/recipe-excel";
 import { useRecipes, type RecipeInput } from "../../../lib/recipe-store";
@@ -15,6 +22,14 @@ import { getActivePenzaRole, getRoleLabel } from "../../../lib/role-session";
 import type { AuditLogEntry, Product, Recipe } from "../../../lib/types";
 
 const AUDIT_SCOPE = "recipes";
+
+function formatToman(value: number) {
+    return `${new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(value)} تومان`;
+}
+
+function formatForeignCurrency(value: number, symbol: string) {
+    return `${new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(value)} ${symbol}`;
+}
 
 function getProduct(productId: string, products: Product[]) {
     return products.find((product) => product.id === productId);
@@ -53,8 +68,61 @@ export default function ManagerRecipesPage() {
 
     const [auditEntries, setAuditEntries] = useState<AuditLogEntry[]>([]);
 
+    const [ingredientPrices, setIngredientPrices] = useState<IngredientPrice[]>([]);
+    const [priceInputs, setPriceInputs] = useState<Record<string, string>>({});
+    const [exchangeRates, setExchangeRates] = useState<ExchangeRatesResult>({ configured: false });
+
     const actorRole = getActivePenzaRole();
     const actorRoleLabel = actorRole ? getRoleLabel(actorRole) : "نامشخص";
+
+    async function refreshIngredientPrices() {
+        setIngredientPrices(await fetchIngredientPrices());
+    }
+
+    useEffect(() => {
+        refreshIngredientPrices();
+        fetchExchangeRates().then(setExchangeRates);
+    }, []);
+
+    const priceByProductId = useMemo(
+        () => new Map(ingredientPrices.map((price) => [price.productId, price])),
+        [ingredientPrices]
+    );
+
+    const priceableProducts = useMemo(() => {
+        const productIds = new Set<string>();
+        recipes.forEach((recipe) => recipe.ingredients.forEach((ingredient) => productIds.add(ingredient.productId)));
+
+        return Array.from(productIds)
+            .map((productId) => getProduct(productId, products))
+            .filter((product): product is Product => Boolean(product))
+            .sort((a, b) => a.name.localeCompare(b.name, "fa"));
+    }, [recipes, products]);
+
+    function recipeCostToman(recipe: Recipe) {
+        return recipe.ingredients.reduce((sum, ingredient) => {
+            const price = priceByProductId.get(ingredient.productId)?.unitPrice ?? 0;
+            return sum + price * ingredient.quantity;
+        }, 0);
+    }
+
+    async function handleSavePrice(product: Product) {
+        const rawValue = priceInputs[product.id] ?? String(priceByProductId.get(product.id)?.unitPrice ?? "");
+        const unitPrice = Number.parseFloat(rawValue);
+        if (!Number.isFinite(unitPrice) || unitPrice < 0) return;
+
+        const saved = await saveIngredientPrice({
+            productId: product.id,
+            productName: product.name,
+            unitPrice,
+            stockUnit: getStockUnit(product),
+        });
+
+        if (saved) {
+            await refreshIngredientPrices();
+            await recordAuditEvent("update_ingredient_price", `قیمت «${product.name}» به ${formatToman(unitPrice)} به‌ازای هر ${getStockUnit(product)} تنظیم شد`);
+        }
+    }
 
     async function refreshAuditLog() {
         const entries = await fetchAuditLog(AUDIT_SCOPE);
@@ -121,10 +189,15 @@ export default function ManagerRecipesPage() {
             name: preview.name,
             ingredients: preview.rows
                 .filter((row) => row.productId)
-                .map((row) => ({ productId: row.productId as string, quantity: row.quantity })),
+                .map((row) => ({
+                    productId: row.productId as string,
+                    quantity: row.quantity,
+                    productName: row.ingredientName,
+                    stockUnit: row.stockUnit ?? undefined,
+                })),
         }));
 
-        const imported = importRecipes(inputs);
+        const imported = await importRecipes(inputs);
         await recordAuditEvent(
             "import_excel",
             `ایمپورت ${imported.length} رسپی از فایل «${pendingFileName ?? "نامشخص"}»`
@@ -190,17 +263,22 @@ export default function ManagerRecipesPage() {
             category: editForm.category.trim() || undefined,
             ingredients: editForm.ingredients
                 .filter((ingredient) => ingredient.productId)
-                .map((ingredient) => ({
-                    productId: ingredient.productId,
-                    quantity: Number.parseFloat(ingredient.quantity) || 0,
-                })),
+                .map((ingredient) => {
+                    const product = getProduct(ingredient.productId, products);
+                    return {
+                        productId: ingredient.productId,
+                        quantity: Number.parseFloat(ingredient.quantity) || 0,
+                        productName: product?.name,
+                        stockUnit: getStockUnit(product),
+                    };
+                }),
         };
 
         if (editingRecipeId === "new") {
-            addRecipe(input);
+            await addRecipe(input);
             await recordAuditEvent("create_recipe", `ایجاد رسپی «${name}»`);
         } else if (editingRecipeId) {
-            updateRecipe(editingRecipeId, input);
+            await updateRecipe(editingRecipeId, input);
             await recordAuditEvent("update_recipe", `ویرایش رسپی «${name}»`);
         }
 
@@ -211,7 +289,7 @@ export default function ManagerRecipesPage() {
         const confirmed = window.confirm(`حذف رسپی «${recipe.name}»؟\n\nاین کار قابل بازگشت نیست.`);
         if (!confirmed) return;
 
-        deleteRecipe(recipe.id);
+        await deleteRecipe(recipe.id);
         await recordAuditEvent("delete_recipe", `حذف رسپی «${recipe.name}»`);
     }
 
@@ -244,6 +322,12 @@ export default function ManagerRecipesPage() {
                                 </Link>
                                 <Link href="/manager/reports" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">
                                     گزارش دوره‌ای
+                                </Link>
+                                <Link href="/manager/sales" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
+                                    فروش و تحلیل
+                                </Link>
+                                <Link href="/manager/purchases" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
+                                    خریدهای روزانه
                                 </Link>
                             </div>
                         </div>
@@ -389,6 +473,7 @@ export default function ManagerRecipesPage() {
                                         <th className="px-4 py-3">نام رسپی</th>
                                         <th className="px-4 py-3">دسته‌بندی</th>
                                         <th className="px-4 py-3">تعداد مواد</th>
+                                        <th className="px-4 py-3">قیمت تمام‌شده</th>
                                         <th className="px-4 py-3">عملیات</th>
                                     </tr>
                                 </thead>
@@ -407,6 +492,24 @@ export default function ManagerRecipesPage() {
                                                 </td>
                                                 <td className="px-4 py-3 text-slate-600">{recipe.category ?? "-"}</td>
                                                 <td className="px-4 py-3 text-slate-600">{recipe.ingredients.length}</td>
+                                                <td className="px-4 py-3 text-slate-600">
+                                                    <div className="font-black text-[#0B2F0B]">{formatToman(recipeCostToman(recipe))}</div>
+                                                    {exchangeRates.configured ? (
+                                                        <div className="mt-1 flex gap-2 text-[11px] font-bold text-slate-400">
+                                                            {exchangeRates.rates.usd > 0 && (
+                                                                <span>{formatForeignCurrency(recipeCostToman(recipe) / exchangeRates.rates.usd, "$")}</span>
+                                                            )}
+                                                            {exchangeRates.rates.eur > 0 && (
+                                                                <span>{formatForeignCurrency(recipeCostToman(recipe) / exchangeRates.rates.eur, "€")}</span>
+                                                            )}
+                                                            {exchangeRates.rates.try > 0 && (
+                                                                <span>{formatForeignCurrency(recipeCostToman(recipe) / exchangeRates.rates.try, "₺")}</span>
+                                                            )}
+                                                        </div>
+                                                    ) : (
+                                                        <p className="mt-1 text-[11px] font-bold text-slate-400">نرخ ارز هنوز دریافت نشده</p>
+                                                    )}
+                                                </td>
                                                 <td className="px-4 py-3">
                                                     <div className="flex gap-2">
                                                         <button
@@ -428,7 +531,7 @@ export default function ManagerRecipesPage() {
                                             </tr>
                                             {expandedRecipeId === recipe.id && (
                                                 <tr>
-                                                    <td colSpan={4} className="bg-[#f8fff8] px-4 py-3">
+                                                    <td colSpan={5} className="bg-[#f8fff8] px-4 py-3">
                                                         <ul className="space-y-1 text-xs font-bold text-slate-600">
                                                             {recipe.ingredients.map((ingredient) => {
                                                                 const product = getProduct(ingredient.productId, products);
@@ -447,8 +550,64 @@ export default function ManagerRecipesPage() {
                                     ))}
                                     {recipes.length === 0 && (
                                         <tr>
-                                            <td className="px-4 py-6 text-center text-sm font-bold text-slate-500" colSpan={4}>
+                                            <td className="px-4 py-6 text-center text-sm font-bold text-slate-500" colSpan={5}>
                                                 هنوز رسپی‌ای ثبت نشده است.
+                                            </td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section className="mt-5 penza-card rounded-[1.5rem] p-5">
+                        <h2 className="text-xl font-black text-[#0B2F0B]">قیمت‌گذاری مواد اولیه</h2>
+                        <p className="mt-1 text-xs font-bold leading-6 text-slate-500">
+                            قیمت خرید هر واحد از کالاهای استفاده‌شده در رسپی‌ها را به تومان وارد کنید تا «قیمت تمام‌شده»
+                            هر رسپی محاسبه شود.
+                            {!exchangeRates.configured && " تبدیل به دلار/یورو/لیر تا وقتی نرخ ارز از کانال تلگرام دریافت نشود نمایش داده نمی‌شود."}
+                        </p>
+
+                        <div className="mt-4 overflow-hidden rounded-2xl border border-green-900/10 bg-white">
+                            <table className="w-full min-w-[560px] text-right text-sm">
+                                <thead className="penza-table-head text-xs font-black">
+                                    <tr>
+                                        <th className="px-4 py-3">کالا</th>
+                                        <th className="px-4 py-3">واحد</th>
+                                        <th className="px-4 py-3">قیمت هر واحد (تومان)</th>
+                                        <th className="px-4 py-3">عملیات</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-green-900/10">
+                                    {priceableProducts.map((product) => (
+                                        <tr key={product.id}>
+                                            <td className="px-4 py-3 font-black text-[#0B2F0B]">{product.name}</td>
+                                            <td className="px-4 py-3 text-slate-600">{getStockUnit(product)}</td>
+                                            <td className="px-4 py-3">
+                                                <input
+                                                    value={priceInputs[product.id] ?? String(priceByProductId.get(product.id)?.unitPrice ?? "")}
+                                                    onChange={(event) =>
+                                                        setPriceInputs((current) => ({ ...current, [product.id]: event.target.value }))
+                                                    }
+                                                    className="h-10 w-32 rounded-xl border border-green-900/15 bg-white px-3 text-right text-sm font-semibold text-[#0B2F0B] outline-none focus:border-[#00A300]"
+                                                    placeholder="0"
+                                                />
+                                            </td>
+                                            <td className="px-4 py-3">
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleSavePrice(product)}
+                                                    className="rounded-full bg-[#e0ffe0] px-3 py-1 text-[11px] font-black text-[#007A00]"
+                                                >
+                                                    ذخیره
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                    {priceableProducts.length === 0 && (
+                                        <tr>
+                                            <td className="px-4 py-6 text-center text-sm font-bold text-slate-500" colSpan={4}>
+                                                ابتدا حداقل یک رسپی با مواد اولیه ثبت کنید.
                                             </td>
                                         </tr>
                                     )}

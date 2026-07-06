@@ -101,6 +101,12 @@ export default function ManagerDashboardPage() {
                             <Link href="/manager/recipes" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
                                 رسپی‌ها
                             </Link>
+                            <Link href="/manager/sales" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
+                                فروش و تحلیل
+                            </Link>
+                            <Link href="/manager/purchases" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
+                                خریدهای روزانه
+                            </Link>
                         </div>
                     </div>
                 </section>

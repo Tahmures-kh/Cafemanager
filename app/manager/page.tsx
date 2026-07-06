@@ -14,6 +14,8 @@ export default function ManagerMainPage() {
         { href: "/manager/orders", title: "درخواست‌ها", eyebrow: "کنترل سفارش" },
         { href: "/manager/inventory", title: "موجودی انبار", eyebrow: "انبار مدیریتی" },
         { href: "/manager/recipes", title: "رسپی‌ها", eyebrow: "مواد اولیه و مقدار" },
+        { href: "/manager/sales", title: "فروش و تحلیل", eyebrow: "پایان شیفت" },
+        { href: "/manager/purchases", title: "خریدهای روزانه", eyebrow: "فروشنده‌ها و سفارش" },
     ];
 
     function handleLogout() {

@@ -1,14 +1,33 @@
-import { mkdir, readFile, appendFile } from "fs/promises";
-import path from "path";
 import { NextRequest, NextResponse } from "next/server";
+import { createRecordId, getDb, nowIso } from "../../../lib/db";
 import type { AuditLogEntry } from "../../../lib/types";
 
-const DATA_DIR = path.join(process.cwd(), "data");
-const LOG_FILE = path.join(DATA_DIR, "audit-log.jsonl");
 const MAX_ENTRIES_RETURNED = 500;
 
-function createId() {
-    return `audit-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+type AuditLogRow = {
+    id: string;
+    scope: string;
+    action: string;
+    description: string | null;
+    actor_role: string | null;
+    actor_name: string | null;
+    ip: string | null;
+    user_agent: string | null;
+    created_at: string;
+};
+
+function mapRow(row: AuditLogRow): AuditLogEntry {
+    return {
+        id: row.id,
+        scope: row.scope,
+        action: row.action,
+        description: row.description ?? "",
+        actorRole: row.actor_role ?? "نامشخص",
+        actorName: row.actor_name ?? "نامشخص",
+        ip: row.ip ?? "نامشخص",
+        userAgent: row.user_agent ?? "نامشخص",
+        createdAt: row.created_at,
+    };
 }
 
 function getClientIp(request: NextRequest) {
@@ -21,26 +40,6 @@ function getClientIp(request: NextRequest) {
     return "نامشخص (بدون پراکسی)";
 }
 
-async function readAllEntries(): Promise<AuditLogEntry[]> {
-    try {
-        const raw = await readFile(LOG_FILE, "utf-8");
-        return raw
-            .split("\n")
-            .map((line) => line.trim())
-            .filter(Boolean)
-            .map((line) => {
-                try {
-                    return JSON.parse(line) as AuditLogEntry;
-                } catch {
-                    return null;
-                }
-            })
-            .filter((entry): entry is AuditLogEntry => entry !== null);
-    } catch {
-        return [];
-    }
-}
-
 export async function POST(request: NextRequest) {
     const body = await request.json().catch(() => null);
 
@@ -49,7 +48,7 @@ export async function POST(request: NextRequest) {
     }
 
     const entry: AuditLogEntry = {
-        id: createId(),
+        id: createRecordId("audit"),
         scope: body.scope,
         action: body.action,
         description: typeof body.description === "string" ? body.description : "",
@@ -57,21 +56,39 @@ export async function POST(request: NextRequest) {
         actorName: typeof body.actorName === "string" && body.actorName.trim() ? body.actorName.trim() : "نامشخص",
         ip: getClientIp(request),
         userAgent: request.headers.get("user-agent") ?? "نامشخص",
-        createdAt: new Date().toISOString(),
+        createdAt: nowIso(),
     };
 
-    await mkdir(DATA_DIR, { recursive: true });
-    await appendFile(LOG_FILE, `${JSON.stringify(entry)}\n`, "utf-8");
+    const db = getDb();
+    db.prepare(
+        `INSERT INTO audit_log (id, scope, action, description, actor_role, actor_name, ip, user_agent, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    ).run(
+        entry.id,
+        entry.scope,
+        entry.action,
+        entry.description,
+        entry.actorRole,
+        entry.actorName,
+        entry.ip,
+        entry.userAgent,
+        entry.createdAt
+    );
 
     return NextResponse.json({ entry });
 }
 
 export async function GET(request: NextRequest) {
     const scope = request.nextUrl.searchParams.get("scope");
-    const entries = await readAllEntries();
+    const db = getDb();
 
-    const filtered = scope ? entries.filter((entry) => entry.scope === scope) : entries;
-    const sorted = filtered.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    const rows = scope
+        ? (db
+            .prepare("SELECT * FROM audit_log WHERE scope = ? ORDER BY created_at DESC LIMIT ?")
+            .all(scope, MAX_ENTRIES_RETURNED) as AuditLogRow[])
+        : (db
+            .prepare("SELECT * FROM audit_log ORDER BY created_at DESC LIMIT ?")
+            .all(MAX_ENTRIES_RETURNED) as AuditLogRow[]);
 
-    return NextResponse.json({ entries: sorted.slice(0, MAX_ENTRIES_RETURNED) });
+    return NextResponse.json({ entries: rows.map(mapRow) });
 }

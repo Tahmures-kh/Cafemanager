@@ -111,6 +111,53 @@ export type Recipe = {
     updatedAt: string;
 };
 
+export type SalesItem = {
+    id: string;
+    recipeId: string | null;
+    itemName: string;
+    quantitySold: number;
+    unitPrice: number | null;
+    revenue: number | null;
+};
+
+export type SalesBatch = {
+    id: string;
+    shiftDate: string;
+    shiftLabel?: string;
+    sourceType: "excel" | "csv" | "image";
+    sourceFileName?: string;
+    importedBy?: string;
+    createdAt: string;
+    items: SalesItem[];
+};
+
+export type Supplier = {
+    id: string;
+    name: string;
+    phone: string;
+    website?: string;
+    notes?: string;
+    createdAt: string;
+};
+
+export type PurchaseOrderItem = {
+    id: string;
+    productId?: string;
+    productName: string;
+    quantity: number;
+    stockUnit?: string;
+};
+
+export type PurchaseOrder = {
+    id: string;
+    supplierId: string;
+    status: string;
+    smsStatus: string;
+    createdBy?: string;
+    createdAt: string;
+    items: PurchaseOrderItem[];
+};
+
 export type AuditLogEntry = {
     id: string;
     scope: string;
