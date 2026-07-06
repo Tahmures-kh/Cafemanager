@@ -166,6 +166,9 @@ export default function ManagerOrdersPage() {
                             <Link href="/manager/reports" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">
                                 گزارش دوره‌ای
                             </Link>
+                            <Link href="/manager/recipes" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
+                                رسپی‌ها
+                            </Link>
                         </div>
                     </div>
                 </section>

@@ -13,6 +13,7 @@ export default function ManagerMainPage() {
         { href: "/manager/dashboard", title: "داشبورد", eyebrow: "دید زنده" },
         { href: "/manager/orders", title: "درخواست‌ها", eyebrow: "کنترل سفارش" },
         { href: "/manager/inventory", title: "موجودی انبار", eyebrow: "انبار مدیریتی" },
+        { href: "/manager/recipes", title: "رسپی‌ها", eyebrow: "مواد اولیه و مقدار" },
     ];
 
     function handleLogout() {
