@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "watch:autocommit": "node scripts/auto-commit-watch.mjs"
   },
   "dependencies": {
     "next": "16.2.9",
