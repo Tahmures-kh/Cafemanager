@@ -65,109 +65,163 @@ export const products: Product[] = [
         "id": "p1",
         "name": "سیروپ گل رز",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p2",
         "name": "سیروپ رز fo",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p3",
         "name": "سیروپ آمارتو",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p4",
         "name": "سیروپ تریپل سک کاراسائو",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p5",
         "name": "سیروپ کارامل",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p6",
         "name": "سیروپ سیب سبز",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p7",
         "name": "سیروپ موهیتو",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p8",
         "name": "سیروپ بلوبری",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p9",
         "name": "سیروپ آیریش",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p10",
         "name": "سیروپ دارچین زنجبیل",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p11",
         "name": "سیروپ نارگیل",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p12",
         "name": "سیروپ فندق",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p13",
         "name": "سیروپ پشن فروت",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p14",
         "name": "سیروپ بلو کاراساِئو",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p15",
         "name": "سیروپ گرانادین",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p16",
         "name": "سیروپ وانیل",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p17",
         "name": "سیروپ تیرامیسو",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p18",
         "name": "سیروپ رام",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p19",
@@ -1809,7 +1863,10 @@ export const products: Product[] = [
         "id": "p289",
         "name": "سیروپ دارچین",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p290",
@@ -2257,7 +2314,10 @@ export const products: Product[] = [
         "id": "p359",
         "name": "سیروپ زنجبیل",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p360",
@@ -2407,7 +2467,10 @@ export const products: Product[] = [
         "id": "p384",
         "name": "سیروپ نعناع",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p385",
@@ -2485,49 +2548,73 @@ export const products: Product[] = [
         "id": "p397",
         "name": "سیروپ لاوندر fo",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p398",
         "name": "سیروپ کدو حلوایی fo",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p399",
         "name": "سیروپ کوکی fo",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p400",
         "name": "سیروپ توت فرنگی fo",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p401",
         "name": "سیروپ کارامل fo",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p402",
         "name": "سیروپ دارچین fo",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p403",
         "name": "سیروپ وانیل fo",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p404",
         "name": "سیروپ فندق fo",
         "category": "syrup",
-        "unit": "لیتر"
+        "unit": "لیتر",
+        "stockUnit": "لیتر",
+        "orderUnit": "بطری",
+        "orderUnitQuantity": 0.7
     },
     {
         "id": "p405",
