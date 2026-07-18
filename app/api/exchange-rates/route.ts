@@ -1,6 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getDb, nowIso } from "../../../lib/db";
 import { fetchLiveExchangeRates, isExchangeRateConfigured } from "../../../lib/exchange-rate";
+import { requireAuth } from "../../../lib/session";
 
 // Refreshed at most twice a day, matching the update cadence of the source channel.
 const CACHE_TTL_MS = 12 * 60 * 60 * 1000;
@@ -8,7 +9,10 @@ const CURRENCIES = ["USD", "EUR", "TRY"] as const;
 
 type RateRow = { currency: string; rate_to_toman: number; fetched_at: string };
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+    const auth = requireAuth(request, ["manager", "accountant"]);
+    if (!auth.ok) return auth.response;
+
     const db = getDb();
     const rows = db.prepare("SELECT * FROM exchange_rates").all() as RateRow[];
     const byCurrency = new Map(rows.map((row) => [row.currency, row]));

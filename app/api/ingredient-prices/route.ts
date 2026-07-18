@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDb, nowIso } from "../../../lib/db";
+import { requireAuth } from "../../../lib/session";
 
 type PriceRow = {
     product_id: string;
@@ -9,7 +10,10 @@ type PriceRow = {
     updated_at: string;
 };
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+    const auth = requireAuth(request, ["manager", "accountant"]);
+    if (!auth.ok) return auth.response;
+
     const db = getDb();
     const rows = db.prepare("SELECT * FROM ingredient_prices").all() as PriceRow[];
 
@@ -25,6 +29,9 @@ export async function GET() {
 }
 
 export async function PUT(request: NextRequest) {
+    const auth = requireAuth(request, ["manager", "accountant"]);
+    if (!auth.ok) return auth.response;
+
     const body = await request.json().catch(() => null);
 
     if (!body || typeof body.productId !== "string" || typeof body.unitPrice !== "number" || body.unitPrice < 0) {

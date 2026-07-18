@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createRecordId, getDb, nowIso } from "../../../lib/db";
+import { requireAuth } from "../../../lib/session";
 import type { Recipe } from "../../../lib/types";
 
 type RecipeRow = { id: string; name: string; category: string | null; created_at: string; updated_at: string };
@@ -74,7 +75,10 @@ export function insertRecipe(input: RecipeInput): Recipe {
     return mapRecipe(recipeRow, ingredientRows);
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+    const auth = requireAuth(request, ["manager", "accountant"]);
+    if (!auth.ok) return auth.response;
+
     const db = getDb();
     const recipeRows = db.prepare("SELECT * FROM recipes ORDER BY created_at DESC").all() as RecipeRow[];
     const ingredientRows = db.prepare("SELECT * FROM recipe_ingredients").all() as IngredientRow[];
@@ -85,6 +89,9 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+    const auth = requireAuth(request, ["manager", "accountant"]);
+    if (!auth.ok) return auth.response;
+
     const body = await request.json().catch(() => null);
 
     if (!body || typeof body.name !== "string" || !body.name.trim() || !Array.isArray(body.ingredients)) {

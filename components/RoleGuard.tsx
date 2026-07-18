@@ -2,32 +2,40 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import {
-    getActivePenzaRole,
-    getRoleLabel,
-    PENZA_ROLE_GUARD_MESSAGE_KEY,
-    type PenzaRole,
-} from "../lib/role-session";
+import { getCurrentAccount } from "../lib/auth-api";
+import { PENZA_ROLE_GUARD_MESSAGE_KEY, getRoleLabel, setActivePenzaRole, type PenzaRole } from "../lib/role-session";
 
 type GuardState = "checking" | "allowed" | "blocked";
 
-export function RoleGuard({ role, children }: { role: PenzaRole; children: ReactNode }) {
+export function RoleGuard({ role, children }: { role: PenzaRole | PenzaRole[]; children: ReactNode }) {
     const router = useRouter();
     const [guardState, setGuardState] = useState<GuardState>("checking");
 
+    const allowedRoles = Array.isArray(role) ? role : [role];
+
     useEffect(() => {
-        const activeRole = getActivePenzaRole();
+        let cancelled = false;
 
-        if (activeRole === role) {
-            setGuardState("allowed");
-            return;
-        }
+        getCurrentAccount().then((account) => {
+            if (cancelled) return;
 
-        const message = `این صفحه برای ${getRoleLabel(role)} است.`;
-        window.localStorage.setItem(PENZA_ROLE_GUARD_MESSAGE_KEY, message);
-        setGuardState("blocked");
-        router.replace("/?access=denied");
-    }, [role, router]);
+            if (account && (allowedRoles.includes(account.role) || account.role === "admin")) {
+                setActivePenzaRole(account.role);
+                setGuardState("allowed");
+                return;
+            }
+
+            const message = `این صفحه برای ${allowedRoles.map(getRoleLabel).join(" یا ")} است.`;
+            window.localStorage.setItem(PENZA_ROLE_GUARD_MESSAGE_KEY, message);
+            setGuardState("blocked");
+            router.replace("/?access=denied");
+        });
+
+        return () => {
+            cancelled = true;
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [allowedRoles.join(","), router]);
 
     if (guardState === "allowed") return <>{children}</>;
 

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
+import { requireAuth } from "../../../../lib/session";
 
 const SUPPORTED_MEDIA_TYPES = new Set(["image/jpeg", "image/png", "image/gif", "image/webp"]);
 
@@ -33,6 +34,9 @@ type ExtractedItem = {
 };
 
 export async function POST(request: NextRequest) {
+    const auth = requireAuth(request, ["manager"]);
+    if (!auth.ok) return auth.response;
+
     const apiKey = process.env.ANTHROPIC_API_KEY;
 
     if (!apiKey) {

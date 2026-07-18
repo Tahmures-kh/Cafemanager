@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDb } from "../../../../lib/db";
+import { requireAuth } from "../../../../lib/session";
 import { sendSms } from "../../../../lib/sms";
 import type { PurchaseOrder } from "../../../../lib/types";
 
@@ -47,6 +48,9 @@ function buildSmsMessage(itemRows: OrderItemRow[]) {
 }
 
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    const auth = requireAuth(request, ["manager"]);
+    if (!auth.ok) return auth.response;
+
     const { id } = await params;
     const body = await request.json().catch(() => null);
 
@@ -77,7 +81,10 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     return NextResponse.json({ order: mapOrder(orderRow, itemRows) });
 }
 
-export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    const auth = requireAuth(request, ["manager"]);
+    if (!auth.ok) return auth.response;
+
     const { id } = await params;
     const db = getDb();
 

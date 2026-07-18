@@ -6,8 +6,6 @@ export type LogAuditEventInput = {
     scope: string;
     action: string;
     description: string;
-    actorRole: string;
-    actorName: string;
 };
 
 /**

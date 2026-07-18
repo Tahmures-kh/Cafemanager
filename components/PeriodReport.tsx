@@ -9,7 +9,7 @@ import type { CafeOrder, OrderItem, Product, StockMovementType } from "../lib/ty
 import { RoleGuard } from "./RoleGuard";
 import { BackButton } from "./BackButton";
 
-type ReportRole = "manager" | "storage";
+type ReportRole = "manager" | "storage" | "accountant";
 
 type TopProduct = {
     product: Product;
@@ -304,15 +304,21 @@ export function PeriodReport({ role }: { role: ReportRole }) {
         downloadBlob(blob, `penza-report-${startDate}-to-${endDate}.xls`);
     }
 
-    const workLinks = role === "manager"
-        ? [
-            { href: "/manager/orders", label: "درخواست‌ها" },
-            { href: "/manager/inventory", label: "موجودی انبار" },
-        ]
-        : [
-            { href: "/storage/orders", label: "درخواست‌ها" },
-            { href: "/storage/dashboard", label: "داشبورد انبار" },
-        ];
+    const workLinks =
+        role === "manager"
+            ? [
+                { href: "/manager/orders", label: "درخواست‌ها" },
+                { href: "/manager/inventory", label: "موجودی انبار" },
+            ]
+            : role === "storage"
+                ? [
+                    { href: "/storage/orders", label: "درخواست‌ها" },
+                    { href: "/storage/dashboard", label: "داشبورد انبار" },
+                ]
+                : [
+                    { href: "/accountant/recipes", label: "رسپی‌ها و قیمت‌گذاری" },
+                    { href: "/accountant/inventory", label: "موجودی انبار" },
+                ];
     const title = "گزارش";
 
     return (

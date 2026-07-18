@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BackButton } from "../../components/BackButton";
 import { RoleGuard } from "../../components/RoleGuard";
+import { logout } from "../../lib/auth-api";
 import { clearActivePenzaRole } from "../../lib/role-session";
 
 const actions = [
@@ -15,7 +16,8 @@ const actions = [
 export default function StorageMainPage() {
     const router = useRouter();
 
-    function handleLogout() {
+    async function handleLogout() {
+        await logout();
         clearActivePenzaRole();
         router.push("/");
     }

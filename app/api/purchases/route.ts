@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createRecordId, getDb, nowIso } from "../../../lib/db";
+import { requireAuth } from "../../../lib/session";
 import { sendSms } from "../../../lib/sms";
 import type { PurchaseOrder } from "../../../lib/types";
 
@@ -55,7 +56,10 @@ function buildSmsMessage(items: PurchaseItemInput[]) {
     return `سفارش جدید از Penza:\n${lines.join("\n")}`;
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+    const auth = requireAuth(request, ["manager"]);
+    if (!auth.ok) return auth.response;
+
     const db = getDb();
     const orderRows = db.prepare("SELECT * FROM purchase_orders ORDER BY created_at DESC").all() as OrderRow[];
     const itemRows = db.prepare("SELECT * FROM purchase_order_items").all() as OrderItemRow[];
@@ -64,6 +68,9 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+    const auth = requireAuth(request, ["manager"]);
+    if (!auth.ok) return auth.response;
+
     const body = await request.json().catch(() => null);
 
     if (

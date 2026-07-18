@@ -6,7 +6,7 @@ import * as XLSX from "xlsx";
 import { BackButton } from "../../../components/BackButton";
 import { RoleGuard } from "../../../components/RoleGuard";
 import { fetchAuditLog, logAuditEvent } from "../../../lib/audit-log";
-import { getActorName, setActorName } from "../../../lib/actor-name";
+import { getCurrentAccount, type CurrentAccount } from "../../../lib/auth-api";
 import { formatDateTime, useCafeStorageStore } from "../../../lib/local-store";
 import { formatStockQuantity } from "../../../lib/product-units";
 import { useRecipes } from "../../../lib/recipe-store";
@@ -20,7 +20,7 @@ import {
     fetchSalesBatches,
     importSalesBatch,
 } from "../../../lib/sales-api";
-import { getActivePenzaRole, getRoleLabel } from "../../../lib/role-session";
+import { getRoleLabel } from "../../../lib/role-session";
 import type { AuditLogEntry, Product, Recipe, SalesBatch } from "../../../lib/types";
 
 const AUDIT_SCOPE = "sales";
@@ -43,10 +43,7 @@ export default function ManagerSalesPage() {
     const { products, stockMovements } = useCafeStorageStore();
     const { recipes } = useRecipes();
 
-    const [actorName, setActorNameState] = useState<string | null>(() => getActorName());
-    const [actorNameInput, setActorNameInput] = useState("");
-    const actorRole = getActivePenzaRole();
-    const actorRoleLabel = actorRole ? getRoleLabel(actorRole) : "نامشخص";
+    const [account, setAccount] = useState<CurrentAccount | null>(null);
 
     const [shiftDate, setShiftDate] = useState(todayIso());
     const [shiftLabel, setShiftLabel] = useState("");
@@ -79,26 +76,12 @@ export default function ManagerSalesPage() {
     useEffect(() => {
         refreshBatches();
         refreshAuditLog();
+        getCurrentAccount().then(setAccount);
     }, []);
 
     async function recordAuditEvent(action: string, description: string) {
-        await logAuditEvent({
-            scope: AUDIT_SCOPE,
-            action,
-            description,
-            actorRole: actorRoleLabel,
-            actorName: actorName ?? "نامشخص",
-        });
+        await logAuditEvent({ scope: AUDIT_SCOPE, action, description });
         refreshAuditLog();
-    }
-
-    function handleSaveActorName() {
-        const trimmed = actorNameInput.trim();
-        if (!trimmed) return;
-
-        setActorName(trimmed);
-        setActorNameState(trimmed);
-        setActorNameInput("");
     }
 
     function handleExcelFileChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -170,7 +153,7 @@ export default function ManagerSalesPage() {
             shiftLabel: shiftLabel.trim() || undefined,
             sourceType: previewSourceType,
             sourceFileName: pendingFileName ?? undefined,
-            importedBy: actorName ?? undefined,
+            importedBy: account?.displayName ?? account?.username ?? undefined,
             items: previewRows.map((row) => ({
                 itemName: row.itemName,
                 quantitySold: row.quantitySold,
@@ -269,29 +252,9 @@ export default function ManagerSalesPage() {
                         </div>
                     </section>
 
-                    {!actorName ? (
-                        <section className="mt-5 penza-card rounded-[1.5rem] p-5">
-                            <p className="text-sm font-black text-[#0B2F0B]">
-                                برای اینکه در تاریخچه‌ی فعالیت مشخص باشد چه کسی چه کاری کرده، لطفاً نام خود را وارد کنید.
-                            </p>
-                            <div className="mt-3 flex flex-wrap gap-2">
-                                <input
-                                    value={actorNameInput}
-                                    onChange={(event) => setActorNameInput(event.target.value)}
-                                    className="h-12 min-w-[16rem] rounded-2xl border border-green-900/15 bg-white px-4 text-right text-sm font-semibold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
-                                    placeholder="نام شما..."
-                                />
-                                <button type="button" onClick={handleSaveActorName} className="penza-button rounded-2xl px-5 py-3 text-sm font-black">
-                                    ذخیره نام
-                                </button>
-                            </div>
-                        </section>
-                    ) : (
-                        <section className="mt-5 flex items-center justify-between rounded-2xl bg-[#f2fff2] px-4 py-2 text-xs font-bold text-[#007A00]">
-                            <span>ثبت‌کننده‌ی فعالیت‌ها: {actorName} ({actorRoleLabel})</span>
-                            <button type="button" onClick={() => setActorNameState(null)} className="font-black text-[#007A00] underline">
-                                تغییر نام
-                            </button>
+                    {account && (
+                        <section className="mt-5 rounded-2xl bg-[#f2fff2] px-4 py-2 text-xs font-bold text-[#007A00]">
+                            ثبت‌کننده‌ی فعالیت‌ها: {account.displayName ?? account.username} ({getRoleLabel(account.role)})
                         </section>
                     )}
 

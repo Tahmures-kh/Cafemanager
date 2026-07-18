@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createRecordId, getDb, nowIso } from "../../../../lib/db";
+import { requireAuth } from "../../../../lib/session";
 import type { Recipe } from "../../../../lib/types";
 
 type RecipeRow = { id: string; name: string; category: string | null; created_at: string; updated_at: string };
@@ -21,6 +22,9 @@ function mapRecipe(row: RecipeRow, ingredientRows: IngredientRow[]): Recipe {
 }
 
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    const auth = requireAuth(request, ["manager", "accountant"]);
+    if (!auth.ok) return auth.response;
+
     const { id } = await params;
     const body = await request.json().catch(() => null);
 
@@ -70,7 +74,10 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     return NextResponse.json({ recipe: mapRecipe(recipeRow, ingredientRows) });
 }
 
-export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    const auth = requireAuth(request, ["manager", "accountant"]);
+    if (!auth.ok) return auth.response;
+
     const { id } = await params;
     const db = getDb();
 

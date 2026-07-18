@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDb } from "../../../../lib/db";
+import { requireAuth } from "../../../../lib/session";
 import type { Supplier } from "../../../../lib/types";
 
 type SupplierRow = { id: string; name: string; phone: string; website: string | null; notes: string | null; created_at: string };
@@ -16,6 +17,9 @@ function mapSupplier(row: SupplierRow): Supplier {
 }
 
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    const auth = requireAuth(request, ["manager"]);
+    if (!auth.ok) return auth.response;
+
     const { id } = await params;
     const body = await request.json().catch(() => null);
 
@@ -43,7 +47,10 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     return NextResponse.json({ supplier: mapSupplier(row) });
 }
 
-export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    const auth = requireAuth(request, ["manager"]);
+    if (!auth.ok) return auth.response;
+
     const { id } = await params;
     const db = getDb();
 

@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AccessDeniedNotice } from "../components/AccessDeniedNotice";
-import { findRoleByCredentials } from "../lib/auth";
+import { login } from "../lib/auth-api";
 import { setActivePenzaRole } from "../lib/role-session";
 
 export default function LoginPage() {
@@ -11,19 +11,24 @@ export default function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
+    const [submitting, setSubmitting] = useState(false);
 
-    function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
+        setError(null);
+        setSubmitting(true);
 
-        const role = findRoleByCredentials(username, password);
+        const result = await login(username, password);
 
-        if (!role) {
-            setError("نام کاربری یا رمز عبور اشتباه است.");
+        setSubmitting(false);
+
+        if (!result.ok) {
+            setError(result.error);
             return;
         }
 
-        setActivePenzaRole(role);
-        router.push(`/${role}`);
+        setActivePenzaRole(result.account.role);
+        router.push(`/${result.account.role}`);
     }
 
     return (
@@ -72,8 +77,12 @@ export default function LoginPage() {
                                         <p className="text-sm font-bold text-red-600">{error}</p>
                                     )}
 
-                                    <button type="submit" className="penza-button w-full rounded-2xl px-5 py-3 text-sm font-black">
-                                        ورود
+                                    <button
+                                        type="submit"
+                                        disabled={submitting}
+                                        className="penza-button w-full rounded-2xl px-5 py-3 text-sm font-black disabled:opacity-50"
+                                    >
+                                        {submitting ? "در حال ورود..." : "ورود"}
                                     </button>
                                 </form>
                             </div>

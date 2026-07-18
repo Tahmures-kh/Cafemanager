@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { insertRecipe } from "../route";
+import { requireAuth } from "../../../../lib/session";
 import type { Recipe } from "../../../../lib/types";
 
 export async function POST(request: NextRequest) {
+    const auth = requireAuth(request, ["manager", "accountant"]);
+    if (!auth.ok) return auth.response;
+
     const body = await request.json().catch(() => null);
 
     if (!body || !Array.isArray(body.recipes)) {

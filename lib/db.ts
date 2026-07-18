@@ -1,6 +1,7 @@
 import path from "path";
 import { mkdirSync } from "fs";
 import Database from "better-sqlite3";
+import { hashPassword } from "./password";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 const DB_FILE = path.join(DATA_DIR, "app.db");
@@ -103,13 +104,149 @@ function initSchema(database: Database.Database) {
             stock_unit TEXT
         );
 
+        CREATE TABLE IF NOT EXISTS products (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            category TEXT NOT NULL,
+            unit TEXT NOT NULL,
+            stock_unit TEXT,
+            order_unit TEXT,
+            order_unit_quantity REAL,
+            order_quantity_step REAL
+        );
+
+        CREATE TABLE IF NOT EXISTS inventory_items (
+            id TEXT PRIMARY KEY,
+            product_id TEXT NOT NULL UNIQUE REFERENCES products(id) ON DELETE CASCADE,
+            current_quantity REAL NOT NULL DEFAULT 0,
+            minimum_quantity REAL NOT NULL DEFAULT 0,
+            critical_quantity REAL NOT NULL DEFAULT 0
+        );
+
+        CREATE TABLE IF NOT EXISTS stock_movements (
+            id TEXT PRIMARY KEY,
+            product_id TEXT NOT NULL,
+            type TEXT NOT NULL,
+            quantity REAL NOT NULL,
+            description TEXT NOT NULL,
+            created_by TEXT,
+            created_at TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS cafe_orders (
+            id TEXT PRIMARY KEY,
+            requested_by TEXT NOT NULL,
+            status TEXT NOT NULL,
+            note TEXT,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS order_items (
+            id TEXT PRIMARY KEY,
+            order_id TEXT NOT NULL REFERENCES cafe_orders(id) ON DELETE CASCADE,
+            product_id TEXT NOT NULL,
+            requested_quantity REAL NOT NULL,
+            packed_quantity REAL NOT NULL DEFAULT 0
+        );
+
+        CREATE TABLE IF NOT EXISTS accounts (
+            id TEXT PRIMARY KEY,
+            username TEXT NOT NULL UNIQUE,
+            password_hash TEXT NOT NULL,
+            password_salt TEXT NOT NULL,
+            role TEXT NOT NULL,
+            display_name TEXT,
+            is_active INTEGER NOT NULL DEFAULT 1,
+            created_at TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS sessions (
+            id TEXT PRIMARY KEY,
+            account_id TEXT NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
+            ip TEXT,
+            user_agent TEXT,
+            created_at TEXT NOT NULL,
+            expires_at TEXT NOT NULL
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_sessions_account_id ON sessions(account_id);
         CREATE INDEX IF NOT EXISTS idx_recipe_ingredients_recipe_id ON recipe_ingredients(recipe_id);
         CREATE INDEX IF NOT EXISTS idx_audit_log_scope ON audit_log(scope);
         CREATE INDEX IF NOT EXISTS idx_sales_items_batch_id ON sales_items(batch_id);
         CREATE INDEX IF NOT EXISTS idx_sales_batches_shift_date ON sales_batches(shift_date);
         CREATE INDEX IF NOT EXISTS idx_purchase_order_items_order_id ON purchase_order_items(purchase_order_id);
         CREATE INDEX IF NOT EXISTS idx_purchase_orders_supplier_id ON purchase_orders(supplier_id);
+        CREATE INDEX IF NOT EXISTS idx_inventory_items_product_id ON inventory_items(product_id);
+        CREATE INDEX IF NOT EXISTS idx_stock_movements_product_id ON stock_movements(product_id);
+        CREATE INDEX IF NOT EXISTS idx_stock_movements_created_at ON stock_movements(created_at);
+        CREATE INDEX IF NOT EXISTS idx_order_items_order_id ON order_items(order_id);
+        CREATE INDEX IF NOT EXISTS idx_cafe_orders_status ON cafe_orders(status);
     `);
+}
+
+function seedInventoryIfEmpty(database: Database.Database) {
+    const { count } = database.prepare("SELECT COUNT(*) as count FROM products").get() as { count: number };
+    if (count > 0) return;
+
+    const { products, inventoryItems } = require("./mock-data") as typeof import("./mock-data");
+
+    const insertProduct = database.prepare(
+        `INSERT INTO products (id, name, category, unit, stock_unit, order_unit, order_unit_quantity, order_quantity_step)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+    );
+    const insertInventory = database.prepare(
+        `INSERT INTO inventory_items (id, product_id, current_quantity, minimum_quantity, critical_quantity)
+         VALUES (?, ?, ?, ?, ?)`
+    );
+
+    const run = database.transaction(() => {
+        for (const product of products) {
+            insertProduct.run(
+                product.id,
+                product.name,
+                product.category,
+                product.unit,
+                product.stockUnit ?? null,
+                product.orderUnit ?? null,
+                product.orderUnitQuantity ?? null,
+                product.orderQuantityStep ?? null
+            );
+        }
+        for (const item of inventoryItems) {
+            insertInventory.run(item.id, item.productId, item.currentQuantity, item.minimumQuantity, item.criticalQuantity);
+        }
+    });
+
+    run();
+}
+
+function seedAccountsIfEmpty(database: Database.Database) {
+    const { count } = database.prepare("SELECT COUNT(*) as count FROM accounts").get() as { count: number };
+    if (count > 0) return;
+
+    const insertAccount = database.prepare(
+        `INSERT INTO accounts (id, username, password_hash, password_salt, role, display_name, is_active, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, 1, ?)`
+    );
+
+    const now = nowIso();
+    const seedAccounts: Array<{ id: string; username: string; password: string; role: string; displayName: string }> = [
+        { id: "account-seed-admin", username: "tahmures", password: "tahmures123", role: "admin", displayName: "مدیر سیستم" },
+        { id: "account-seed-manager", username: "manager", password: "manager123", role: "manager", displayName: "مدیر" },
+        { id: "account-seed-staff", username: "staff", password: "staff123", role: "staff", displayName: "کاربر کافه" },
+        { id: "account-seed-storage", username: "storage", password: "storage123", role: "storage", displayName: "انباردار" },
+        { id: "account-seed-accountant", username: "accountant", password: "accountant123", role: "accountant", displayName: "حسابدار" },
+    ];
+
+    const run = database.transaction(() => {
+        for (const account of seedAccounts) {
+            const { hash, salt } = hashPassword(account.password);
+            insertAccount.run(account.id, account.username, hash, salt, account.role, account.displayName, now);
+        }
+    });
+
+    run();
 }
 
 export function getDb(): Database.Database {
@@ -120,6 +257,8 @@ export function getDb(): Database.Database {
     db.pragma("journal_mode = WAL");
     db.pragma("foreign_keys = ON");
     initSchema(db);
+    seedInventoryIfEmpty(db);
+    seedAccountsIfEmpty(db);
 
     return db;
 }

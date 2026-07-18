@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createRecordId, getDb, nowIso } from "../../../lib/db";
+import { requireAuth } from "../../../lib/session";
 import type { Supplier } from "../../../lib/types";
 
 type SupplierRow = { id: string; name: string; phone: string; website: string | null; notes: string | null; created_at: string };
@@ -15,7 +16,10 @@ function mapSupplier(row: SupplierRow): Supplier {
     };
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+    const auth = requireAuth(request, ["manager"]);
+    if (!auth.ok) return auth.response;
+
     const db = getDb();
     const rows = db.prepare("SELECT * FROM suppliers ORDER BY name ASC").all() as SupplierRow[];
 
@@ -23,6 +27,9 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+    const auth = requireAuth(request, ["manager"]);
+    if (!auth.ok) return auth.response;
+
     const body = await request.json().catch(() => null);
 
     if (!body || typeof body.name !== "string" || !body.name.trim() || typeof body.phone !== "string" || !body.phone.trim()) {

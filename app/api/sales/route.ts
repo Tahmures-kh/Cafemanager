@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createRecordId, getDb, nowIso } from "../../../lib/db";
+import { requireAuth } from "../../../lib/session";
 import type { SalesBatch } from "../../../lib/types";
 
 type BatchRow = {
@@ -53,6 +54,9 @@ function mapBatch(row: BatchRow, itemRows: ItemRow[]): SalesBatch {
 }
 
 export async function GET(request: NextRequest) {
+    const auth = requireAuth(request, ["manager"]);
+    if (!auth.ok) return auth.response;
+
     const from = request.nextUrl.searchParams.get("from");
     const to = request.nextUrl.searchParams.get("to");
 
@@ -78,6 +82,9 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+    const auth = requireAuth(request, ["manager"]);
+    if (!auth.ok) return auth.response;
+
     const body = await request.json().catch(() => null);
 
     if (

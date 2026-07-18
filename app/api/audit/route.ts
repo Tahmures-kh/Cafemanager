@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createRecordId, getDb, nowIso } from "../../../lib/db";
+import { getClientIp, requireAuth } from "../../../lib/session";
 import type { AuditLogEntry } from "../../../lib/types";
 
 const MAX_ENTRIES_RETURNED = 500;
@@ -30,30 +31,25 @@ function mapRow(row: AuditLogRow): AuditLogEntry {
     };
 }
 
-function getClientIp(request: NextRequest) {
-    const forwardedFor = request.headers.get("x-forwarded-for");
-    if (forwardedFor) return forwardedFor.split(",")[0].trim();
-
-    const realIp = request.headers.get("x-real-ip");
-    if (realIp) return realIp.trim();
-
-    return "نامشخص (بدون پراکسی)";
-}
-
 export async function POST(request: NextRequest) {
+    const auth = requireAuth(request, ["manager", "accountant"]);
+    if (!auth.ok) return auth.response;
+
     const body = await request.json().catch(() => null);
 
     if (!body || typeof body.scope !== "string" || typeof body.action !== "string") {
         return NextResponse.json({ error: "scope و action الزامی است." }, { status: 400 });
     }
 
+    // actorName/actorRole come from the verified session, never from the client
+    // body — otherwise anyone could plant fabricated entries in the log.
     const entry: AuditLogEntry = {
         id: createRecordId("audit"),
         scope: body.scope,
         action: body.action,
         description: typeof body.description === "string" ? body.description : "",
-        actorRole: typeof body.actorRole === "string" ? body.actorRole : "نامشخص",
-        actorName: typeof body.actorName === "string" && body.actorName.trim() ? body.actorName.trim() : "نامشخص",
+        actorRole: auth.account.role,
+        actorName: auth.account.displayName ?? auth.account.username,
         ip: getClientIp(request),
         userAgent: request.headers.get("user-agent") ?? "نامشخص",
         createdAt: nowIso(),
@@ -79,6 +75,9 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
+    const auth = requireAuth(request, ["manager", "accountant"]);
+    if (!auth.ok) return auth.response;
+
     const scope = request.nextUrl.searchParams.get("scope");
     const db = getDb();
 
