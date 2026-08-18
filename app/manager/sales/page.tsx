@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import * as XLSX from "xlsx";
-import { BackButton } from "../../../components/BackButton";
 import { RoleGuard } from "../../../components/RoleGuard";
 import { fetchAuditLog, logAuditEvent } from "../../../lib/audit-log";
 import { getCurrentAccount, type CurrentAccount } from "../../../lib/auth-api";
@@ -232,7 +231,6 @@ export default function ManagerSalesPage() {
                             </div>
 
                             <div className="flex flex-wrap gap-2">
-                                <BackButton />
                                 <Link href="/manager/dashboard" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
                                     داشبورد
                                 </Link>

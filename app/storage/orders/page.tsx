@@ -6,7 +6,6 @@ import { cafes, users } from "../../../lib/mock-data";
 import { formatDateTime, useCafeStorageStore } from "../../../lib/local-store";
 import { formatOrderQuantity, formatStockQuantity, formatUnitConversion, orderToStockQuantity, stockToOrderQuantity } from "../../../lib/product-units";
 import type { CafeOrder, InventoryItem, OrderItem, OrderStatus, Product } from "../../../lib/types";
-import { BackButton } from "../../../components/BackButton";
 import { RoleGuard } from "../../../components/RoleGuard";
 import { SuccessNotice } from "../../../components/SuccessNotice";
 
@@ -514,7 +513,6 @@ export default function StorageOrdersPage() {
                         </div>
 
                         <div className="flex flex-wrap gap-2">
-                            <BackButton />
                             <Link href="/storage/dashboard" className="rounded-2xl border border-green-900/15 bg-white px-4 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
                                 داشبورد انبار
                             </Link>

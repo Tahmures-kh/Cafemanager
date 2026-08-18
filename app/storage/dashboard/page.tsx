@@ -14,7 +14,6 @@ import {
     getStockUnit,
 } from "../../../lib/product-units";
 import type { Product, ProductCategory, StockMovement, StockMovementType } from "../../../lib/types";
-import { BackButton } from "../../../components/BackButton";
 import { RoleGuard } from "../../../components/RoleGuard";
 import { SuccessNotice } from "../../../components/SuccessNotice";
 
@@ -404,7 +403,6 @@ export default function StorageDashboardPage() {
                             </div>
 
                             <div className="flex flex-wrap gap-2">
-                                <BackButton />
                                 <Link href="/storage/orders" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
                                     درخواست‌ها
                                 </Link>

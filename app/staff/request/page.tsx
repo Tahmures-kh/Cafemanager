@@ -15,7 +15,6 @@ import {
     normalizeOrderQuantity,
 } from "../../../lib/product-units";
 import type { InventoryItem, Product, ProductCategory } from "../../../lib/types";
-import { BackButton } from "../../../components/BackButton";
 import { RoleGuard } from "../../../components/RoleGuard";
 import { SuccessNotice } from "../../../components/SuccessNotice";
 
@@ -212,7 +211,6 @@ export default function CafeRequestPage() {
                             </h1>
 
                             <div className="mt-4">
-                                <BackButton />
                             </div>
                         </div>
 

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { BackButton } from "../BackButton";
 
 export type PanelNavLink = {
     href: string;
@@ -15,7 +14,6 @@ export type PanelNavLink = {
 export function PanelNav({ links }: { links: PanelNavLink[] }) {
     return (
         <div className="flex flex-wrap gap-2">
-            <BackButton />
             {links.map((link) => (
                 <Link
                     key={link.href}

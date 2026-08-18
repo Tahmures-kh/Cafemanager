@@ -5,7 +5,6 @@ import { cafes, users } from "../../../lib/mock-data";
 import { formatDateTime, useCafeStorageStore } from "../../../lib/local-store";
 import { formatStockQuantity, getStockStatus, getStockStatusLabel, getStockStatusStyle } from "../../../lib/product-units";
 import type { OrderStatus, Product } from "../../../lib/types";
-import { BackButton } from "../../../components/BackButton";
 import { RoleGuard } from "../../../components/RoleGuard";
 
 function formatNumber(value: number) {
@@ -88,7 +87,6 @@ export default function ManagerDashboardPage() {
                         </div>
 
                         <div className="flex flex-wrap gap-2">
-                            <BackButton />
                             <Link href="/manager/orders" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">
                                 مشاهده درخواست‌ها
                             </Link>

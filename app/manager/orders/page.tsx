@@ -6,7 +6,6 @@ import { cafes, users } from "../../../lib/mock-data";
 import { formatDateTime, useCafeStorageStore } from "../../../lib/local-store";
 import { formatOrderQuantity, formatStockQuantity, orderToStockQuantity } from "../../../lib/product-units";
 import type { CafeOrder, OrderItem, OrderStatus, Product } from "../../../lib/types";
-import { BackButton } from "../../../components/BackButton";
 import { RoleGuard } from "../../../components/RoleGuard";
 
 type ManagerFilter = "requested" | "delivered";
@@ -159,7 +158,6 @@ export default function ManagerOrdersPage() {
                         </div>
 
                         <div className="flex flex-wrap gap-2">
-                            <BackButton />
                             <Link href="/manager/dashboard" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
                                 داشبورد
                             </Link>

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { BackButton } from "../../../components/BackButton";
 import { RoleGuard } from "../../../components/RoleGuard";
 import {
     createAccount,
@@ -109,7 +108,6 @@ export default function AdminUsersPage() {
                                 <h1 className="mt-4 text-3xl font-black tracking-tight text-[#0B2F0B] lg:text-5xl">مدیریت کاربران</h1>
                             </div>
                             <div className="flex flex-wrap gap-2">
-                                <BackButton />
                                 <Link href="/admin" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">داشبورد ادمین</Link>
                                 <Link href="/admin/logs" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">لاگ فعالیت‌ها</Link>
                                 <Link href="/admin/sessions" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">نشست‌های فعال</Link>

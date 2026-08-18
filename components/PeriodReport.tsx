@@ -7,7 +7,6 @@ import { formatDateTime, useCafeStorageStore } from "../lib/local-store";
 import { formatOrderQuantity, formatStockQuantity, getOrderUnit } from "../lib/product-units";
 import type { CafeOrder, OrderItem, Product, StockMovementType } from "../lib/types";
 import { RoleGuard } from "./RoleGuard";
-import { BackButton } from "./BackButton";
 
 type ReportRole = "manager" | "storage" | "accountant";
 
@@ -336,7 +335,6 @@ export function PeriodReport({ role }: { role: ReportRole }) {
                             </div>
 
                             <div className="flex flex-wrap gap-2">
-                                <BackButton className="penza-ghost-button rounded-2xl px-4 py-3 text-sm font-black hover:bg-green-50" />
                                 {workLinks.map((link) => (
                                     <Link key={link.href} href={link.href} className="rounded-2xl border border-green-900/15 bg-white px-4 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
                                         {link.label}

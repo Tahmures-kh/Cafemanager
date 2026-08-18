@@ -6,7 +6,6 @@ import { cafes, users } from "../../../lib/mock-data";
 import { formatDateTime, useCafeStorageStore } from "../../../lib/local-store";
 import { formatOrderQuantity, formatStockQuantity, orderToStockQuantity } from "../../../lib/product-units";
 import type { CafeOrder, OrderItem, OrderStatus, Product } from "../../../lib/types";
-import { BackButton } from "../../../components/BackButton";
 import { RoleGuard } from "../../../components/RoleGuard";
 import { SuccessNotice } from "../../../components/SuccessNotice";
 
@@ -181,7 +180,6 @@ export default function StaffDashboardPage() {
                         </div>
 
                         <div className="flex flex-wrap gap-2">
-                            <BackButton />
                             <Link href="/staff/request" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">
                                 ثبت درخواست جدید
                             </Link>

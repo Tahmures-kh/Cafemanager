@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { BackButton } from "../../components/BackButton";
 import { RoleGuard } from "../../components/RoleGuard";
 import { logout } from "../../lib/auth-api";
 import { clearActivePenzaRole } from "../../lib/role-session";
@@ -34,7 +33,6 @@ export default function AccountantMainPage() {
                             </p>
                             <h1 className="mt-4 text-3xl font-black tracking-tight text-[#0B2F0B] lg:text-4xl">پنل حسابدار</h1>
                             <div className="mt-6 flex flex-wrap gap-3">
-                                <BackButton />
                                 <Link href="/accountant/recipes" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">رسپی‌ها و قیمت‌گذاری</Link>
                                 <Link href="/accountant/inventory" className="penza-ghost-button rounded-2xl px-5 py-3 text-sm font-black hover:bg-green-50">موجودی انبار</Link>
                                 <Link href="/accountant/reports" className="penza-ghost-button rounded-2xl px-5 py-3 text-sm font-black hover:bg-green-50">گزارش</Link>
