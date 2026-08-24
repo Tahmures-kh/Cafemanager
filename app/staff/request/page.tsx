@@ -73,8 +73,7 @@ function productMatches(product: Product, searchTerm: string, activeCategory: Ca
     const matchesCategory = activeCategory === "all" || product.category === activeCategory;
     const matchesSearch =
         normalizedSearch.length === 0 ||
-        normalizeText(product.name).includes(normalizedSearch) ||
-        normalizeText(categoryLabel(product.category)).includes(normalizedSearch);
+        normalizeText(product.name).includes(normalizedSearch);
 
     return matchesCategory && matchesSearch;
 }

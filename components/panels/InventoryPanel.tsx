@@ -82,12 +82,7 @@ export function InventoryPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
 
             if (!product) return false;
 
-            return (
-                normalizeText(product.name).includes(search) ||
-                normalizeText(getStockUnit(product)).includes(search) ||
-                normalizeText(getOrderUnit(product)).includes(search) ||
-                normalizeText(categoryLabel(product.category)).includes(search)
-            );
+            return normalizeText(product.name).includes(search);
         });
     }, [inventoryItems, products, searchTerm]);
 

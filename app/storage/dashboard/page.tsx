@@ -243,12 +243,7 @@ export default function StorageDashboardPage() {
                 if (categoryFilter !== "all" && product.category !== categoryFilter) return false;
                 if (!search) return true;
 
-                return (
-                    normalizeText(product.name).includes(search) ||
-                    normalizeText(getStockUnit(product)).includes(search) ||
-                    normalizeText(getOrderUnit(product)).includes(search) ||
-                    normalizeText(categoryLabel(product.category)).includes(search)
-                );
+                return normalizeText(product.name).includes(search);
             })
             .sort((first, second) => {
                 const firstQuantity = first.inventoryItem?.currentQuantity ?? 0;
