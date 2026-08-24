@@ -8,6 +8,34 @@ export type InventoryData = {
     movements: StockMovement[];
 };
 
+export async function fetchUnitTypes(): Promise<string[]> {
+    try {
+        const response = await fetch("/api/unit-types", { cache: "no-store" });
+        if (!response.ok) return [];
+
+        const data = await response.json();
+        return Array.isArray(data.unitTypes) ? (data.unitTypes as string[]) : [];
+    } catch {
+        return [];
+    }
+}
+
+export async function createUnitType(name: string): Promise<string[]> {
+    try {
+        const response = await fetch("/api/unit-types", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name }),
+        });
+        if (!response.ok) return [];
+
+        const data = await response.json();
+        return Array.isArray(data.unitTypes) ? (data.unitTypes as string[]) : [];
+    } catch {
+        return [];
+    }
+}
+
 export async function fetchInventoryData(): Promise<InventoryData> {
     try {
         const response = await fetch("/api/inventory", { cache: "no-store" });

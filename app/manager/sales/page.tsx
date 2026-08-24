@@ -274,10 +274,9 @@ export default function ManagerSalesPage() {
                                 انتخاب فایل اکسل/CSV
                                 <input ref={excelInputRef} type="file" accept=".xlsx,.xls,.csv" onChange={handleExcelFileChange} className="hidden" />
                             </label>
-                            <label className="penza-ghost-button cursor-pointer rounded-2xl px-5 py-3 text-sm font-black hover:bg-green-50">
-                                آپلود عکس گزارش شیفت
-                                <input ref={imageInputRef} type="file" accept="image/*" onChange={handleImageFileChange} className="hidden" />
-                            </label>
+                            {/* آپلود عکس گزارش شیفت — موقتاً مخفی شده تا طراحی بهتری براش انجام بشه.
+                                منطق و API (extractSalesFromImage, handleImageFileChange) دست‌نخورده باقی مونده. */}
+                            <input ref={imageInputRef} type="file" accept="image/*" onChange={handleImageFileChange} className="hidden" />
                         </div>
 
                         {extractingImage && (

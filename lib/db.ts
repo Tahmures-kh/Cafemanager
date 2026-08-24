@@ -170,6 +170,12 @@ function initSchema(database: Database.Database) {
             expires_at TEXT NOT NULL
         );
 
+        CREATE TABLE IF NOT EXISTS unit_types (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL UNIQUE,
+            created_at TEXT NOT NULL
+        );
+
         CREATE INDEX IF NOT EXISTS idx_sessions_account_id ON sessions(account_id);
         CREATE INDEX IF NOT EXISTS idx_recipe_ingredients_recipe_id ON recipe_ingredients(recipe_id);
         CREATE INDEX IF NOT EXISTS idx_audit_log_scope ON audit_log(scope);
@@ -221,6 +227,31 @@ function seedInventoryIfEmpty(database: Database.Database) {
     run();
 }
 
+function seedUnitTypesIfEmpty(database: Database.Database) {
+    const { count } = database.prepare("SELECT COUNT(*) as count FROM unit_types").get() as { count: number };
+    if (count > 0) return;
+
+    const { products } = require("./mock-data") as typeof import("./mock-data");
+
+    const names = new Set<string>(["کیلوگرم", "لیتر", "عدد", "بسته", "وزن"]);
+    products.forEach((product) => {
+        if (product.unit) names.add(product.unit);
+        if (product.stockUnit) names.add(product.stockUnit);
+        if (product.orderUnit) names.add(product.orderUnit);
+    });
+
+    const insertUnitType = database.prepare(`INSERT INTO unit_types (id, name, created_at) VALUES (?, ?, ?)`);
+    const now = nowIso();
+
+    const run = database.transaction(() => {
+        for (const name of names) {
+            insertUnitType.run(createRecordId("unit"), name, now);
+        }
+    });
+
+    run();
+}
+
 function seedAccountsIfEmpty(database: Database.Database) {
     const { count } = database.prepare("SELECT COUNT(*) as count FROM accounts").get() as { count: number };
     if (count > 0) return;
@@ -258,6 +289,7 @@ export function getDb(): Database.Database {
     db.pragma("foreign_keys = ON");
     initSchema(db);
     seedInventoryIfEmpty(db);
+    seedUnitTypesIfEmpty(db);
     seedAccountsIfEmpty(db);
 
     return db;

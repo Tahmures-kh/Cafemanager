@@ -1,14 +1,16 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getCurrentAccount, type CurrentAccount } from "./auth-api";
 import {
     adjustInventoryProductQuantity,
     createCafeOrder,
     createInventoryProduct,
+    createUnitType,
     deleteInventoryProduct,
     fetchInventoryData,
     fetchOrdersData,
+    fetchUnitTypes,
     fillCafeOrderRequestedQuantities,
     updateCafeOrderStatus,
     updateInventoryProductApi,
@@ -23,7 +25,6 @@ import type {
     ProductCategory,
     StockMovement,
 } from "./types";
-import { products as seedProducts } from "./mock-data";
 
 export type CreateOrderInput = {
     note?: string;
@@ -179,96 +180,31 @@ export function useFavoriteProducts(): FavoriteProducts {
     return { favoriteIds, isFavorite, toggleFavorite };
 }
 
-const UNIT_TYPES_KEY = "cafe-storage-mvp-unit-types-v1";
-const UNIT_TYPES_EVENT = "cafe-storage-mvp-unit-types-updated";
-
-const seedUnitTypes: string[] = (() => {
-    const values = new Set<string>(["کیلوگرم", "لیتر", "عدد", "بسته", "وزن"]);
-
-    seedProducts.forEach((product) => {
-        if (product.unit) values.add(product.unit);
-        if (product.stockUnit) values.add(product.stockUnit);
-        if (product.orderUnit) values.add(product.orderUnit);
-    });
-
-    return Array.from(values);
-})();
-
-function readUnitTypesFromStorage(): string[] {
-    if (typeof window === "undefined") return [];
-
-    try {
-        const raw = window.localStorage.getItem(UNIT_TYPES_KEY);
-        if (!raw) return [];
-
-        const parsed = JSON.parse(raw);
-        return Array.isArray(parsed) ? parsed.filter((value): value is string => typeof value === "string") : [];
-    } catch {
-        return [];
-    }
-}
-
-function writeUnitTypesToStorage(values: string[]) {
-    if (typeof window === "undefined") return;
-
-    window.localStorage.setItem(UNIT_TYPES_KEY, JSON.stringify(values));
-    window.dispatchEvent(new Event(UNIT_TYPES_EVENT));
-}
-
 export type UnitTypes = {
     unitTypes: string[];
-    addUnitType: (name: string) => void;
+    addUnitType: (name: string) => Promise<void>;
 };
 
 /**
  * Storage-managed list of unit-of-measure types (کیلوگرم، لیتر، عدد...) offered
  * when adding a product, so storage staff pick from a consistent list instead
- * of free-typing a new string per item. Custom additions persist in their own
- * localStorage key — a per-device convenience list, not core business data.
+ * of free-typing a new string per item. Backed by the real database
+ * (unit_types table), shared across every device instead of per-browser.
  */
 export function useUnitTypes(): UnitTypes {
-    const [customUnitTypes, setCustomUnitTypes] = useState<string[]>([]);
-
-    const refresh = useCallback(() => {
-        setCustomUnitTypes(readUnitTypesFromStorage());
-    }, []);
+    const [unitTypes, setUnitTypes] = useState<string[]>([]);
 
     useEffect(() => {
-        refresh();
+        fetchUnitTypes().then(setUnitTypes);
+    }, []);
 
-        function handleExternalUpdate() {
-            refresh();
-        }
-
-        window.addEventListener("storage", handleExternalUpdate);
-        window.addEventListener(UNIT_TYPES_EVENT, handleExternalUpdate);
-
-        return () => {
-            window.removeEventListener("storage", handleExternalUpdate);
-            window.removeEventListener(UNIT_TYPES_EVENT, handleExternalUpdate);
-        };
-    }, [refresh]);
-
-    const addUnitType = useCallback((name: string) => {
+    const addUnitType = useCallback(async (name: string) => {
         const trimmed = name.trim();
         if (!trimmed) return;
 
-        const current = readUnitTypesFromStorage();
-
-        if (seedUnitTypes.includes(trimmed) || current.includes(trimmed)) {
-            setCustomUnitTypes(current);
-            return;
-        }
-
-        const next = [...current, trimmed];
-        writeUnitTypesToStorage(next);
-        setCustomUnitTypes(next);
+        const next = await createUnitType(trimmed);
+        if (next.length > 0) setUnitTypes(next);
     }, []);
-
-    const unitTypes = useMemo(
-        () => Array.from(new Set([...seedUnitTypes, ...customUnitTypes])).sort((a, b) => a.localeCompare(b, "fa")),
-        [customUnitTypes]
-    );
 
     return { unitTypes, addUnitType };
 }
