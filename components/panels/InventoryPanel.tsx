@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { users } from "../../lib/mock-data";
 import { formatDateTime, useCafeStorageStore } from "../../lib/local-store";
 import {
     formatAvailableQuantity,
@@ -22,10 +21,6 @@ function formatNumber(value: number) {
 
 function getProduct(productId: string, productList: Product[]) {
     return productList.find((product) => product.id === productId);
-}
-
-function getUser(userId: string) {
-    return users.find((user) => user.id === userId);
 }
 
 function categoryLabel(category: ProductCategory) {
@@ -199,14 +194,13 @@ export function InventoryPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
                         <div className="mt-4 space-y-3">
                             {stockMovements.slice(0, 10).map((movement) => {
                                 const product = getProduct(movement.productId, products);
-                                const user = getUser(movement.createdBy);
 
                                 return (
                                     <div key={movement.id} className="rounded-2xl bg-[#f8fff8] p-4 text-sm">
                                         <div className="flex items-start justify-between gap-3">
                                             <div>
                                                 <p className="font-black text-[#0B2F0B]">{product?.name ?? "کالا"}</p>
-                                                <p className="mt-1 text-xs font-bold text-slate-500">{formatDateTime(movement.createdAt)} · {user?.name ?? "کاربر"}</p>
+                                                <p className="mt-1 text-xs font-bold text-slate-500">{formatDateTime(movement.createdAt)} · {movement.createdBy || "کاربر"}</p>
                                             </div>
                                             <span className={`rounded-full px-3 py-1 text-[11px] font-black ${movementTypeStyle(movement.type)}`}>
                                                 {movementTypeLabel(movement.type)}

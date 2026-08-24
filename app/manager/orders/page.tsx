@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { cafes, users } from "../../../lib/mock-data";
 import { formatDateTime, useCafeStorageStore } from "../../../lib/local-store";
 import { formatOrderQuantity, formatStockQuantity, orderToStockQuantity } from "../../../lib/product-units";
 import type { CafeOrder, OrderItem, OrderStatus, Product } from "../../../lib/types";
@@ -18,14 +17,6 @@ const tabs: Array<{ id: ManagerFilter; label: string; description: string }> = [
 
 function formatNumber(value: number) {
     return new Intl.NumberFormat("en-US", { maximumFractionDigits: 3 }).format(value);
-}
-
-function getCafe(cafeId: string) {
-    return cafes.find((cafe) => cafe.id === cafeId);
-}
-
-function getUser(userId: string) {
-    return users.find((user) => user.id === userId);
 }
 
 function getProduct(productId: string, productList: Product[]) {
@@ -84,7 +75,6 @@ function ManagerOrderCard({
     selected: boolean;
     onSelect: () => void;
 }) {
-    const cafe = getCafe(order.cafeId);
     const totals = getTotals(order.id, items);
     const percent = progressPercent(totals.requested, totals.packed);
 
@@ -100,7 +90,7 @@ function ManagerOrderCard({
         >
             <div className="flex items-start justify-between gap-3">
                 <div>
-                    <h3 className="text-sm font-black">{cafe?.name ?? "کافه"}</h3>
+                    <h3 className="text-sm font-black">{order.requestedBy}</h3>
                     <p className={selected ? "mt-1 text-xs text-white/70" : "mt-1 text-xs text-slate-500"}>
                         درخواست #{order.id.slice(-6)} · {formatDateTime(order.updatedAt)}
                     </p>
@@ -211,7 +201,7 @@ export default function ManagerOrdersPage() {
                                 <div className="flex flex-col justify-between gap-4 border-b border-green-900/10 pb-4 lg:flex-row lg:items-start">
                                     <div>
                                         <p className="text-sm font-black text-[#007A00]">
-                                            {getCafe(selectedOrder.cafeId)?.name ?? "کافه"} · {getUser(selectedOrder.requestedBy)?.name ?? "کاربر"}
+                                            {selectedOrder.requestedBy}
                                         </p>
                                         <h2 className="mt-2 text-2xl font-black text-[#0B2F0B]">درخواست #{selectedOrder.id.slice(-6)}</h2>
                                         <p className="mt-2 text-sm leading-7 text-slate-500">

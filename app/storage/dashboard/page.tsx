@@ -277,7 +277,7 @@ export default function StorageDashboardPage() {
         setQuickAdjust(emptyQuickAdjust);
     }
 
-    function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
         const stockUnit = form.unit.trim();
@@ -285,7 +285,7 @@ export default function StorageDashboardPage() {
         const orderUnitQuantity = Number(form.orderUnitQuantity) || 1;
         const orderQuantityStep = orderUnit === stockUnit && orderUnitQuantity === 1 ? 0.001 : 1;
 
-        addInventoryProduct({
+        const success = await addInventoryProduct({
             name: form.name,
             category: form.category,
             unit: stockUnit,
@@ -296,8 +296,10 @@ export default function StorageDashboardPage() {
             currentQuantity: Number(form.currentQuantity),
         });
 
-        setActionMessage(`کالای «${form.name}» با موفقیت به انبار اضافه شد.`);
-        resetForm();
+        if (success) {
+            setActionMessage(`کالای «${form.name}» با موفقیت به انبار اضافه شد.`);
+            resetForm();
+        }
     }
 
     function openQuickAdjust(productId: string, mode: QuickAdjustState["mode"]) {
@@ -310,7 +312,7 @@ export default function StorageDashboardPage() {
         });
     }
 
-    function handleQuickAdjustSubmit(event: FormEvent<HTMLFormElement>) {
+    async function handleQuickAdjustSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
         if (!quickAdjust.productId) return;
@@ -320,14 +322,15 @@ export default function StorageDashboardPage() {
         if (!Number.isFinite(amount) || amount <= 0) return;
 
         const delta = quickAdjust.mode === "add" ? amount : -amount;
-        adjustInventoryQuantity(quickAdjust.productId, delta, quickAdjust.reason);
+        const success = await adjustInventoryQuantity(quickAdjust.productId, delta, quickAdjust.reason);
 
-        const adjustedProduct = products.find((product) => product.id === quickAdjust.productId);
-        if (adjustedProduct) {
-            setActionMessage(`موجودی «${adjustedProduct.name}» با موفقیت اصلاح شد.`);
+        if (success) {
+            const adjustedProduct = products.find((product) => product.id === quickAdjust.productId);
+            if (adjustedProduct) {
+                setActionMessage(`موجودی «${adjustedProduct.name}» با موفقیت اصلاح شد.`);
+            }
+            resetQuickAdjust();
         }
-
-        resetQuickAdjust();
     }
 
     function resetEditForm() {
@@ -347,7 +350,7 @@ export default function StorageDashboardPage() {
         });
     }
 
-    function handleEditSubmit(event: FormEvent<HTMLFormElement>) {
+    async function handleEditSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
         if (!editForm.productId) return;
@@ -358,7 +361,7 @@ export default function StorageDashboardPage() {
         const orderUnitQuantity = Number(editForm.orderUnitQuantity) || 1;
         const orderQuantityStep = Number(editForm.orderQuantityStep) || (orderUnit === stockUnit && orderUnitQuantity === 1 ? 0.001 : 1);
 
-        updateInventoryProduct(editForm.productId, {
+        const success = await updateInventoryProduct(editForm.productId, {
             name: editForm.name,
             category: editForm.category,
             unit: stockUnit,
@@ -369,11 +372,13 @@ export default function StorageDashboardPage() {
             currentQuantity: inventoryItem?.currentQuantity ?? 0,
         });
 
-        setActionMessage(`کالای «${editForm.name}» با موفقیت ویرایش شد.`);
-        resetEditForm();
+        if (success) {
+            setActionMessage(`کالای «${editForm.name}» با موفقیت ویرایش شد.`);
+            resetEditForm();
+        }
     }
 
-    function handleRemove(product: Product) {
+    async function handleRemove(product: Product) {
         const inventoryItem = inventoryItems.find((item) => item.productId === product.id);
         const currentQuantity = inventoryItem?.currentQuantity ?? 0;
         const ok = window.confirm(
@@ -382,10 +387,12 @@ export default function StorageDashboardPage() {
 
         if (!ok) return;
 
-        removeInventoryProduct(product.id);
-        setActionMessage(`کالای «${product.name}» از انبار حذف شد.`);
-        if (quickAdjust.productId === product.id) resetQuickAdjust();
-        if (editForm.productId === product.id) resetEditForm();
+        const success = await removeInventoryProduct(product.id);
+        if (success) {
+            setActionMessage(`کالای «${product.name}» از انبار حذف شد.`);
+            if (quickAdjust.productId === product.id) resetQuickAdjust();
+            if (editForm.productId === product.id) resetEditForm();
+        }
     }
 
     return (

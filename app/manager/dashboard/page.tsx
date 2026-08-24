@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { cafes, users } from "../../../lib/mock-data";
 import { formatDateTime, useCafeStorageStore } from "../../../lib/local-store";
 import { formatStockQuantity, getStockStatus, getStockStatusLabel, getStockStatusStyle } from "../../../lib/product-units";
 import type { OrderStatus, Product } from "../../../lib/types";
@@ -11,14 +10,6 @@ import { MANAGER_NAV_LINKS } from "../../../lib/nav-links";
 
 function formatNumber(value: number) {
     return new Intl.NumberFormat("en-US", { maximumFractionDigits: 3 }).format(value);
-}
-
-function getCafe(cafeId: string) {
-    return cafes.find((cafe) => cafe.id === cafeId);
-}
-
-function getUser(userId: string) {
-    return users.find((user) => user.id === userId);
 }
 
 function getProduct(productId: string, productList: Product[]) {
@@ -123,7 +114,6 @@ export default function ManagerDashboardPage() {
                                 <thead className="penza-table-head text-xs font-black">
                                     <tr>
                                         <th className="px-4 py-3">درخواست</th>
-                                        <th className="px-4 py-3">کافه</th>
                                         <th className="px-4 py-3">ثبت‌کننده</th>
                                         <th className="px-4 py-3">قلم کالا</th>
                                         <th className="px-4 py-3">وضعیت</th>
@@ -131,15 +121,12 @@ export default function ManagerDashboardPage() {
                                 </thead>
                                 <tbody className="divide-y divide-green-900/10">
                                     {orders.filter((order) => order.status !== "cancelled").slice(0, 8).map((order) => {
-                                        const cafe = getCafe(order.cafeId);
-                                        const requestedBy = getUser(order.requestedBy);
                                         const items = orderItems.filter((item) => item.orderId === order.id);
 
                                         return (
                                             <tr key={order.id} className="hover:bg-[#f8fff8]">
                                                 <td className="px-4 py-3 font-black text-[#0B2F0B]">#{order.id.slice(-6)}</td>
-                                                <td className="px-4 py-3 text-slate-600">{cafe?.name ?? "کافه"}</td>
-                                                <td className="px-4 py-3 text-slate-600">{requestedBy?.name ?? "کاربر"}</td>
+                                                <td className="px-4 py-3 text-slate-600">{order.requestedBy}</td>
                                                 <td className="px-4 py-3 text-slate-600">{formatNumber(items.length)}</td>
                                                 <td className="px-4 py-3 font-black text-[#007A00]">{simpleStatusLabel(order.status)}</td>
                                             </tr>

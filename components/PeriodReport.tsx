@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { cafes, users } from "../lib/mock-data";
 import { formatDateTime, useCafeStorageStore } from "../lib/local-store";
 import { ACCOUNTANT_NAV_LINKS, MANAGER_NAV_LINKS, STORAGE_NAV_LINKS } from "../lib/nav-links";
 import { formatOrderQuantity, formatStockQuantity, getOrderUnit } from "../lib/product-units";
@@ -67,14 +66,6 @@ function getProduct(productId: string, products: Product[]) {
 
 function getOrderItems(order: CafeOrder, orderItems: OrderItem[]) {
     return orderItems.filter((item) => item.orderId === order.id);
-}
-
-function getCafeName(cafeId: string) {
-    return cafes.find((cafe) => cafe.id === cafeId)?.name ?? "Penza";
-}
-
-function getUserName(userId: string) {
-    return users.find((user) => user.id === userId)?.name ?? "کاربر نامشخص";
 }
 
 function movementLabel(type: StockMovementType) {
@@ -221,12 +212,12 @@ export function PeriodReport({ role }: { role: ReportRole }) {
 
     function reportRows() {
         return [
-            ["نوع", "تاریخ", "کافه/کالا", "کاربر", "تعداد", "توضیح"],
+            ["نوع", "تاریخ", "درخواست/کالا", "کاربر", "تعداد", "توضیح"],
             ...filteredOrders.map((order) => [
                 orderStatusLabel(order.status),
                 formatDateTime(order.createdAt),
-                getCafeName(order.cafeId),
-                getUserName(order.requestedBy),
+                `#${order.id.slice(-6)}`,
+                order.requestedBy,
                 String(getOrderItems(order, orderItems).reduce((sum, item) => sum + item.requestedQuantity, 0)),
                 order.note ?? "",
             ]),
@@ -236,7 +227,7 @@ export function PeriodReport({ role }: { role: ReportRole }) {
                     movementLabel(movement.type),
                     formatDateTime(movement.createdAt),
                     product?.name ?? "کالای حذف‌شده",
-                    getUserName(movement.createdBy),
+                    movement.createdBy,
                     product ? formatStockQuantity(product, movement.quantity) : String(movement.quantity),
                     movement.description,
                 ];
@@ -417,7 +408,6 @@ export function PeriodReport({ role }: { role: ReportRole }) {
                                 <thead className="bg-[#f2fff2] text-xs font-black text-[#0B2F0B]">
                                     <tr>
                                         <th className="px-4 py-3">تاریخ</th>
-                                        <th className="px-4 py-3">کافه</th>
                                         <th className="px-4 py-3">ثبت‌کننده</th>
                                         <th className="px-4 py-3">وضعیت</th>
                                         <th className="px-4 py-3">تعداد درخواستی</th>
@@ -431,8 +421,7 @@ export function PeriodReport({ role }: { role: ReportRole }) {
                                         return (
                                             <tr key={order.id} className="hover:bg-[#f8fff8]">
                                                 <td className="px-4 py-3 font-bold text-slate-600">{formatDateTime(order.createdAt)}</td>
-                                                <td className="px-4 py-3 font-black text-[#0B2F0B]">{getCafeName(order.cafeId)}</td>
-                                                <td className="px-4 py-3 font-bold text-slate-600">{getUserName(order.requestedBy)}</td>
+                                                <td className="px-4 py-3 font-bold text-slate-600">{order.requestedBy}</td>
                                                 <td className="px-4 py-3">
                                                     <span className={`rounded-full px-3 py-1 text-xs font-black ${orderStatusStyle(order.status)}`}>{orderStatusLabel(order.status)}</span>
                                                 </td>

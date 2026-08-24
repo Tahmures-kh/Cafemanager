@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { cafes, users } from "../../../lib/mock-data";
 import { formatDateTime, useCafeStorageStore } from "../../../lib/local-store";
 import { formatOrderQuantity, formatStockQuantity, orderToStockQuantity } from "../../../lib/product-units";
 import type { CafeOrder, OrderItem, OrderStatus, Product } from "../../../lib/types";
@@ -19,14 +18,6 @@ const filterTabs: Array<{ id: StaffFilter; label: string; description: string }>
 
 function formatNumber(value: number) {
     return new Intl.NumberFormat("en-US", { maximumFractionDigits: 3 }).format(value);
-}
-
-function getCafe(cafeId: string) {
-    return cafes.find((cafe) => cafe.id === cafeId);
-}
-
-function getUser(userId: string) {
-    return users.find((user) => user.id === userId);
 }
 
 function getProduct(productId: string, productList: Product[]) {
@@ -133,19 +124,12 @@ function StaffOrderCard({
 }
 
 export default function StaffDashboardPage() {
-    const currentCafeStaffId = "u3";
-    const currentCafeId = "c1";
-    const cafeStaff = getUser(currentCafeStaffId);
-    const currentCafe = getCafe(currentCafeId);
     const { orders, orderItems, products, confirmReceived } = useCafeStorageStore();
     const [activeFilter, setActiveFilter] = useState<StaffFilter>("requested");
     const [confirmedMessage, setConfirmedMessage] = useState<string | null>(null);
 
     const myCafeOrders = useMemo(
-        () =>
-            orders.filter(
-                (order) => order.requestedBy === currentCafeStaffId || order.cafeId === currentCafeId
-            ),
+        () => orders,
         [orders]
     );
 
@@ -263,7 +247,7 @@ export default function StaffDashboardPage() {
                             <>
                                 <div className="flex flex-col justify-between gap-4 border-b border-green-900/10 pb-4 lg:flex-row lg:items-start">
                                     <div>
-                                        <p className="text-sm font-black text-[#007A00]">{currentCafe?.name} · {cafeStaff?.name}</p>
+                                        <p className="text-sm font-black text-[#007A00]">{selectedOrder.requestedBy}</p>
                                         <h2 className="mt-2 text-2xl font-black text-[#0B2F0B]">
                                             درخواست #{selectedOrder.id.slice(-6)}
                                         </h2>
@@ -334,9 +318,11 @@ export default function StaffDashboardPage() {
                                 {selectedOrder.status === "sent" && (
                                     <button
                                         type="button"
-                                        onClick={() => {
-                                            confirmReceived(selectedOrder.id);
-                                            setConfirmedMessage(`دریافت درخواست #${selectedOrder.id.slice(-6)} با موفقیت تایید شد.`);
+                                        onClick={async () => {
+                                            const success = await confirmReceived(selectedOrder.id);
+                                            if (success) {
+                                                setConfirmedMessage(`دریافت درخواست #${selectedOrder.id.slice(-6)} با موفقیت تایید شد.`);
+                                            }
                                         }}
                                         className="penza-button mt-5 rounded-2xl px-5 py-3 text-sm font-black"
                                     >

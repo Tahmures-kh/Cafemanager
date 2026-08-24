@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useMemo, useState } from "react";
-import { cafes, users } from "../../../lib/mock-data";
+import { FormEvent, useEffect, useMemo, useState } from "react";
+import { getCurrentAccount, type CurrentAccount } from "../../../lib/auth-api";
 import { useCafeStorageStore, useFavoriteProducts } from "../../../lib/local-store";
 import {
     formatOrderQuantity,
@@ -89,13 +89,13 @@ function stockVisibilityStyle(product: Product, inventoryItem?: InventoryItem) {
 }
 
 export default function CafeRequestPage() {
-    const currentCafeStaffId = "u3";
-    const currentCafeId = "c1";
-
-    const currentUser = users.find((user) => user.id === currentCafeStaffId);
-    const currentCafe = cafes.find((cafe) => cafe.id === currentCafeId);
+    const [account, setAccount] = useState<CurrentAccount | null>(null);
     const { createOrder, products, inventoryItems } = useCafeStorageStore();
     const { favoriteIds, isFavorite, toggleFavorite } = useFavoriteProducts();
+
+    useEffect(() => {
+        getCurrentAccount().then(setAccount);
+    }, []);
 
     const [quantities, setQuantities] = useState<Record<string, number>>({});
     const [note, setNote] = useState("");
@@ -158,7 +158,7 @@ export default function CafeRequestPage() {
         updateQuantity(productId, 0);
     }
 
-    function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
         const finalItems: SubmittedItem[] = selectedItems.map((item) => ({
@@ -168,9 +168,7 @@ export default function CafeRequestPage() {
 
         const finalNote = note.trim();
 
-        const createdOrder = createOrder({
-            cafeId: currentCafeId,
-            requestedBy: currentCafeStaffId,
+        const createdOrder = await createOrder({
             note: finalNote,
             items: finalItems.map((item) => ({
                 productId: item.productId,
@@ -406,7 +404,7 @@ export default function CafeRequestPage() {
                         <div className="penza-card rounded-[1.5rem] p-4">
                             <h2 className="text-xl font-black text-[#0B2F0B]">سبد درخواست</h2>
                             <p className="mt-1 text-sm text-slate-500">
-                                {currentCafe?.name} · {currentUser?.name}
+                                {account?.displayName ?? account?.username ?? "کاربر"}
                             </p>
 
                             <div className="mt-4 max-h-[40vh] space-y-2 overflow-y-auto pl-1">
