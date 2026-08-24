@@ -169,13 +169,13 @@ function UnitTypeField({
                         value={newValue}
                         onChange={(event) => setNewValue(event.target.value)}
                         autoFocus
-                        className="h-11 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-right text-sm font-bold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                        className="h-12 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-right text-sm font-bold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
                         placeholder="نوع واحد جدید"
                     />
                     <button
                         type="button"
                         onClick={confirmNewValue}
-                        className="h-11 shrink-0 rounded-2xl bg-[#00A300] px-4 text-sm font-black text-white"
+                        className="h-12 shrink-0 rounded-2xl bg-[#00A300] px-4 text-sm font-black text-white"
                     >
                         افزودن
                     </button>
@@ -184,7 +184,7 @@ function UnitTypeField({
                 <select
                     value={value}
                     onChange={handleSelectChange}
-                    className="mt-2 h-11 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-sm font-bold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                    className="mt-2 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-sm font-bold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
                 >
                     {!unitTypes.includes(value) && value && <option value={value}>{value}</option>}
                     {unitTypes.map((unit) => (
@@ -421,7 +421,7 @@ export default function StorageDashboardPage() {
                         </div>
                     )}
 
-                    <section className="mt-5 grid gap-5 xl:grid-cols-[1fr_24rem]">
+                    <section className="mt-5 grid gap-5 xl:grid-cols-[1fr_28rem]">
                         <div className="penza-card rounded-[1.5rem] p-5">
                             <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
                                 <h2 className="text-xl font-black text-[#0B2F0B]">موجودی</h2>
@@ -547,7 +547,7 @@ export default function StorageDashboardPage() {
                                                                         <input
                                                                             value={quickAdjust.amount}
                                                                             onChange={(event) => setQuickAdjust((current) => ({ ...current, amount: event.target.value }))}
-                                                                            className="mt-1 h-11 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-center text-sm font-black text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                                                            className="mt-1 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-center text-sm font-black text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
                                                                             inputMode="decimal"
                                                                         />
                                                                     </div>
@@ -556,7 +556,7 @@ export default function StorageDashboardPage() {
                                                                         <input
                                                                             value={quickAdjust.reason}
                                                                             onChange={(event) => setQuickAdjust((current) => ({ ...current, reason: event.target.value }))}
-                                                                            className="mt-1 h-11 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-right text-sm font-bold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                                                            className="mt-1 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-right text-sm font-bold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
                                                                             placeholder="مثلا خرید جدید، شمارش دستی، خرابی..."
                                                                         />
                                                                     </div>
@@ -584,7 +584,7 @@ export default function StorageDashboardPage() {
                                                                         <input
                                                                             value={editForm.name}
                                                                             onChange={(event) => setEditForm((current) => ({ ...current, name: event.target.value }))}
-                                                                            className="mt-1 h-11 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-right text-sm font-bold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                                                            className="mt-1 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-right text-sm font-bold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
                                                                         />
                                                                     </div>
                                                                     <div>
@@ -592,7 +592,7 @@ export default function StorageDashboardPage() {
                                                                         <select
                                                                             value={editForm.category}
                                                                             onChange={(event) => setEditForm((current) => ({ ...current, category: event.target.value as ProductCategory }))}
-                                                                            className="mt-1 h-11 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-sm font-bold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                                                            className="mt-1 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-sm font-bold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
                                                                         >
                                                                             {categoryOptions.map((category) => (
                                                                                 <option key={category.id} value={category.id}>{category.label}</option>
@@ -618,7 +618,7 @@ export default function StorageDashboardPage() {
                                                                         <input
                                                                             value={editForm.orderUnitQuantity}
                                                                             onChange={(event) => setEditForm((current) => ({ ...current, orderUnitQuantity: event.target.value }))}
-                                                                            className="mt-1 h-11 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-center text-sm font-black text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                                                            className="mt-1 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-center text-sm font-black text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
                                                                             inputMode="decimal"
                                                                         />
                                                                     </div>
@@ -655,24 +655,24 @@ export default function StorageDashboardPage() {
                         </div>
 
                         <aside className="space-y-5 xl:sticky xl:top-5 xl:self-start">
-                            <form onSubmit={handleSubmit} className="penza-card rounded-[1.5rem] p-5">
+                            <form onSubmit={handleSubmit} className="penza-card rounded-[1.5rem] p-6">
                                 <h2 className="text-xl font-black text-[#0B2F0B]">افزودن کالا</h2>
 
-                                <label className="mt-4 block text-sm font-black text-[#0B2F0B]">نام کالا</label>
+                                <label className="mt-5 block text-sm font-black text-[#0B2F0B]">نام کالا</label>
                                 <input
                                     value={form.name}
                                     onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
-                                    className="mt-2 h-11 w-full rounded-2xl border border-green-900/15 bg-white px-4 text-right text-sm font-semibold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                    className="mt-2 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-4 text-right text-sm font-semibold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
                                     placeholder="مثلا شیر پرچرب"
                                 />
 
-                                <div className="mt-3 grid grid-cols-2 gap-3">
+                                <div className="mt-4 grid grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-black text-[#0B2F0B]">دسته</label>
                                         <select
                                             value={form.category}
                                             onChange={(event) => setForm((current) => ({ ...current, category: event.target.value as ProductCategory }))}
-                                            className="mt-2 h-11 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-sm font-bold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                            className="mt-2 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-sm font-bold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
                                         >
                                             {categoryOptions.map((category) => (
                                                 <option key={category.id} value={category.id}>{category.label}</option>
@@ -688,7 +688,7 @@ export default function StorageDashboardPage() {
                                     />
                                 </div>
 
-                                <div className="mt-3 grid grid-cols-2 gap-3">
+                                <div className="mt-4 grid grid-cols-2 gap-4">
                                     <UnitTypeField
                                         label="واحد درخواست"
                                         value={form.orderUnit}
@@ -701,21 +701,21 @@ export default function StorageDashboardPage() {
                                         <input
                                             value={form.orderUnitQuantity}
                                             onChange={(event) => setForm((current) => ({ ...current, orderUnitQuantity: event.target.value }))}
-                                            className="mt-2 h-11 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-center text-sm font-black text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                            className="mt-2 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-center text-sm font-black text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
                                             placeholder="مثلا 6"
                                             inputMode="decimal"
                                         />
                                     </div>
                                 </div>
-                                <label className="mt-3 block text-sm font-black text-[#0B2F0B]">موجودی فعلی</label>
+                                <label className="mt-4 block text-sm font-black text-[#0B2F0B]">موجودی فعلی</label>
                                 <input
                                     value={form.currentQuantity}
                                     onChange={(event) => setForm((current) => ({ ...current, currentQuantity: event.target.value }))}
-                                    className="mt-2 h-11 w-full rounded-2xl border border-green-900/15 bg-white px-4 text-center text-sm font-black text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                    className="mt-2 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-4 text-center text-sm font-black text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
                                     inputMode="decimal"
                                 />
 
-                                <div className="mt-4 grid grid-cols-2 gap-2">
+                                <div className="mt-5 grid grid-cols-2 gap-3">
                                     <button
                                         type="button"
                                         onClick={resetForm}
@@ -729,7 +729,7 @@ export default function StorageDashboardPage() {
                                 </div>
                             </form>
 
-                            <div className="penza-card rounded-[1.5rem] p-5">
+                            <div className="penza-card rounded-[1.5rem] p-6">
                                 <div className="flex items-center justify-between gap-3">
                                     <h2 className="text-xl font-black text-[#0B2F0B]">آخرین تغییرات</h2>
                                     <Link href="/storage/reports" className="text-sm font-black text-[#007A00] hover:underline">
