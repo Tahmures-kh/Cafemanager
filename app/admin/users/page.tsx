@@ -14,7 +14,7 @@ import {
 import { formatDateTime } from "../../../lib/local-store";
 import { getRoleLabel, type PenzaRole } from "../../../lib/role-session";
 
-const ROLES: PenzaRole[] = ["admin", "manager", "staff", "storage"];
+const ROLES: PenzaRole[] = ["admin", "manager", "staff", "storage", "accountant"];
 
 function emptyNewForm() {
     return { username: "", password: "", role: "manager" as PenzaRole, displayName: "" };
