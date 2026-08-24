@@ -1,16 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { getCurrentAccount, logout, type CurrentAccount } from "../lib/auth-api";
 import { clearActivePenzaRole, getRoleLabel } from "../lib/role-session";
 
 /** Global top bar shown on every logged-in page: a read-only profile
  * summary and a single logout entry point, so every page behaves the
  * same way instead of each page wiring its own (inconsistent) logout
- * button. Renders nothing when no session is active (e.g. login page). */
+ * button. Renders nothing when no session is active, and never on the
+ * login page itself (even if a stale session cookie is still present). */
 export function AccountMenu() {
     const router = useRouter();
+    const pathname = usePathname();
     const [account, setAccount] = useState<CurrentAccount | null>(null);
     const [open, setOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -36,7 +38,7 @@ export function AccountMenu() {
         router.push("/");
     }
 
-    if (!account) return null;
+    if (!account || pathname === "/") return null;
 
     return (
         <div
