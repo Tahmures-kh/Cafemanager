@@ -1,12 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { RoleGuard } from "../../components/RoleGuard";
 import { PanelNav } from "../../components/panels/PanelNav";
-import { logout } from "../../lib/auth-api";
 import { STAFF_NAV_LINKS } from "../../lib/nav-links";
-import { clearActivePenzaRole } from "../../lib/role-session";
 
 const actions = [
     { href: "/staff/request", title: "ثبت درخواست", eyebrow: "شروع شیفت" },
@@ -14,14 +11,6 @@ const actions = [
 ];
 
 export default function StaffMainPage() {
-    const router = useRouter();
-
-    async function handleLogout() {
-        await logout();
-        clearActivePenzaRole();
-        router.push("/");
-    }
-
     return (
         <RoleGuard role="staff">
             <main className="penza-page">
@@ -34,9 +23,7 @@ export default function StaffMainPage() {
                             </p>
                             <h1 className="mt-4 text-3xl font-black tracking-tight text-[#0B2F0B] lg:text-4xl">پنل کافه</h1>
                             <div className="mt-6">
-                                <PanelNav links={STAFF_NAV_LINKS}>
-                                    <button type="button" onClick={handleLogout} className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-red-600 hover:bg-red-50">خروج</button>
-                                </PanelNav>
+                                <PanelNav links={STAFF_NAV_LINKS} />
                             </div>
                         </div>
                     </section>

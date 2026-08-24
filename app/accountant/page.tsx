@@ -1,27 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { RoleGuard } from "../../components/RoleGuard";
 import { PanelNav } from "../../components/panels/PanelNav";
-import { logout } from "../../lib/auth-api";
 import { ACCOUNTANT_NAV_LINKS } from "../../lib/nav-links";
-import { clearActivePenzaRole } from "../../lib/role-session";
 
 export default function AccountantMainPage() {
-    const router = useRouter();
-
     const actionCards = [
         { href: "/accountant/recipes", title: "رسپی‌ها و قیمت‌گذاری", eyebrow: "مواد اولیه و قیمت روز" },
         { href: "/accountant/inventory", title: "موجودی انبار", eyebrow: "مشاهده (بدون امکان ویرایش)" },
         { href: "/accountant/reports", title: "گزارش دوره‌ای", eyebrow: "تحلیل و آمار" },
     ];
-
-    async function handleLogout() {
-        await logout();
-        clearActivePenzaRole();
-        router.push("/");
-    }
 
     return (
         <RoleGuard role="accountant">
@@ -35,9 +24,7 @@ export default function AccountantMainPage() {
                             </p>
                             <h1 className="mt-4 text-3xl font-black tracking-tight text-[#0B2F0B] lg:text-4xl">پنل حسابدار</h1>
                             <div className="mt-6">
-                                <PanelNav links={ACCOUNTANT_NAV_LINKS}>
-                                    <button type="button" onClick={handleLogout} className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-red-600 hover:bg-red-50">خروج</button>
-                                </PanelNav>
+                                <PanelNav links={ACCOUNTANT_NAV_LINKS} />
                             </div>
                         </div>
                     </section>
