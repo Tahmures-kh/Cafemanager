@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { RoleGuard } from "../../../components/RoleGuard";
+import { PanelNav } from "../../../components/panels/PanelNav";
 import { fetchActiveSessions, revokeSession, type AdminSession } from "../../../lib/admin-api";
 import { formatDateTime } from "../../../lib/local-store";
+import { ADMIN_NAV_LINKS } from "../../../lib/nav-links";
 import { getRoleLabel, type PenzaRole } from "../../../lib/role-session";
 
 export default function AdminSessionsPage() {
@@ -39,11 +40,7 @@ export default function AdminSessionsPage() {
                                 </p>
                                 <h1 className="mt-4 text-3xl font-black tracking-tight text-[#0B2F0B] lg:text-5xl">نشست‌های فعال</h1>
                             </div>
-                            <div className="flex flex-wrap gap-2">
-                                <Link href="/admin" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">داشبورد ادمین</Link>
-                                <Link href="/admin/users" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">کاربران</Link>
-                                <Link href="/admin/logs" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">لاگ فعالیت‌ها</Link>
-                            </div>
+                            <PanelNav links={ADMIN_NAV_LINKS} />
                         </div>
                     </section>
 

@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { RoleGuard } from "../../components/RoleGuard";
+import { PanelNav } from "../../components/panels/PanelNav";
 import { logout } from "../../lib/auth-api";
+import { STAFF_NAV_LINKS } from "../../lib/nav-links";
 import { clearActivePenzaRole } from "../../lib/role-session";
 
 const actions = [
@@ -31,10 +33,10 @@ export default function StaffMainPage() {
                                 Penza · کافه
                             </p>
                             <h1 className="mt-4 text-3xl font-black tracking-tight text-[#0B2F0B] lg:text-4xl">پنل کافه</h1>
-                            <div className="mt-6 flex flex-wrap gap-3">
-                                <Link href="/staff/request" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">ثبت درخواست</Link>
-                                <Link href="/staff/dashboard" className="penza-ghost-button rounded-2xl px-5 py-3 text-sm font-black hover:bg-green-50">پیگیری سفارش‌ها</Link>
-                                <button type="button" onClick={handleLogout} className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-red-600 hover:bg-red-50">خروج</button>
+                            <div className="mt-6">
+                                <PanelNav links={STAFF_NAV_LINKS}>
+                                    <button type="button" onClick={handleLogout} className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-red-600 hover:bg-red-50">خروج</button>
+                                </PanelNav>
                             </div>
                         </div>
                     </section>

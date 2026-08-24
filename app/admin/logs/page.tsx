@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { RoleGuard } from "../../../components/RoleGuard";
+import { PanelNav } from "../../../components/panels/PanelNav";
 import { fetchAuditLog } from "../../../lib/audit-log";
 import { formatDateTime } from "../../../lib/local-store";
+import { ADMIN_NAV_LINKS } from "../../../lib/nav-links";
 import type { AuditLogEntry } from "../../../lib/types";
 
 const SCOPE_LABELS: Record<string, string> = {
@@ -57,11 +58,7 @@ export default function AdminLogsPage() {
                                 </p>
                                 <h1 className="mt-4 text-3xl font-black tracking-tight text-[#0B2F0B] lg:text-5xl">لاگ فعالیت‌ها</h1>
                             </div>
-                            <div className="flex flex-wrap gap-2">
-                                <Link href="/admin" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">داشبورد ادمین</Link>
-                                <Link href="/admin/users" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">کاربران</Link>
-                                <Link href="/admin/sessions" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">نشست‌های فعال</Link>
-                            </div>
+                            <PanelNav links={ADMIN_NAV_LINKS} />
                         </div>
                     </section>
 

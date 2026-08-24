@@ -1,11 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
 import { cafes, users } from "../lib/mock-data";
 import { formatDateTime, useCafeStorageStore } from "../lib/local-store";
+import { ACCOUNTANT_NAV_LINKS, MANAGER_NAV_LINKS, STORAGE_NAV_LINKS } from "../lib/nav-links";
 import { formatOrderQuantity, formatStockQuantity, getOrderUnit } from "../lib/product-units";
 import type { CafeOrder, OrderItem, Product, StockMovementType } from "../lib/types";
+import { PanelNav } from "./panels/PanelNav";
 import { RoleGuard } from "./RoleGuard";
 
 type ReportRole = "manager" | "storage" | "accountant";
@@ -303,21 +304,8 @@ export function PeriodReport({ role }: { role: ReportRole }) {
         downloadBlob(blob, `penza-report-${startDate}-to-${endDate}.xls`);
     }
 
-    const workLinks =
-        role === "manager"
-            ? [
-                { href: "/manager/orders", label: "درخواست‌ها" },
-                { href: "/manager/inventory", label: "موجودی انبار" },
-            ]
-            : role === "storage"
-                ? [
-                    { href: "/storage/orders", label: "درخواست‌ها" },
-                    { href: "/storage/dashboard", label: "داشبورد انبار" },
-                ]
-                : [
-                    { href: "/accountant/recipes", label: "رسپی‌ها و قیمت‌گذاری" },
-                    { href: "/accountant/inventory", label: "موجودی انبار" },
-                ];
+    const navLinks =
+        role === "manager" ? MANAGER_NAV_LINKS : role === "storage" ? STORAGE_NAV_LINKS : ACCOUNTANT_NAV_LINKS;
     const title = "گزارش";
 
     return (
@@ -334,19 +322,14 @@ export function PeriodReport({ role }: { role: ReportRole }) {
                                 <h1 className="mt-4 text-3xl font-black tracking-tight text-[#0B2F0B] lg:text-5xl">{title}</h1>
                             </div>
 
-                            <div className="flex flex-wrap gap-2">
-                                {workLinks.map((link) => (
-                                    <Link key={link.href} href={link.href} className="rounded-2xl border border-green-900/15 bg-white px-4 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
-                                        {link.label}
-                                    </Link>
-                                ))}
+                            <PanelNav links={navLinks}>
                                 <button type="button" onClick={() => window.print()} className="penza-ghost-button rounded-2xl px-4 py-3 text-sm font-black hover:bg-green-50">
                                     PDF / چاپ
                                 </button>
                                 <button type="button" onClick={copySummary} className="penza-button rounded-2xl px-4 py-3 text-sm font-black">
                                     {copied ? "کپی شد" : "کپی خلاصه"}
                                 </button>
-                            </div>
+                            </PanelNav>
                         </div>
                     </section>
 

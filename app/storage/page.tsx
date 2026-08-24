@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { RoleGuard } from "../../components/RoleGuard";
+import { PanelNav } from "../../components/panels/PanelNav";
 import { logout } from "../../lib/auth-api";
+import { STORAGE_NAV_LINKS } from "../../lib/nav-links";
 import { clearActivePenzaRole } from "../../lib/role-session";
 
 const actions = [
@@ -32,11 +34,10 @@ export default function StorageMainPage() {
                                 Penza · انبار
                             </p>
                             <h1 className="mt-4 text-3xl font-black tracking-tight text-[#0B2F0B] lg:text-4xl">پنل انبار</h1>
-                            <div className="mt-6 flex flex-wrap gap-3">
-                                <Link href="/storage/orders" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">درخواست‌ها</Link>
-                                <Link href="/storage/dashboard" className="penza-ghost-button rounded-2xl px-5 py-3 text-sm font-black hover:bg-green-50">داشبورد انبار</Link>
-                                <Link href="/storage/reports" className="penza-ghost-button rounded-2xl px-5 py-3 text-sm font-black hover:bg-green-50">گزارش</Link>
-                                <button type="button" onClick={handleLogout} className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-red-600 hover:bg-red-50">خروج</button>
+                            <div className="mt-6">
+                                <PanelNav links={STORAGE_NAV_LINKS}>
+                                    <button type="button" onClick={handleLogout} className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-red-600 hover:bg-red-50">خروج</button>
+                                </PanelNav>
                             </div>
                         </div>
                     </section>

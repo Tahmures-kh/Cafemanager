@@ -1,13 +1,14 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
 import { cafes, users } from "../../../lib/mock-data";
 import { formatDateTime, useCafeStorageStore } from "../../../lib/local-store";
 import { formatOrderQuantity, formatStockQuantity, orderToStockQuantity } from "../../../lib/product-units";
 import type { CafeOrder, OrderItem, OrderStatus, Product } from "../../../lib/types";
 import { RoleGuard } from "../../../components/RoleGuard";
+import { PanelNav } from "../../../components/panels/PanelNav";
 import { SuccessNotice } from "../../../components/SuccessNotice";
+import { STAFF_NAV_LINKS } from "../../../lib/nav-links";
 
 type StaffFilter = "requested" | "delivered";
 
@@ -179,11 +180,7 @@ export default function StaffDashboardPage() {
                             </h1>
                         </div>
 
-                        <div className="flex flex-wrap gap-2">
-                            <Link href="/staff/request" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">
-                                ثبت درخواست جدید
-                            </Link>
-                        </div>
+                        <PanelNav links={STAFF_NAV_LINKS} />
                     </div>
                 </section>
 

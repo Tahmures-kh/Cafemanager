@@ -16,7 +16,9 @@ import {
 } from "../../../lib/product-units";
 import type { InventoryItem, Product, ProductCategory } from "../../../lib/types";
 import { RoleGuard } from "../../../components/RoleGuard";
+import { PanelNav } from "../../../components/panels/PanelNav";
 import { SuccessNotice } from "../../../components/SuccessNotice";
+import { STAFF_NAV_LINKS } from "../../../lib/nav-links";
 
 type CategoryFilter = "all" | ProductCategory;
 
@@ -211,6 +213,7 @@ export default function CafeRequestPage() {
                             </h1>
 
                             <div className="mt-4">
+                                <PanelNav links={STAFF_NAV_LINKS} />
                             </div>
                         </div>
 

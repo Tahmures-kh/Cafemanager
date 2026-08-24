@@ -15,7 +15,9 @@ import {
 } from "../../../lib/product-units";
 import type { Product, ProductCategory, StockMovement, StockMovementType } from "../../../lib/types";
 import { RoleGuard } from "../../../components/RoleGuard";
+import { PanelNav } from "../../../components/panels/PanelNav";
 import { SuccessNotice } from "../../../components/SuccessNotice";
+import { STORAGE_NAV_LINKS } from "../../../lib/nav-links";
 
 const categoryOptions: Array<{ id: ProductCategory; label: string }> = [
     { id: "coffee", label: "قهوه" },
@@ -402,14 +404,7 @@ export default function StorageDashboardPage() {
                                 </h1>
                             </div>
 
-                            <div className="flex flex-wrap gap-2">
-                                <Link href="/storage/orders" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
-                                    درخواست‌ها
-                                </Link>
-                                <Link href="/storage/reports" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">
-                                    گزارش دوره‌ای
-                                </Link>
-                            </div>
+                            <PanelNav links={STORAGE_NAV_LINKS} />
                         </div>
                     </section>
 

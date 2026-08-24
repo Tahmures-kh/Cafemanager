@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { RoleGuard } from "../../components/RoleGuard";
+import { PanelNav } from "../../components/panels/PanelNav";
 import { logout } from "../../lib/auth-api";
+import { MANAGER_NAV_LINKS } from "../../lib/nav-links";
 import { clearActivePenzaRole } from "../../lib/role-session";
 
 export default function ManagerMainPage() {
@@ -32,11 +34,10 @@ export default function ManagerMainPage() {
                         <div className="relative z-10">
                             <p className="inline-flex items-center gap-2 rounded-full border border-green-900/10 bg-white px-4 py-2 text-sm font-black text-[#007A00] shadow-sm"><span className="penza-live-dot" />Penza · مدیر</p>
                             <h1 className="mt-4 text-3xl font-black tracking-tight text-[#0B2F0B] lg:text-4xl">داشبورد مدیر</h1>
-                            <div className="mt-6 flex flex-wrap gap-3">
-                                <Link href="/manager/dashboard" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">داشبورد</Link>
-                                <Link href="/manager/orders" className="penza-ghost-button rounded-2xl px-5 py-3 text-sm font-black hover:bg-green-50">درخواست‌ها</Link>
-                                <Link href="/manager/reports" className="penza-ghost-button rounded-2xl px-5 py-3 text-sm font-black hover:bg-green-50">گزارش</Link>
-                                <button type="button" onClick={handleLogout} className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-red-600 hover:bg-red-50">خروج</button>
+                            <div className="mt-6">
+                                <PanelNav links={MANAGER_NAV_LINKS}>
+                                    <button type="button" onClick={handleLogout} className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-red-600 hover:bg-red-50">خروج</button>
+                                </PanelNav>
                             </div>
                         </div>
                     </section>

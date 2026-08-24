@@ -6,6 +6,8 @@ import { formatDateTime, useCafeStorageStore } from "../../../lib/local-store";
 import { formatStockQuantity, getStockStatus, getStockStatusLabel, getStockStatusStyle } from "../../../lib/product-units";
 import type { OrderStatus, Product } from "../../../lib/types";
 import { RoleGuard } from "../../../components/RoleGuard";
+import { PanelNav } from "../../../components/panels/PanelNav";
+import { MANAGER_NAV_LINKS } from "../../../lib/nav-links";
 
 function formatNumber(value: number) {
     return new Intl.NumberFormat("en-US", { maximumFractionDigits: 3 }).format(value);
@@ -86,26 +88,7 @@ export default function ManagerDashboardPage() {
                             </h1>
                         </div>
 
-                        <div className="flex flex-wrap gap-2">
-                            <Link href="/manager/orders" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">
-                                مشاهده درخواست‌ها
-                            </Link>
-                            <Link href="/manager/inventory" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
-                                موجودی انبار
-                            </Link>
-                            <Link href="/manager/reports" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
-                                گزارش دوره‌ای
-                            </Link>
-                            <Link href="/manager/recipes" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
-                                رسپی‌ها
-                            </Link>
-                            <Link href="/manager/sales" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
-                                فروش و تحلیل
-                            </Link>
-                            <Link href="/manager/purchases" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
-                                خریدهای روزانه
-                            </Link>
-                        </div>
+                        <PanelNav links={MANAGER_NAV_LINKS} />
                     </div>
                 </section>
 

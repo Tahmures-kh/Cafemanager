@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import * as XLSX from "xlsx";
 import { RoleGuard } from "../../../components/RoleGuard";
+import { PanelNav } from "../../../components/panels/PanelNav";
+import { MANAGER_NAV_LINKS } from "../../../lib/nav-links";
 import { fetchAuditLog, logAuditEvent } from "../../../lib/audit-log";
 import { getCurrentAccount, type CurrentAccount } from "../../../lib/auth-api";
 import { formatDateTime, useCafeStorageStore } from "../../../lib/local-store";
@@ -230,23 +231,7 @@ export default function ManagerSalesPage() {
                                 </h1>
                             </div>
 
-                            <div className="flex flex-wrap gap-2">
-                                <Link href="/manager/dashboard" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
-                                    داشبورد
-                                </Link>
-                                <Link href="/manager/recipes" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
-                                    رسپی‌ها
-                                </Link>
-                                <Link href="/manager/inventory" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
-                                    موجودی انبار
-                                </Link>
-                                <Link href="/manager/reports" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">
-                                    گزارش دوره‌ای
-                                </Link>
-                                <Link href="/manager/purchases" className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
-                                    خریدهای روزانه
-                                </Link>
-                            </div>
+                            <PanelNav links={MANAGER_NAV_LINKS} />
                         </div>
                     </section>
 

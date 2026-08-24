@@ -1,13 +1,14 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
 import { cafes, users } from "../../../lib/mock-data";
 import { formatDateTime, useCafeStorageStore } from "../../../lib/local-store";
 import { formatOrderQuantity, formatStockQuantity, formatUnitConversion, orderToStockQuantity, stockToOrderQuantity } from "../../../lib/product-units";
 import type { CafeOrder, InventoryItem, OrderItem, OrderStatus, Product } from "../../../lib/types";
 import { RoleGuard } from "../../../components/RoleGuard";
+import { PanelNav } from "../../../components/panels/PanelNav";
 import { SuccessNotice } from "../../../components/SuccessNotice";
+import { STORAGE_NAV_LINKS } from "../../../lib/nav-links";
 
 type StorageFilter = "requested" | "delivered";
 
@@ -512,13 +513,7 @@ export default function StorageOrdersPage() {
                             </h1>
                         </div>
 
-                        <div className="flex flex-wrap gap-2">
-                            <Link href="/storage/dashboard" className="rounded-2xl border border-green-900/15 bg-white px-4 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
-                                داشبورد انبار
-                            </Link>
-                            <Link href="/storage/reports" className="rounded-2xl border border-green-900/15 bg-white px-4 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2]">
-                                گزارش دوره‌ای
-                            </Link>
+                        <PanelNav links={STORAGE_NAV_LINKS}>
                             <button
                                 type="button"
                                 onClick={resetStore}
@@ -526,7 +521,7 @@ export default function StorageOrdersPage() {
                             >
                                 ریست تست
                             </button>
-                        </div>
+                        </PanelNav>
                     </div>
                 </section>
 

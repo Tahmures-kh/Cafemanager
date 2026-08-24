@@ -2,17 +2,12 @@
 
 import { InventoryPanel } from "../../../components/panels/InventoryPanel";
 import { RoleGuard } from "../../../components/RoleGuard";
-
-const navLinks = [
-    { href: "/accountant", label: "داشبورد" },
-    { href: "/accountant/recipes", label: "رسپی‌ها" },
-    { href: "/accountant/reports", label: "گزارش دوره‌ای", primary: true },
-];
+import { ACCOUNTANT_NAV_LINKS } from "../../../lib/nav-links";
 
 export default function AccountantInventoryPage() {
     return (
         <RoleGuard role="accountant">
-            <InventoryPanel navLinks={navLinks} />
+            <InventoryPanel navLinks={ACCOUNTANT_NAV_LINKS} />
         </RoleGuard>
     );
 }

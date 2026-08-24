@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { RoleGuard } from "../../components/RoleGuard";
+import { PanelNav } from "../../components/panels/PanelNav";
 import { logout } from "../../lib/auth-api";
+import { ADMIN_NAV_LINKS } from "../../lib/nav-links";
 import { clearActivePenzaRole } from "../../lib/role-session";
 
 export default function AdminMainPage() {
@@ -39,11 +41,10 @@ export default function AdminMainPage() {
                                 Penza · ادمین
                             </p>
                             <h1 className="mt-4 text-3xl font-black tracking-tight text-[#0B2F0B] lg:text-4xl">پنل ادمین</h1>
-                            <div className="mt-6 flex flex-wrap gap-3">
-                                <Link href="/admin/users" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">کاربران</Link>
-                                <Link href="/admin/logs" className="penza-ghost-button rounded-2xl px-5 py-3 text-sm font-black hover:bg-green-50">لاگ فعالیت‌ها</Link>
-                                <Link href="/admin/sessions" className="penza-ghost-button rounded-2xl px-5 py-3 text-sm font-black hover:bg-green-50">نشست‌های فعال</Link>
-                                <button type="button" onClick={handleLogout} className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-red-600 hover:bg-red-50">خروج</button>
+                            <div className="mt-6">
+                                <PanelNav links={ADMIN_NAV_LINKS}>
+                                    <button type="button" onClick={handleLogout} className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-red-600 hover:bg-red-50">خروج</button>
+                                </PanelNav>
                             </div>
                         </div>
                     </section>
