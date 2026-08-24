@@ -216,6 +216,7 @@ export default function StorageDashboardPage() {
     const [quickAdjust, setQuickAdjust] = useState<QuickAdjustState>(emptyQuickAdjust);
     const [editForm, setEditForm] = useState<EditFormState>(emptyEditForm);
     const [actionMessage, setActionMessage] = useState<string | null>(null);
+    const [showAddForm, setShowAddForm] = useState(false);
 
     const latestMovementByProductId = useMemo(() => {
         const result = new Map<string, StockMovement>();
@@ -299,6 +300,7 @@ export default function StorageDashboardPage() {
         if (success) {
             setActionMessage(`کالای «${form.name}» با موفقیت به انبار اضافه شد.`);
             resetForm();
+            setShowAddForm(false);
         }
     }
 
@@ -421,7 +423,103 @@ export default function StorageDashboardPage() {
                         </div>
                     )}
 
-                    <section className="mt-5 grid gap-5 xl:grid-cols-[1fr_28rem]">
+                    <section className="mt-5">
+                        <div className="penza-card rounded-[1.5rem] p-5">
+                            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                                <h2 className="text-xl font-black text-[#0B2F0B]">افزودن کالا</h2>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowAddForm((current) => !current)}
+                                    className={
+                                        showAddForm
+                                            ? "rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-slate-600 hover:bg-[#f2fff2]"
+                                            : "penza-button rounded-2xl px-5 py-3 text-sm font-black"
+                                    }
+                                >
+                                    {showAddForm ? "بستن" : "+ کالای جدید"}
+                                </button>
+                            </div>
+
+                            {showAddForm && (
+                                <form onSubmit={handleSubmit} className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                                    <div>
+                                        <label className="block text-sm font-black text-[#0B2F0B]">نام کالا</label>
+                                        <input
+                                            value={form.name}
+                                            onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
+                                            className="mt-2 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-4 text-right text-sm font-semibold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                            placeholder="مثلا شیر پرچرب"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-black text-[#0B2F0B]">دسته</label>
+                                        <select
+                                            value={form.category}
+                                            onChange={(event) => setForm((current) => ({ ...current, category: event.target.value as ProductCategory }))}
+                                            className="mt-2 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-sm font-bold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                        >
+                                            {categoryOptions.map((category) => (
+                                                <option key={category.id} value={category.id}>{category.label}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+                                    <UnitTypeField
+                                        label="واحد موجودی"
+                                        value={form.unit}
+                                        unitTypes={unitTypes}
+                                        onChange={(value) => setForm((current) => ({ ...current, unit: value }))}
+                                        onAddUnitType={addUnitType}
+                                    />
+
+                                    <UnitTypeField
+                                        label="واحد درخواست"
+                                        value={form.orderUnit}
+                                        unitTypes={unitTypes}
+                                        onChange={(value) => setForm((current) => ({ ...current, orderUnit: value }))}
+                                        onAddUnitType={addUnitType}
+                                    />
+
+                                    <div>
+                                        <label className="block text-sm font-black text-[#0B2F0B]">هر واحد درخواست</label>
+                                        <input
+                                            value={form.orderUnitQuantity}
+                                            onChange={(event) => setForm((current) => ({ ...current, orderUnitQuantity: event.target.value }))}
+                                            className="mt-2 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-center text-sm font-black text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                            placeholder="مثلا 6"
+                                            inputMode="decimal"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-black text-[#0B2F0B]">موجودی فعلی</label>
+                                        <input
+                                            value={form.currentQuantity}
+                                            onChange={(event) => setForm((current) => ({ ...current, currentQuantity: event.target.value }))}
+                                            className="mt-2 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-4 text-center text-sm font-black text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                            inputMode="decimal"
+                                        />
+                                    </div>
+
+                                    <div className="flex items-end gap-3 sm:col-span-2">
+                                        <button
+                                            type="button"
+                                            onClick={resetForm}
+                                            className="rounded-2xl border border-green-900/15 bg-white px-5 py-3 text-sm font-black text-slate-600 hover:bg-[#f2fff2]"
+                                        >
+                                            پاک کردن
+                                        </button>
+                                        <button type="submit" className="penza-button rounded-2xl px-5 py-3 text-sm font-black">
+                                            افزودن
+                                        </button>
+                                    </div>
+                                </form>
+                            )}
+                        </div>
+                    </section>
+
+                    <section className="mt-5">
                         <div className="penza-card rounded-[1.5rem] p-5">
                             <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
                                 <h2 className="text-xl font-black text-[#0B2F0B]">موجودی</h2>
@@ -653,110 +751,36 @@ export default function StorageDashboardPage() {
                                 </table>
                             </div>
                         </div>
+                    </section>
 
-                        <aside className="space-y-5 xl:sticky xl:top-5 xl:self-start">
-                            <form onSubmit={handleSubmit} className="penza-card rounded-[1.5rem] p-6">
-                                <h2 className="text-xl font-black text-[#0B2F0B]">افزودن کالا</h2>
-
-                                <label className="mt-5 block text-sm font-black text-[#0B2F0B]">نام کالا</label>
-                                <input
-                                    value={form.name}
-                                    onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
-                                    className="mt-2 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-4 text-right text-sm font-semibold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
-                                    placeholder="مثلا شیر پرچرب"
-                                />
-
-                                <div className="mt-4 grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="block text-sm font-black text-[#0B2F0B]">دسته</label>
-                                        <select
-                                            value={form.category}
-                                            onChange={(event) => setForm((current) => ({ ...current, category: event.target.value as ProductCategory }))}
-                                            className="mt-2 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-sm font-bold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
-                                        >
-                                            {categoryOptions.map((category) => (
-                                                <option key={category.id} value={category.id}>{category.label}</option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                    <UnitTypeField
-                                        label="واحد موجودی"
-                                        value={form.unit}
-                                        unitTypes={unitTypes}
-                                        onChange={(value) => setForm((current) => ({ ...current, unit: value }))}
-                                        onAddUnitType={addUnitType}
-                                    />
-                                </div>
-
-                                <div className="mt-4 grid grid-cols-2 gap-4">
-                                    <UnitTypeField
-                                        label="واحد درخواست"
-                                        value={form.orderUnit}
-                                        unitTypes={unitTypes}
-                                        onChange={(value) => setForm((current) => ({ ...current, orderUnit: value }))}
-                                        onAddUnitType={addUnitType}
-                                    />
-                                    <div>
-                                        <label className="block text-sm font-black text-[#0B2F0B]">هر واحد درخواست</label>
-                                        <input
-                                            value={form.orderUnitQuantity}
-                                            onChange={(event) => setForm((current) => ({ ...current, orderUnitQuantity: event.target.value }))}
-                                            className="mt-2 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-center text-sm font-black text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
-                                            placeholder="مثلا 6"
-                                            inputMode="decimal"
-                                        />
-                                    </div>
-                                </div>
-                                <label className="mt-4 block text-sm font-black text-[#0B2F0B]">موجودی فعلی</label>
-                                <input
-                                    value={form.currentQuantity}
-                                    onChange={(event) => setForm((current) => ({ ...current, currentQuantity: event.target.value }))}
-                                    className="mt-2 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-4 text-center text-sm font-black text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
-                                    inputMode="decimal"
-                                />
-
-                                <div className="mt-5 grid grid-cols-2 gap-3">
-                                    <button
-                                        type="button"
-                                        onClick={resetForm}
-                                        className="rounded-2xl border border-green-900/15 bg-white px-4 py-3 text-sm font-black text-slate-600 hover:bg-[#f2fff2]"
-                                    >
-                                        پاک کردن
-                                    </button>
-                                    <button type="submit" className="penza-button rounded-2xl px-4 py-3 text-sm font-black">
-                                        افزودن
-                                    </button>
-                                </div>
-                            </form>
-
-                            <div className="penza-card rounded-[1.5rem] p-6">
-                                <div className="flex items-center justify-between gap-3">
-                                    <h2 className="text-xl font-black text-[#0B2F0B]">آخرین تغییرات</h2>
-                                    <Link href="/storage/reports" className="text-sm font-black text-[#007A00] hover:underline">
-                                        گزارش
-                                    </Link>
-                                </div>
-                                <div className="mt-4 space-y-3">
-                                    {stockMovements.slice(0, 6).map((movement) => {
-                                        const product = products.find((item) => item.id === movement.productId);
-                                        return (
-                                            <div key={movement.id} className="rounded-2xl bg-[#f8fff8] p-3 text-sm">
-                                                <div className="flex items-start justify-between gap-3">
-                                                    <p className="font-black text-[#0B2F0B]">{product?.name ?? "کالا حذف‌شده"}</p>
-                                                    <span className="rounded-full bg-white px-3 py-1 text-[11px] font-black text-[#007A00] ring-1 ring-green-900/10">
-                                                        {movementTypeLabel(movement.type)}
-                                                    </span>
-                                                </div>
-                                                <p className="mt-1 text-xs font-bold text-slate-500">
-                                                    {movementQuantityLabel(movement.quantity)} · {formatDateTime(movement.createdAt)}
-                                                </p>
-                                                <p className="mt-1 text-xs leading-6 text-slate-500">{movement.description}</p>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
+                    <section className="mt-5">
+                        <div className="penza-card rounded-[1.5rem] p-6">
+                            <div className="flex items-center justify-between gap-3">
+                                <h2 className="text-xl font-black text-[#0B2F0B]">آخرین تغییرات</h2>
+                                <Link href="/storage/reports" className="text-sm font-black text-[#007A00] hover:underline">
+                                    گزارش
+                                </Link>
                             </div>
-                        </aside>
+                            <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                                {stockMovements.slice(0, 6).map((movement) => {
+                                    const product = products.find((item) => item.id === movement.productId);
+                                    return (
+                                        <div key={movement.id} className="rounded-2xl bg-[#f8fff8] p-3 text-sm">
+                                            <div className="flex items-start justify-between gap-3">
+                                                <p className="font-black text-[#0B2F0B]">{product?.name ?? "کالا حذف‌شده"}</p>
+                                                <span className="rounded-full bg-white px-3 py-1 text-[11px] font-black text-[#007A00] ring-1 ring-green-900/10">
+                                                    {movementTypeLabel(movement.type)}
+                                                </span>
+                                            </div>
+                                            <p className="mt-1 text-xs font-bold text-slate-500">
+                                                {movementQuantityLabel(movement.quantity)} · {formatDateTime(movement.createdAt)}
+                                            </p>
+                                            <p className="mt-1 text-xs leading-6 text-slate-500">{movement.description}</p>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
                     </section>
                 </div>
             </main>
