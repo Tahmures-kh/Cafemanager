@@ -229,7 +229,7 @@ export default function ManagerOrdersPage() {
                                     </div>
                                 </div>
 
-                                <div className="mt-5 overflow-hidden rounded-2xl border border-green-900/10">
+                                <div className="mt-5 overflow-x-auto rounded-2xl border border-green-900/10">
                                     <table className="w-full min-w-[620px] text-right text-sm">
                                         <thead className="penza-table-head text-xs font-black">
                                             <tr>

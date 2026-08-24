@@ -39,7 +39,10 @@ export function AccountMenu() {
     if (!account) return null;
 
     return (
-        <div className="flex justify-end gap-2 px-4 py-2 lg:px-6">
+        <div
+            className="flex justify-end gap-2 px-4 pb-2 lg:px-6"
+            style={{ paddingTop: "max(0.5rem, env(safe-area-inset-top))" }}
+        >
             <div className="relative" ref={containerRef}>
                 <button
                     type="button"

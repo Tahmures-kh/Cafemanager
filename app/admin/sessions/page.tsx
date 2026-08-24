@@ -50,7 +50,7 @@ export default function AdminSessionsPage() {
                             هر ردیف یک ورود فعال است (یک کاربر ممکن است چند نشست همزمان داشته باشد).
                         </p>
 
-                        <div className="mt-4 overflow-hidden rounded-2xl border border-green-900/10 bg-white">
+                        <div className="mt-4 overflow-x-auto rounded-2xl border border-green-900/10 bg-white">
                             <table className="w-full min-w-[860px] text-right text-xs">
                                 <thead className="penza-table-head font-black">
                                     <tr>

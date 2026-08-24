@@ -455,7 +455,7 @@ export default function StorageDashboardPage() {
                                 </div>
                             </div>
 
-                            <div className="mt-4 overflow-hidden rounded-2xl border border-green-900/10 bg-white">
+                            <div className="mt-4 overflow-x-auto rounded-2xl border border-green-900/10 bg-white">
                                 <table className="w-full min-w-[1320px] text-right text-sm">
                                     <thead className="penza-table-head text-xs font-black">
                                         <tr>

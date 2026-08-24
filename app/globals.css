@@ -25,6 +25,11 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   min-height: 100vh;
   background:
@@ -46,6 +51,9 @@ body {
     radial-gradient(circle at 90% 0%, rgba(148, 230, 148, 0.18), transparent 28rem),
     linear-gradient(180deg, #ffffff 0%, #f7fff7 100%);
   color: #0B2F0B;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .penza-hero {

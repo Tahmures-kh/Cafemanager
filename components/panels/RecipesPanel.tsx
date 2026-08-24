@@ -350,7 +350,7 @@ export function RecipesPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
 
                             <div className="mt-3 space-y-3">
                                 {parsePreview.map((preview) => (
-                                    <div key={preview.name} className="overflow-hidden rounded-2xl border border-green-900/10 bg-white">
+                                    <div key={preview.name} className="overflow-x-auto rounded-2xl border border-green-900/10 bg-white">
                                         <div className="bg-[#f8fff8] px-4 py-2 text-sm font-black text-[#0B2F0B]">
                                             {preview.name} — {preview.rows.length} ماده
                                         </div>
@@ -401,7 +401,7 @@ export function RecipesPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
                         </button>
                     </div>
 
-                    <div className="mt-4 overflow-hidden rounded-2xl border border-green-900/10 bg-white">
+                    <div className="mt-4 overflow-x-auto rounded-2xl border border-green-900/10 bg-white">
                         <table className="w-full min-w-[720px] text-right text-sm">
                             <thead className="penza-table-head text-xs font-black">
                                 <tr>
@@ -503,7 +503,7 @@ export function RecipesPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
                         {!exchangeRates.configured && " تبدیل به دلار/یورو/لیر تا وقتی نرخ ارز از کانال تلگرام دریافت نشود نمایش داده نمی‌شود."}
                     </p>
 
-                    <div className="mt-4 overflow-hidden rounded-2xl border border-green-900/10 bg-white">
+                    <div className="mt-4 overflow-x-auto rounded-2xl border border-green-900/10 bg-white">
                         <table className="w-full min-w-[560px] text-right text-sm">
                             <thead className="penza-table-head text-xs font-black">
                                 <tr>
@@ -628,7 +628,7 @@ export function RecipesPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
 
                 <section className="mt-5 penza-card rounded-[1.5rem] p-5">
                     <h2 className="text-xl font-black text-[#0B2F0B]">تاریخچه‌ی فعالیت این پنل</h2>
-                    <div className="mt-4 overflow-hidden rounded-2xl border border-green-900/10 bg-white">
+                    <div className="mt-4 overflow-x-auto rounded-2xl border border-green-900/10 bg-white">
                         <table className="w-full min-w-[720px] text-right text-xs">
                             <thead className="penza-table-head font-black">
                                 <tr>

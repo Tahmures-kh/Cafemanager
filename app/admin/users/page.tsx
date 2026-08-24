@@ -159,7 +159,7 @@ export default function AdminUsersPage() {
 
                     <section className="mt-5 penza-card rounded-[1.5rem] p-5">
                         <h2 className="text-xl font-black text-[#0B2F0B]">اکانت‌ها ({accounts.length})</h2>
-                        <div className="mt-4 overflow-hidden rounded-2xl border border-green-900/10 bg-white">
+                        <div className="mt-4 overflow-x-auto rounded-2xl border border-green-900/10 bg-white">
                             <table className="w-full min-w-[760px] text-right text-sm">
                                 <thead className="penza-table-head text-xs font-black">
                                     <tr>

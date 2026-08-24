@@ -243,7 +243,7 @@ export default function ManagerPurchasesPage() {
                             </button>
                         </div>
 
-                        <div className="mt-4 overflow-hidden rounded-2xl border border-green-900/10 bg-white">
+                        <div className="mt-4 overflow-x-auto rounded-2xl border border-green-900/10 bg-white">
                             <table className="w-full min-w-[640px] text-right text-sm">
                                 <thead className="penza-table-head text-xs font-black">
                                     <tr>
@@ -414,7 +414,7 @@ export default function ManagerPurchasesPage() {
 
                     <section className="mt-5 penza-card rounded-[1.5rem] p-5">
                         <h2 className="text-xl font-black text-[#0B2F0B]">سفارش‌های قبلی ({orders.length})</h2>
-                        <div className="mt-4 overflow-hidden rounded-2xl border border-green-900/10 bg-white">
+                        <div className="mt-4 overflow-x-auto rounded-2xl border border-green-900/10 bg-white">
                             <table className="w-full min-w-[720px] text-right text-sm">
                                 <thead className="penza-table-head text-xs font-black">
                                     <tr>
@@ -459,7 +459,7 @@ export default function ManagerPurchasesPage() {
 
                     <section className="mt-5 penza-card rounded-[1.5rem] p-5">
                         <h2 className="text-xl font-black text-[#0B2F0B]">تاریخچه‌ی فعالیت این پنل</h2>
-                        <div className="mt-4 overflow-hidden rounded-2xl border border-green-900/10 bg-white">
+                        <div className="mt-4 overflow-x-auto rounded-2xl border border-green-900/10 bg-white">
                             <table className="w-full min-w-[720px] text-right text-xs">
                                 <thead className="penza-table-head font-black">
                                     <tr>
