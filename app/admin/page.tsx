@@ -7,9 +7,9 @@ import { ADMIN_NAV_LINKS } from "../../lib/nav-links";
 
 export default function AdminMainPage() {
     const actionCards = [
-        { href: "/admin/users", title: "کاربران", eyebrow: "ساخت و مدیریت اکانت" },
-        { href: "/admin/logs", title: "لاگ فعالیت‌ها", eyebrow: "همه‌ی بخش‌ها" },
-        { href: "/admin/sessions", title: "نشست‌های فعال", eyebrow: "IP و دستگاه‌ها" },
+        { href: "/admin/users", title: "کاربران" },
+        { href: "/admin/logs", title: "لاگ فعالیت‌ها" },
+        { href: "/admin/sessions", title: "نشست‌های فعال" },
     ];
 
     const quickLinks = [
@@ -39,8 +39,7 @@ export default function AdminMainPage() {
                     <section className="mt-5 grid gap-4 md:grid-cols-3">
                         {actionCards.map((card) => (
                             <Link key={card.href} href={card.href} className="penza-card penza-card-hover rounded-[1.5rem] p-6">
-                                <p className="text-sm font-black text-[#007A00]">{card.eyebrow}</p>
-                                <h2 className="mt-3 text-2xl font-black text-[#0B2F0B]">{card.title}</h2>
+                                <h2 className="text-2xl font-black text-[#0B2F0B]">{card.title}</h2>
                             </Link>
                         ))}
                     </section>

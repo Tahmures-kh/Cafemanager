@@ -7,9 +7,9 @@ import { ACCOUNTANT_NAV_LINKS } from "../../lib/nav-links";
 
 export default function AccountantMainPage() {
     const actionCards = [
-        { href: "/accountant/recipes", title: "رسپی‌ها و قیمت‌گذاری", eyebrow: "مواد اولیه و قیمت روز" },
-        { href: "/accountant/inventory", title: "موجودی انبار", eyebrow: "مشاهده (بدون امکان ویرایش)" },
-        { href: "/accountant/reports", title: "گزارش دوره‌ای", eyebrow: "تحلیل و آمار" },
+        { href: "/accountant/recipes", title: "رسپی‌ها و قیمت‌گذاری" },
+        { href: "/accountant/inventory", title: "موجودی انبار" },
+        { href: "/accountant/reports", title: "گزارش دوره‌ای" },
     ];
 
     return (
@@ -32,8 +32,7 @@ export default function AccountantMainPage() {
                     <section className="mt-5 grid gap-4 md:grid-cols-3">
                         {actionCards.map((card) => (
                             <Link key={card.href} href={card.href} className="penza-card penza-card-hover rounded-[1.5rem] p-6">
-                                <p className="text-sm font-black text-[#007A00]">{card.eyebrow}</p>
-                                <h2 className="mt-3 text-2xl font-black text-[#0B2F0B]">{card.title}</h2>
+                                <h2 className="text-2xl font-black text-[#0B2F0B]">{card.title}</h2>
                             </Link>
                         ))}
                     </section>

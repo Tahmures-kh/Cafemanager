@@ -6,9 +6,9 @@ import { PanelNav } from "../../components/panels/PanelNav";
 import { STORAGE_NAV_LINKS } from "../../lib/nav-links";
 
 const actions = [
-    { href: "/storage/orders", title: "درخواست‌ها", eyebrow: "لیست اصلی کار" },
-    { href: "/storage/dashboard", title: "داشبورد انبار", eyebrow: "نمای روزانه" },
-    { href: "/storage/reports", title: "گزارش انبار", eyebrow: "گزارش دوره‌ای" },
+    { href: "/storage/orders", title: "درخواست‌ها" },
+    { href: "/storage/dashboard", title: "داشبورد انبار" },
+    { href: "/storage/reports", title: "گزارش انبار" },
 ];
 
 export default function StorageMainPage() {
@@ -32,8 +32,7 @@ export default function StorageMainPage() {
                     <section className="mt-5 grid gap-4 md:grid-cols-3">
                         {actions.map((action) => (
                             <Link key={action.href} href={action.href} className="penza-card penza-card-hover rounded-[1.5rem] p-6">
-                                <p className="text-sm font-black text-[#007A00]">{action.eyebrow}</p>
-                                <h2 className="mt-3 text-2xl font-black text-[#0B2F0B]">{action.title}</h2>
+                                <h2 className="text-2xl font-black text-[#0B2F0B]">{action.title}</h2>
                             </Link>
                         ))}
                     </section>

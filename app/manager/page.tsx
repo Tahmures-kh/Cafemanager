@@ -7,12 +7,12 @@ import { MANAGER_NAV_LINKS } from "../../lib/nav-links";
 
 export default function ManagerMainPage() {
     const actionCards = [
-        { href: "/manager/dashboard", title: "داشبورد", eyebrow: "دید زنده" },
-        { href: "/manager/orders", title: "درخواست‌ها", eyebrow: "کنترل سفارش" },
-        { href: "/manager/inventory", title: "موجودی انبار", eyebrow: "انبار مدیریتی" },
-        { href: "/manager/recipes", title: "رسپی‌ها", eyebrow: "مواد اولیه و مقدار" },
-        { href: "/manager/sales", title: "فروش و تحلیل", eyebrow: "پایان شیفت" },
-        { href: "/manager/purchases", title: "خریدهای روزانه", eyebrow: "فروشنده‌ها و سفارش" },
+        { href: "/manager/dashboard", title: "داشبورد" },
+        { href: "/manager/orders", title: "درخواست‌ها" },
+        { href: "/manager/inventory", title: "موجودی انبار" },
+        { href: "/manager/recipes", title: "رسپی‌ها" },
+        { href: "/manager/sales", title: "فروش و تحلیل" },
+        { href: "/manager/purchases", title: "خریدهای روزانه" },
     ];
 
     return (
@@ -32,8 +32,7 @@ export default function ManagerMainPage() {
                     <section className="mt-5 grid gap-4 md:grid-cols-3">
                         {actionCards.map((card) => (
                             <Link key={card.href} href={card.href} className="penza-card penza-card-hover rounded-[1.5rem] p-6">
-                                <p className="text-sm font-black text-[#007A00]">{card.eyebrow}</p>
-                                <h2 className="mt-3 text-2xl font-black text-[#0B2F0B]">{card.title}</h2>
+                                <h2 className="text-2xl font-black text-[#0B2F0B]">{card.title}</h2>
                             </Link>
                         ))}
                     </section>

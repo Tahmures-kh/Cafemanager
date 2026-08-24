@@ -6,8 +6,8 @@ import { PanelNav } from "../../components/panels/PanelNav";
 import { STAFF_NAV_LINKS } from "../../lib/nav-links";
 
 const actions = [
-    { href: "/staff/request", title: "ثبت درخواست", eyebrow: "شروع شیفت" },
-    { href: "/staff/dashboard", title: "پیگیری سفارش‌ها", eyebrow: "وضعیت سفارش" },
+    { href: "/staff/request", title: "ثبت درخواست" },
+    { href: "/staff/dashboard", title: "پیگیری سفارش‌ها" },
 ];
 
 export default function StaffMainPage() {
@@ -31,8 +31,7 @@ export default function StaffMainPage() {
                     <section className="mt-5 grid gap-4 md:grid-cols-2">
                         {actions.map((action) => (
                             <Link key={action.href} href={action.href} className="penza-card penza-card-hover rounded-[1.5rem] p-6">
-                                <p className="text-sm font-black text-[#007A00]">{action.eyebrow}</p>
-                                <h2 className="mt-3 text-2xl font-black text-[#0B2F0B]">{action.title}</h2>
+                                <h2 className="text-2xl font-black text-[#0B2F0B]">{action.title}</h2>
                             </Link>
                         ))}
                     </section>
