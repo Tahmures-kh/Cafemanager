@@ -225,7 +225,14 @@ function seedInventoryIfEmpty(database: Database.Database) {
             );
         }
         for (const item of inventoryItems) {
-            insertInventory.run(item.id, item.productId, item.currentQuantity, item.minimumQuantity, item.criticalQuantity);
+            insertInventory.run(
+                item.id,
+                item.productId,
+                item.currentQuantity,
+                item.minimumQuantity,
+                item.criticalQuantity,
+                item.parQuantity
+            );
         }
     });
 
