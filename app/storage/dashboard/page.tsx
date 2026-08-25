@@ -686,32 +686,32 @@ export default function StorageDashboardPage() {
                                                             )}
                                                         </td>
                                                         <td className="px-4 py-3">
-                                                            <div className="flex flex-wrap gap-2">
+                                                            <div className="grid w-28 grid-cols-2 gap-1.5">
                                                                 <button
                                                                     type="button"
                                                                     onClick={() => (editPanelOpen ? resetEditForm() : openEdit(product))}
-                                                                    className="rounded-xl border border-green-900/15 bg-white px-3 py-2 text-xs font-black text-[#0B2F0B] hover:bg-[#f2fff2]"
+                                                                    className="rounded-xl border border-green-900/15 bg-white px-2 py-2 text-xs font-black text-[#0B2F0B] hover:bg-[#f2fff2]"
                                                                 >
                                                                     ویرایش
                                                                 </button>
                                                                 <button
                                                                     type="button"
                                                                     onClick={() => openQuickAdjust(product.id, "add")}
-                                                                    className="rounded-xl border border-green-900/15 bg-white px-3 py-2 text-xs font-black text-[#007A00] hover:bg-[#f2fff2]"
+                                                                    className="rounded-xl border border-green-900/15 bg-white px-2 py-2 text-xs font-black text-[#007A00] hover:bg-[#f2fff2]"
                                                                 >
                                                                     + موجودی
                                                                 </button>
                                                                 <button
                                                                     type="button"
                                                                     onClick={() => openQuickAdjust(product.id, "subtract")}
-                                                                    className="rounded-xl border border-orange-200 bg-white px-3 py-2 text-xs font-black text-orange-700 hover:bg-orange-50"
+                                                                    className="rounded-xl border border-orange-200 bg-white px-2 py-2 text-xs font-black text-orange-700 hover:bg-orange-50"
                                                                 >
                                                                     - موجودی
                                                                 </button>
                                                                 <button
                                                                     type="button"
                                                                     onClick={() => handleRemove(product)}
-                                                                    className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-black text-slate-500 hover:bg-slate-50"
+                                                                    className="rounded-xl border border-slate-200 bg-white px-2 py-2 text-xs font-black text-slate-500 hover:bg-slate-50"
                                                                 >
                                                                     حذف
                                                                 </button>
