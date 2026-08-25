@@ -42,6 +42,17 @@ function isSameDay(isoValue: string, reference: Date) {
 
 export default function ManagerDashboardPage() {
     const { orders, orderItems, inventoryItems, stockMovements, products } = useCafeStorageStore();
+    const [resupplyPercent, setResupplyPercent] = useState<number | null>(null);
+
+    useEffect(() => {
+        fetchLowStockThreshold().then(setResupplyPercent);
+    }, []);
+
+    const resupplyCount = inventoryItems.filter((item) => {
+        if (item.currentQuantity <= 0) return true;
+        if (resupplyPercent === null || item.parQuantity <= 0) return false;
+        return (item.currentQuantity / item.parQuantity) * 100 <= resupplyPercent;
+    }).length;
 
     const today = new Date();
     const todayNewOrders = orders.filter((order) => isSameDay(order.createdAt, today));
