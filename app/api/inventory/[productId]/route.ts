@@ -20,6 +20,7 @@ type InventoryRow = {
     current_quantity: number;
     minimum_quantity: number;
     critical_quantity: number;
+    par_quantity: number;
 };
 
 function mapProduct(row: ProductRow): Product {
@@ -42,6 +43,7 @@ function mapInventoryItem(row: InventoryRow): InventoryItem {
         currentQuantity: row.current_quantity,
         minimumQuantity: row.minimum_quantity,
         criticalQuantity: row.critical_quantity,
+        parQuantity: row.par_quantity,
     };
 }
 
