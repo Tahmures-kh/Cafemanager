@@ -81,14 +81,24 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     const movementId = createRecordId("sm");
     const now = nowIso();
 
-    const updateInventory = db.prepare("UPDATE inventory_items SET current_quantity = ? WHERE product_id = ?");
+    // A restock (positive delta) resets the "full" reference level used by
+    // the percent-based low-stock alarm; a correction/subtraction doesn't.
+    const updateInventory = db.prepare(
+        appliedDelta > 0
+            ? "UPDATE inventory_items SET current_quantity = ?, par_quantity = ? WHERE product_id = ?"
+            : "UPDATE inventory_items SET current_quantity = ? WHERE product_id = ?"
+    );
     const insertMovement = db.prepare(
         `INSERT INTO stock_movements (id, product_id, type, quantity, description, created_by, created_at)
          VALUES (?, ?, 'manual_correction', ?, ?, ?, ?)`
     );
 
     const run = db.transaction(() => {
-        updateInventory.run(nextQuantity, productId);
+        if (appliedDelta > 0) {
+            updateInventory.run(nextQuantity, nextQuantity, productId);
+        } else {
+            updateInventory.run(nextQuantity, productId);
+        }
         insertMovement.run(
             movementId,
             productId,
