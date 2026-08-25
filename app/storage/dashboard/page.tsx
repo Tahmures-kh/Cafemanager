@@ -295,6 +295,14 @@ export default function StorageDashboardPage() {
             });
     }, [categoryFilter, inventoryItems, latestMovementByProductId, products, searchTerm, sortMode]);
 
+    const resupplyItems = useMemo(
+        () =>
+            products
+                .map((product) => ({ product, inventoryItem: inventoryItems.find((item) => item.productId === product.id) }))
+                .filter(({ inventoryItem }) => needsResupply(inventoryItem)),
+        [products, inventoryItems, lowStockPercent]
+    );
+
     function resetForm() {
         setForm(emptyForm);
     }
