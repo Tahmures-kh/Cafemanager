@@ -5,7 +5,9 @@ import { requireAuth } from "../../../../lib/session";
 const DEFAULT_PERCENT = 20;
 
 export async function GET(request: NextRequest) {
-    const auth = requireAuth(request, ["storage"]);
+    // Read-only: manager also needs the current threshold to compute its own
+    // resupply-count indicator. Only storage can change it (see PATCH below).
+    const auth = requireAuth(request, ["storage", "manager"]);
     if (!auth.ok) return auth.response;
 
     const db = getDb();
