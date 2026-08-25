@@ -65,6 +65,9 @@ export type InventoryItem = {
     currentQuantity: number;
     minimumQuantity: number;
     criticalQuantity: number;
+    /** Reference "full" quantity, set whenever stock is restocked (added
+     * to) — used to compute the percent-based low-stock resupply alarm. */
+    parQuantity: number;
 };
 
 export type CafeOrder = {
