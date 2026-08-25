@@ -218,6 +218,35 @@ export default function StorageDashboardPage() {
     const [editForm, setEditForm] = useState<EditFormState>(emptyEditForm);
     const [actionMessage, setActionMessage] = useState<string | null>(null);
     const [showAddForm, setShowAddForm] = useState(false);
+    const [lowStockPercent, setLowStockPercent] = useState(20);
+    const [thresholdInput, setThresholdInput] = useState("20");
+    const [savingThreshold, setSavingThreshold] = useState(false);
+
+    useEffect(() => {
+        fetchLowStockThreshold().then((percent) => {
+            setLowStockPercent(percent);
+            setThresholdInput(String(percent));
+        });
+    }, []);
+
+    async function handleSaveThreshold() {
+        const percent = Number(thresholdInput);
+        if (!Number.isFinite(percent) || percent <= 0 || percent > 100) return;
+
+        setSavingThreshold(true);
+        const saved = await updateLowStockThreshold(percent);
+        setSavingThreshold(false);
+
+        if (saved !== null) {
+            setLowStockPercent(saved);
+            setThresholdInput(String(saved));
+        }
+    }
+
+    function needsResupply(inventoryItem?: { currentQuantity: number; parQuantity: number }) {
+        if (!inventoryItem || inventoryItem.parQuantity <= 0) return false;
+        return (inventoryItem.currentQuantity / inventoryItem.parQuantity) * 100 <= lowStockPercent;
+    }
 
     const latestMovementByProductId = useMemo(() => {
         const result = new Map<string, StockMovement>();
