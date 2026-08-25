@@ -244,7 +244,9 @@ export default function StorageDashboardPage() {
     }
 
     function needsResupply(inventoryItem?: { currentQuantity: number; parQuantity: number }) {
-        if (!inventoryItem || inventoryItem.parQuantity <= 0) return false;
+        if (!inventoryItem) return false;
+        if (inventoryItem.currentQuantity <= 0) return true;
+        if (inventoryItem.parQuantity <= 0) return false;
         return (inventoryItem.currentQuantity / inventoryItem.parQuantity) * 100 <= lowStockPercent;
     }
 
