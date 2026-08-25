@@ -137,7 +137,8 @@ export async function POST(request: NextRequest) {
             productId,
             currentQuantity,
             Number.isFinite(Number(body.minimumQuantity)) ? Math.max(0, Number(body.minimumQuantity)) : 0,
-            Number.isFinite(Number(body.criticalQuantity)) ? Math.max(0, Number(body.criticalQuantity)) : 0
+            Number.isFinite(Number(body.criticalQuantity)) ? Math.max(0, Number(body.criticalQuantity)) : 0,
+            currentQuantity
         );
         insertMovement.run(
             createRecordId("sm"),
