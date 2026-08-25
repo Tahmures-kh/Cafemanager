@@ -221,6 +221,7 @@ export default function StorageDashboardPage() {
     const [lowStockPercent, setLowStockPercent] = useState(20);
     const [thresholdInput, setThresholdInput] = useState("20");
     const [savingThreshold, setSavingThreshold] = useState(false);
+    const [resupplyExpanded, setResupplyExpanded] = useState(false);
 
     useEffect(() => {
         fetchLowStockThreshold().then((percent) => {
