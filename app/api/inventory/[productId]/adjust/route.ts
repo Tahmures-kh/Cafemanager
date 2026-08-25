@@ -9,6 +9,7 @@ type InventoryRow = {
     current_quantity: number;
     minimum_quantity: number;
     critical_quantity: number;
+    par_quantity: number;
 };
 
 type MovementRow = {
