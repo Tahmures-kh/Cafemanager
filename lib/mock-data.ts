@@ -2755,6 +2755,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i1",
         "productId": "p1",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2762,6 +2763,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i2",
         "productId": "p2",
         "currentQuantity": 0.7,
+        "parQuantity": 0.7,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2769,6 +2771,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i3",
         "productId": "p3",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2776,6 +2779,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i4",
         "productId": "p4",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2783,6 +2787,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i5",
         "productId": "p5",
         "currentQuantity": 6,
+        "parQuantity": 6,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2790,6 +2795,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i6",
         "productId": "p6",
         "currentQuantity": 1.4,
+        "parQuantity": 1.4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2797,6 +2803,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i7",
         "productId": "p7",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2804,6 +2811,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i8",
         "productId": "p8",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2811,6 +2819,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i9",
         "productId": "p9",
         "currentQuantity": 1.4,
+        "parQuantity": 1.4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2818,6 +2827,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i10",
         "productId": "p10",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2825,6 +2835,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i11",
         "productId": "p11",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2832,6 +2843,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i12",
         "productId": "p12",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2839,6 +2851,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i13",
         "productId": "p13",
         "currentQuantity": 1.4,
+        "parQuantity": 1.4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2846,6 +2859,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i14",
         "productId": "p14",
         "currentQuantity": 2.1,
+        "parQuantity": 2.1,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2853,6 +2867,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i15",
         "productId": "p15",
         "currentQuantity": 4.2,
+        "parQuantity": 4.2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2860,6 +2875,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i16",
         "productId": "p16",
         "currentQuantity": 1.5,
+        "parQuantity": 1.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2867,6 +2883,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i17",
         "productId": "p17",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2874,6 +2891,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i18",
         "productId": "p18",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2881,6 +2899,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i19",
         "productId": "p19",
         "currentQuantity": 2.8,
+        "parQuantity": 2.8,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2888,6 +2907,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i20",
         "productId": "p20",
         "currentQuantity": 15,
+        "parQuantity": 15,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2895,6 +2915,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i21",
         "productId": "p21",
         "currentQuantity": 2,
+        "parQuantity": 2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2902,6 +2923,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i22",
         "productId": "p22",
         "currentQuantity": 10,
+        "parQuantity": 10,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2909,6 +2931,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i23",
         "productId": "p23",
         "currentQuantity": 14,
+        "parQuantity": 14,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2916,6 +2939,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i24",
         "productId": "p24",
         "currentQuantity": 2,
+        "parQuantity": 2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2923,6 +2947,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i25",
         "productId": "p25",
         "currentQuantity": 1,
+        "parQuantity": 1,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2930,6 +2955,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i26",
         "productId": "p26",
         "currentQuantity": 40,
+        "parQuantity": 40,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2937,6 +2963,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i27",
         "productId": "p27",
         "currentQuantity": 40,
+        "parQuantity": 40,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2944,6 +2971,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i28",
         "productId": "p28",
         "currentQuantity": 0.15,
+        "parQuantity": 0.15,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2951,6 +2979,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i29",
         "productId": "p29",
         "currentQuantity": 4.25,
+        "parQuantity": 4.25,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2958,6 +2987,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i30",
         "productId": "p30",
         "currentQuantity": 0.75,
+        "parQuantity": 0.75,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2965,6 +2995,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i31",
         "productId": "p31",
         "currentQuantity": 9,
+        "parQuantity": 9,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2972,6 +3003,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i32",
         "productId": "p32",
         "currentQuantity": 2,
+        "parQuantity": 2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2979,6 +3011,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i33",
         "productId": "p33",
         "currentQuantity": 6,
+        "parQuantity": 6,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2986,6 +3019,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i34",
         "productId": "p34",
         "currentQuantity": 18,
+        "parQuantity": 18,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -2993,6 +3027,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i35",
         "productId": "p35",
         "currentQuantity": 0.36,
+        "parQuantity": 0.36,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3000,6 +3035,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i36",
         "productId": "p36",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3007,6 +3043,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i37",
         "productId": "p37",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3014,6 +3051,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i38",
         "productId": "p38",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3021,6 +3059,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i39",
         "productId": "p39",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3028,6 +3067,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i40",
         "productId": "p40",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3035,6 +3075,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i41",
         "productId": "p41",
         "currentQuantity": 1.5,
+        "parQuantity": 1.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3042,6 +3083,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i42",
         "productId": "p42",
         "currentQuantity": 0.25,
+        "parQuantity": 0.25,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3049,6 +3091,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i43",
         "productId": "p43",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3056,6 +3099,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i44",
         "productId": "p44",
         "currentQuantity": 408,
+        "parQuantity": 408,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3063,6 +3107,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i45",
         "productId": "p45",
         "currentQuantity": 480,
+        "parQuantity": 480,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3070,6 +3115,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i46",
         "productId": "p46",
         "currentQuantity": 3.5,
+        "parQuantity": 3.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3077,6 +3123,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i47",
         "productId": "p47",
         "currentQuantity": 2,
+        "parQuantity": 2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3084,6 +3131,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i48",
         "productId": "p48",
         "currentQuantity": 4.5,
+        "parQuantity": 4.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3091,6 +3139,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i49",
         "productId": "p49",
         "currentQuantity": 40,
+        "parQuantity": 40,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3098,6 +3147,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i50",
         "productId": "p50",
         "currentQuantity": 0.8,
+        "parQuantity": 0.8,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3105,6 +3155,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i51",
         "productId": "p51",
         "currentQuantity": 2,
+        "parQuantity": 2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3112,6 +3163,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i52",
         "productId": "p52",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3119,6 +3171,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i53",
         "productId": "p53",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3126,6 +3179,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i54",
         "productId": "p54",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3133,6 +3187,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i55",
         "productId": "p55",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3140,6 +3195,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i56",
         "productId": "p56",
         "currentQuantity": 16.8,
+        "parQuantity": 16.8,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3147,6 +3203,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i57",
         "productId": "p57",
         "currentQuantity": 2,
+        "parQuantity": 2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3154,6 +3211,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i58",
         "productId": "p58",
         "currentQuantity": 40,
+        "parQuantity": 40,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3161,6 +3219,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i59",
         "productId": "p59",
         "currentQuantity": 10,
+        "parQuantity": 10,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3168,6 +3227,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i60",
         "productId": "p60",
         "currentQuantity": 20,
+        "parQuantity": 20,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3175,6 +3235,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i61",
         "productId": "p61",
         "currentQuantity": 10,
+        "parQuantity": 10,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3182,6 +3243,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i62",
         "productId": "p62",
         "currentQuantity": 3.5,
+        "parQuantity": 3.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3189,6 +3251,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i63",
         "productId": "p63",
         "currentQuantity": 0.4,
+        "parQuantity": 0.4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3196,6 +3259,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i64",
         "productId": "p64",
         "currentQuantity": 4,
+        "parQuantity": 4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3203,6 +3267,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i65",
         "productId": "p65",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3210,6 +3275,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i66",
         "productId": "p66",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3217,6 +3283,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i67",
         "productId": "p67",
         "currentQuantity": 2,
+        "parQuantity": 2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3224,6 +3291,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i68",
         "productId": "p68",
         "currentQuantity": 93,
+        "parQuantity": 93,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3231,6 +3299,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i69",
         "productId": "p69",
         "currentQuantity": 12,
+        "parQuantity": 12,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3238,6 +3307,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i70",
         "productId": "p70",
         "currentQuantity": 10,
+        "parQuantity": 10,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3245,6 +3315,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i71",
         "productId": "p71",
         "currentQuantity": 3.6,
+        "parQuantity": 3.6,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3252,6 +3323,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i72",
         "productId": "p72",
         "currentQuantity": 18,
+        "parQuantity": 18,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3259,6 +3331,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i73",
         "productId": "p73",
         "currentQuantity": 7,
+        "parQuantity": 7,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3266,6 +3339,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i74",
         "productId": "p74",
         "currentQuantity": 5,
+        "parQuantity": 5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3273,6 +3347,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i75",
         "productId": "p75",
         "currentQuantity": 4,
+        "parQuantity": 4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3280,6 +3355,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i76",
         "productId": "p76",
         "currentQuantity": 690,
+        "parQuantity": 690,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3287,6 +3363,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i77",
         "productId": "p77",
         "currentQuantity": 0.088,
+        "parQuantity": 0.088,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3294,6 +3371,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i78",
         "productId": "p78",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3301,6 +3379,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i79",
         "productId": "p79",
         "currentQuantity": 18,
+        "parQuantity": 18,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3308,6 +3387,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i80",
         "productId": "p80",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3315,6 +3395,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i81",
         "productId": "p81",
         "currentQuantity": 24.5,
+        "parQuantity": 24.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3322,6 +3403,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i82",
         "productId": "p82",
         "currentQuantity": 26.1,
+        "parQuantity": 26.1,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3329,6 +3411,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i83",
         "productId": "p83",
         "currentQuantity": 25,
+        "parQuantity": 25,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3336,6 +3419,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i84",
         "productId": "p84",
         "currentQuantity": 40,
+        "parQuantity": 40,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3343,6 +3427,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i85",
         "productId": "p85",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3350,6 +3435,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i86",
         "productId": "p86",
         "currentQuantity": 84.5,
+        "parQuantity": 84.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3357,6 +3443,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i87",
         "productId": "p87",
         "currentQuantity": 2.7,
+        "parQuantity": 2.7,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3364,6 +3451,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i88",
         "productId": "p88",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3371,6 +3459,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i89",
         "productId": "p89",
         "currentQuantity": 5,
+        "parQuantity": 5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3378,6 +3467,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i90",
         "productId": "p90",
         "currentQuantity": 1602,
+        "parQuantity": 1602,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3385,6 +3475,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i91",
         "productId": "p91",
         "currentQuantity": 0.5,
+        "parQuantity": 0.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3392,6 +3483,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i92",
         "productId": "p92",
         "currentQuantity": 0.33,
+        "parQuantity": 0.33,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3399,6 +3491,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i93",
         "productId": "p93",
         "currentQuantity": 1.62,
+        "parQuantity": 1.62,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3406,6 +3499,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i94",
         "productId": "p94",
         "currentQuantity": 3.65,
+        "parQuantity": 3.65,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3413,6 +3507,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i95",
         "productId": "p95",
         "currentQuantity": 2.295,
+        "parQuantity": 2.295,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3420,6 +3515,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i96",
         "productId": "p96",
         "currentQuantity": 9.5,
+        "parQuantity": 9.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3427,6 +3523,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i97",
         "productId": "p97",
         "currentQuantity": 2.2,
+        "parQuantity": 2.2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3434,6 +3531,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i98",
         "productId": "p98",
         "currentQuantity": 10,
+        "parQuantity": 10,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3441,6 +3539,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i99",
         "productId": "p99",
         "currentQuantity": 300,
+        "parQuantity": 300,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3448,6 +3547,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i100",
         "productId": "p100",
         "currentQuantity": 4,
+        "parQuantity": 4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3455,6 +3555,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i101",
         "productId": "p101",
         "currentQuantity": 15,
+        "parQuantity": 15,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3462,6 +3563,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i102",
         "productId": "p102",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3469,6 +3571,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i103",
         "productId": "p103",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3476,6 +3579,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i104",
         "productId": "p104",
         "currentQuantity": 2,
+        "parQuantity": 2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3483,6 +3587,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i105",
         "productId": "p105",
         "currentQuantity": 0.8,
+        "parQuantity": 0.8,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3490,6 +3595,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i106",
         "productId": "p106",
         "currentQuantity": 0.5,
+        "parQuantity": 0.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3497,6 +3603,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i107",
         "productId": "p107",
         "currentQuantity": 1.4,
+        "parQuantity": 1.4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3504,6 +3611,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i108",
         "productId": "p108",
         "currentQuantity": 37,
+        "parQuantity": 37,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3511,6 +3619,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i109",
         "productId": "p109",
         "currentQuantity": 4.07,
+        "parQuantity": 4.07,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3518,6 +3627,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i110",
         "productId": "p110",
         "currentQuantity": 3.85,
+        "parQuantity": 3.85,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3525,6 +3635,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i111",
         "productId": "p111",
         "currentQuantity": 1.2,
+        "parQuantity": 1.2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3532,6 +3643,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i112",
         "productId": "p112",
         "currentQuantity": 600,
+        "parQuantity": 600,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3539,6 +3651,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i113",
         "productId": "p113",
         "currentQuantity": 58,
+        "parQuantity": 58,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3546,6 +3659,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i114",
         "productId": "p114",
         "currentQuantity": 7.2,
+        "parQuantity": 7.2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3553,6 +3667,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i115",
         "productId": "p115",
         "currentQuantity": 18,
+        "parQuantity": 18,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3560,6 +3675,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i116",
         "productId": "p116",
         "currentQuantity": 20,
+        "parQuantity": 20,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3567,6 +3683,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i117",
         "productId": "p117",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3574,6 +3691,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i118",
         "productId": "p118",
         "currentQuantity": 29.64,
+        "parQuantity": 29.64,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3581,6 +3699,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i119",
         "productId": "p119",
         "currentQuantity": 7,
+        "parQuantity": 7,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3588,6 +3707,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i120",
         "productId": "p120",
         "currentQuantity": 1.11,
+        "parQuantity": 1.11,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3595,6 +3715,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i121",
         "productId": "p121",
         "currentQuantity": 2.35,
+        "parQuantity": 2.35,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3602,6 +3723,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i122",
         "productId": "p122",
         "currentQuantity": 5,
+        "parQuantity": 5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3609,6 +3731,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i123",
         "productId": "p123",
         "currentQuantity": 1.95,
+        "parQuantity": 1.95,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3616,6 +3739,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i124",
         "productId": "p124",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3623,6 +3747,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i125",
         "productId": "p125",
         "currentQuantity": 11.3,
+        "parQuantity": 11.3,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3630,6 +3755,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i126",
         "productId": "p126",
         "currentQuantity": 4.975,
+        "parQuantity": 4.975,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3637,6 +3763,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i127",
         "productId": "p127",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3644,6 +3771,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i128",
         "productId": "p128",
         "currentQuantity": 5.8,
+        "parQuantity": 5.8,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3651,6 +3779,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i129",
         "productId": "p129",
         "currentQuantity": 2,
+        "parQuantity": 2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3658,6 +3787,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i130",
         "productId": "p130",
         "currentQuantity": 24,
+        "parQuantity": 24,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3665,6 +3795,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i131",
         "productId": "p131",
         "currentQuantity": 24,
+        "parQuantity": 24,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3672,6 +3803,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i132",
         "productId": "p132",
         "currentQuantity": 24,
+        "parQuantity": 24,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3679,6 +3811,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i133",
         "productId": "p133",
         "currentQuantity": 4.83,
+        "parQuantity": 4.83,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3686,6 +3819,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i134",
         "productId": "p134",
         "currentQuantity": 4.325,
+        "parQuantity": 4.325,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3693,6 +3827,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i135",
         "productId": "p135",
         "currentQuantity": 3.025,
+        "parQuantity": 3.025,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3700,6 +3835,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i136",
         "productId": "p136",
         "currentQuantity": 3.005,
+        "parQuantity": 3.005,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3707,6 +3843,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i137",
         "productId": "p137",
         "currentQuantity": 1.97,
+        "parQuantity": 1.97,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3714,6 +3851,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i138",
         "productId": "p138",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3721,6 +3859,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i139",
         "productId": "p139",
         "currentQuantity": 1.215,
+        "parQuantity": 1.215,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3728,6 +3867,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i140",
         "productId": "p140",
         "currentQuantity": 1,
+        "parQuantity": 1,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3735,6 +3875,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i141",
         "productId": "p141",
         "currentQuantity": 0.335,
+        "parQuantity": 0.335,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3742,6 +3883,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i142",
         "productId": "p142",
         "currentQuantity": 1.5,
+        "parQuantity": 1.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3749,6 +3891,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i143",
         "productId": "p143",
         "currentQuantity": 2.7,
+        "parQuantity": 2.7,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3756,6 +3899,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i144",
         "productId": "p144",
         "currentQuantity": 0.995,
+        "parQuantity": 0.995,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3763,6 +3907,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i145",
         "productId": "p145",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3770,6 +3915,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i146",
         "productId": "p146",
         "currentQuantity": 0.29,
+        "parQuantity": 0.29,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3777,6 +3923,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i147",
         "productId": "p147",
         "currentQuantity": 0.63,
+        "parQuantity": 0.63,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3784,6 +3931,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i148",
         "productId": "p148",
         "currentQuantity": 0.425,
+        "parQuantity": 0.425,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3791,6 +3939,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i149",
         "productId": "p149",
         "currentQuantity": 0.625,
+        "parQuantity": 0.625,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3798,6 +3947,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i150",
         "productId": "p150",
         "currentQuantity": 2,
+        "parQuantity": 2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3805,6 +3955,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i151",
         "productId": "p151",
         "currentQuantity": 0.125,
+        "parQuantity": 0.125,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3812,6 +3963,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i152",
         "productId": "p152",
         "currentQuantity": 22.75,
+        "parQuantity": 22.75,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3819,6 +3971,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i153",
         "productId": "p153",
         "currentQuantity": 3.25,
+        "parQuantity": 3.25,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3826,6 +3979,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i154",
         "productId": "p154",
         "currentQuantity": 2,
+        "parQuantity": 2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3833,6 +3987,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i155",
         "productId": "p155",
         "currentQuantity": 7.5,
+        "parQuantity": 7.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3840,6 +3995,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i156",
         "productId": "p156",
         "currentQuantity": 0.3,
+        "parQuantity": 0.3,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3847,6 +4003,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i157",
         "productId": "p157",
         "currentQuantity": 4,
+        "parQuantity": 4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3854,6 +4011,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i158",
         "productId": "p158",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3861,6 +4019,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i159",
         "productId": "p159",
         "currentQuantity": 11,
+        "parQuantity": 11,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3868,6 +4027,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i160",
         "productId": "p160",
         "currentQuantity": 0.536,
+        "parQuantity": 0.536,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3875,6 +4035,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i161",
         "productId": "p161",
         "currentQuantity": 4,
+        "parQuantity": 4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3882,6 +4043,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i162",
         "productId": "p162",
         "currentQuantity": 1,
+        "parQuantity": 1,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3889,6 +4051,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i163",
         "productId": "p163",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3896,6 +4059,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i164",
         "productId": "p164",
         "currentQuantity": 3.5,
+        "parQuantity": 3.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3903,6 +4067,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i165",
         "productId": "p165",
         "currentQuantity": 4.76,
+        "parQuantity": 4.76,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3910,6 +4075,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i166",
         "productId": "p166",
         "currentQuantity": 0.4,
+        "parQuantity": 0.4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3917,6 +4083,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i167",
         "productId": "p167",
         "currentQuantity": 1.2,
+        "parQuantity": 1.2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3924,6 +4091,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i168",
         "productId": "p168",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3931,6 +4099,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i169",
         "productId": "p169",
         "currentQuantity": 1.75,
+        "parQuantity": 1.75,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3938,6 +4107,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i170",
         "productId": "p170",
         "currentQuantity": 4,
+        "parQuantity": 4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3945,6 +4115,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i171",
         "productId": "p171",
         "currentQuantity": 3.6,
+        "parQuantity": 3.6,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3952,6 +4123,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i172",
         "productId": "p172",
         "currentQuantity": 15.4,
+        "parQuantity": 15.4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3959,6 +4131,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i173",
         "productId": "p173",
         "currentQuantity": 860,
+        "parQuantity": 860,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3966,6 +4139,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i174",
         "productId": "p174",
         "currentQuantity": 1700,
+        "parQuantity": 1700,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3973,6 +4147,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i175",
         "productId": "p175",
         "currentQuantity": 2725,
+        "parQuantity": 2725,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3980,6 +4155,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i176",
         "productId": "p176",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3987,6 +4163,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i177",
         "productId": "p177",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -3994,6 +4171,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i178",
         "productId": "p178",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4001,6 +4179,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i179",
         "productId": "p179",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4008,6 +4187,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i180",
         "productId": "p180",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4015,6 +4195,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i181",
         "productId": "p181",
         "currentQuantity": 5.5,
+        "parQuantity": 5.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4022,6 +4203,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i182",
         "productId": "p182",
         "currentQuantity": 1.44,
+        "parQuantity": 1.44,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4029,6 +4211,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i183",
         "productId": "p183",
         "currentQuantity": 595,
+        "parQuantity": 595,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4036,6 +4219,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i184",
         "productId": "p184",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4043,6 +4227,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i185",
         "productId": "p185",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4050,6 +4235,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i186",
         "productId": "p186",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4057,6 +4243,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i187",
         "productId": "p187",
         "currentQuantity": 3.5,
+        "parQuantity": 3.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4064,6 +4251,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i188",
         "productId": "p188",
         "currentQuantity": 0.71,
+        "parQuantity": 0.71,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4071,6 +4259,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i189",
         "productId": "p189",
         "currentQuantity": 0.725,
+        "parQuantity": 0.725,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4078,6 +4267,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i190",
         "productId": "p190",
         "currentQuantity": 2.25,
+        "parQuantity": 2.25,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4085,6 +4275,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i191",
         "productId": "p191",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4092,6 +4283,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i192",
         "productId": "p192",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4099,6 +4291,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i193",
         "productId": "p193",
         "currentQuantity": 27.47,
+        "parQuantity": 27.47,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4106,6 +4299,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i194",
         "productId": "p194",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4113,6 +4307,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i195",
         "productId": "p195",
         "currentQuantity": 4,
+        "parQuantity": 4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4120,6 +4315,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i196",
         "productId": "p196",
         "currentQuantity": 12,
+        "parQuantity": 12,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4127,6 +4323,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i197",
         "productId": "p197",
         "currentQuantity": 13,
+        "parQuantity": 13,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4134,6 +4331,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i198",
         "productId": "p198",
         "currentQuantity": 300,
+        "parQuantity": 300,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4141,6 +4339,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i199",
         "productId": "p199",
         "currentQuantity": 155,
+        "parQuantity": 155,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4148,6 +4347,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i200",
         "productId": "p200",
         "currentQuantity": 6050,
+        "parQuantity": 6050,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4155,6 +4355,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i201",
         "productId": "p201",
         "currentQuantity": 100,
+        "parQuantity": 100,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4162,6 +4363,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i202",
         "productId": "p202",
         "currentQuantity": 4000,
+        "parQuantity": 4000,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4169,6 +4371,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i203",
         "productId": "p203",
         "currentQuantity": 8,
+        "parQuantity": 8,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4176,6 +4379,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i204",
         "productId": "p204",
         "currentQuantity": 1400,
+        "parQuantity": 1400,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4183,6 +4387,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i205",
         "productId": "p205",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4190,6 +4395,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i206",
         "productId": "p206",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4197,6 +4403,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i207",
         "productId": "p207",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4204,6 +4411,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i208",
         "productId": "p208",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4211,6 +4419,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i209",
         "productId": "p209",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4218,6 +4427,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i210",
         "productId": "p210",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4225,6 +4435,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i211",
         "productId": "p211",
         "currentQuantity": 700,
+        "parQuantity": 700,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4232,6 +4443,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i212",
         "productId": "p212",
         "currentQuantity": 400,
+        "parQuantity": 400,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4239,6 +4451,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i213",
         "productId": "p213",
         "currentQuantity": 48,
+        "parQuantity": 48,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4246,6 +4459,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i214",
         "productId": "p214",
         "currentQuantity": 21,
+        "parQuantity": 21,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4253,6 +4467,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i215",
         "productId": "p215",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4260,6 +4475,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i216",
         "productId": "p216",
         "currentQuantity": 1900,
+        "parQuantity": 1900,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4267,6 +4483,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i217",
         "productId": "p217",
         "currentQuantity": 575,
+        "parQuantity": 575,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4274,6 +4491,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i218",
         "productId": "p218",
         "currentQuantity": 50,
+        "parQuantity": 50,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4281,6 +4499,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i219",
         "productId": "p219",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4288,6 +4507,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i220",
         "productId": "p220",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4295,6 +4515,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i221",
         "productId": "p221",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4302,6 +4523,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i222",
         "productId": "p222",
         "currentQuantity": 200,
+        "parQuantity": 200,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4309,6 +4531,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i223",
         "productId": "p223",
         "currentQuantity": 400,
+        "parQuantity": 400,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4316,6 +4539,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i224",
         "productId": "p224",
         "currentQuantity": 294,
+        "parQuantity": 294,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4323,6 +4547,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i225",
         "productId": "p225",
         "currentQuantity": 3500,
+        "parQuantity": 3500,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4330,6 +4555,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i226",
         "productId": "p226",
         "currentQuantity": 1450,
+        "parQuantity": 1450,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4337,6 +4563,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i227",
         "productId": "p227",
         "currentQuantity": 1750,
+        "parQuantity": 1750,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4344,6 +4571,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i228",
         "productId": "p228",
         "currentQuantity": 1190,
+        "parQuantity": 1190,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4351,6 +4579,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i229",
         "productId": "p229",
         "currentQuantity": 20,
+        "parQuantity": 20,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4358,6 +4587,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i230",
         "productId": "p230",
         "currentQuantity": 1270,
+        "parQuantity": 1270,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4365,6 +4595,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i231",
         "productId": "p231",
         "currentQuantity": 209,
+        "parQuantity": 209,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4372,6 +4603,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i232",
         "productId": "p232",
         "currentQuantity": 250,
+        "parQuantity": 250,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4379,6 +4611,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i233",
         "productId": "p233",
         "currentQuantity": 150,
+        "parQuantity": 150,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4386,6 +4619,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i234",
         "productId": "p234",
         "currentQuantity": 9,
+        "parQuantity": 9,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4393,6 +4627,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i235",
         "productId": "p235",
         "currentQuantity": 27,
+        "parQuantity": 27,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4400,6 +4635,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i236",
         "productId": "p236",
         "currentQuantity": 677,
+        "parQuantity": 677,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4407,6 +4643,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i237",
         "productId": "p237",
         "currentQuantity": 250,
+        "parQuantity": 250,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4414,6 +4651,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i238",
         "productId": "p238",
         "currentQuantity": 9,
+        "parQuantity": 9,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4421,6 +4659,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i239",
         "productId": "p239",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4428,6 +4667,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i240",
         "productId": "p240",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4435,6 +4675,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i241",
         "productId": "p241",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4442,6 +4683,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i242",
         "productId": "p242",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4449,6 +4691,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i243",
         "productId": "p243",
         "currentQuantity": 200,
+        "parQuantity": 200,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4456,6 +4699,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i244",
         "productId": "p244",
         "currentQuantity": 2,
+        "parQuantity": 2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4463,6 +4707,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i245",
         "productId": "p245",
         "currentQuantity": 4,
+        "parQuantity": 4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4470,6 +4715,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i246",
         "productId": "p246",
         "currentQuantity": 2,
+        "parQuantity": 2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4477,6 +4723,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i247",
         "productId": "p247",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4484,6 +4731,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i248",
         "productId": "p248",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4491,6 +4739,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i249",
         "productId": "p249",
         "currentQuantity": 50,
+        "parQuantity": 50,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4498,6 +4747,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i250",
         "productId": "p250",
         "currentQuantity": 1,
+        "parQuantity": 1,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4505,6 +4755,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i251",
         "productId": "p251",
         "currentQuantity": 1,
+        "parQuantity": 1,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4512,6 +4763,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i252",
         "productId": "p252",
         "currentQuantity": 0.4,
+        "parQuantity": 0.4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4519,6 +4771,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i253",
         "productId": "p253",
         "currentQuantity": 1.825,
+        "parQuantity": 1.825,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4526,6 +4779,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i254",
         "productId": "p254",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4533,6 +4787,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i255",
         "productId": "p255",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4540,6 +4795,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i256",
         "productId": "p256",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4547,6 +4803,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i257",
         "productId": "p257",
         "currentQuantity": 27,
+        "parQuantity": 27,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4554,6 +4811,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i258",
         "productId": "p258",
         "currentQuantity": 22.5,
+        "parQuantity": 22.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4561,6 +4819,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i259",
         "productId": "p259",
         "currentQuantity": 170,
+        "parQuantity": 170,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4568,6 +4827,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i260",
         "productId": "p260",
         "currentQuantity": 260,
+        "parQuantity": 260,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4575,6 +4835,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i261",
         "productId": "p261",
         "currentQuantity": 1.4,
+        "parQuantity": 1.4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4582,6 +4843,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i262",
         "productId": "p262",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4589,6 +4851,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i263",
         "productId": "p263",
         "currentQuantity": 3.84,
+        "parQuantity": 3.84,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4596,6 +4859,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i264",
         "productId": "p264",
         "currentQuantity": 3,
+        "parQuantity": 3,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4603,6 +4867,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i265",
         "productId": "p265",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4610,6 +4875,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i266",
         "productId": "p266",
         "currentQuantity": 0.455,
+        "parQuantity": 0.455,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4617,6 +4883,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i267",
         "productId": "p267",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4624,6 +4891,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i268",
         "productId": "p268",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4631,6 +4899,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i269",
         "productId": "p269",
         "currentQuantity": 48,
+        "parQuantity": 48,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4638,6 +4907,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i270",
         "productId": "p270",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4645,6 +4915,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i271",
         "productId": "p271",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4652,6 +4923,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i272",
         "productId": "p272",
         "currentQuantity": 2.375,
+        "parQuantity": 2.375,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4659,6 +4931,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i273",
         "productId": "p273",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4666,6 +4939,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i274",
         "productId": "p274",
         "currentQuantity": 2.5,
+        "parQuantity": 2.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4673,6 +4947,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i275",
         "productId": "p275",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4680,6 +4955,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i276",
         "productId": "p276",
         "currentQuantity": 4,
+        "parQuantity": 4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4687,6 +4963,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i277",
         "productId": "p277",
         "currentQuantity": 3,
+        "parQuantity": 3,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4694,6 +4971,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i278",
         "productId": "p278",
         "currentQuantity": 3.34,
+        "parQuantity": 3.34,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4701,6 +4979,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i279",
         "productId": "p279",
         "currentQuantity": 5,
+        "parQuantity": 5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4708,6 +4987,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i280",
         "productId": "p280",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4715,6 +4995,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i281",
         "productId": "p281",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4722,6 +5003,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i282",
         "productId": "p282",
         "currentQuantity": 3.2,
+        "parQuantity": 3.2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4729,6 +5011,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i283",
         "productId": "p283",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4736,6 +5019,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i284",
         "productId": "p284",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4743,6 +5027,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i285",
         "productId": "p285",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4750,6 +5035,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i286",
         "productId": "p286",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4757,6 +5043,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i287",
         "productId": "p287",
         "currentQuantity": 0.68,
+        "parQuantity": 0.68,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4764,6 +5051,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i288",
         "productId": "p288",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4771,6 +5059,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i289",
         "productId": "p289",
         "currentQuantity": 4.9,
+        "parQuantity": 4.9,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4778,6 +5067,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i290",
         "productId": "p290",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4785,6 +5075,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i291",
         "productId": "p291",
         "currentQuantity": 6,
+        "parQuantity": 6,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4792,6 +5083,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i292",
         "productId": "p292",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4799,6 +5091,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i293",
         "productId": "p293",
         "currentQuantity": 24,
+        "parQuantity": 24,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4806,6 +5099,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i294",
         "productId": "p294",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4813,6 +5107,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i295",
         "productId": "p295",
         "currentQuantity": 72,
+        "parQuantity": 72,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4820,6 +5115,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i296",
         "productId": "p296",
         "currentQuantity": 24,
+        "parQuantity": 24,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4827,6 +5123,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i297",
         "productId": "p297",
         "currentQuantity": 2316,
+        "parQuantity": 2316,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4834,6 +5131,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i298",
         "productId": "p298",
         "currentQuantity": 34,
+        "parQuantity": 34,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4841,6 +5139,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i299",
         "productId": "p299",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4848,6 +5147,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i300",
         "productId": "p300",
         "currentQuantity": 29.69,
+        "parQuantity": 29.69,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4855,6 +5155,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i301",
         "productId": "p301",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4862,6 +5163,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i302",
         "productId": "p302",
         "currentQuantity": 1,
+        "parQuantity": 1,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4869,6 +5171,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i303",
         "productId": "p303",
         "currentQuantity": 1,
+        "parQuantity": 1,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4876,6 +5179,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i304",
         "productId": "p304",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4883,6 +5187,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i305",
         "productId": "p305",
         "currentQuantity": 1,
+        "parQuantity": 1,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4890,6 +5195,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i306",
         "productId": "p306",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4897,6 +5203,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i307",
         "productId": "p307",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4904,6 +5211,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i308",
         "productId": "p308",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4911,6 +5219,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i309",
         "productId": "p309",
         "currentQuantity": 19.6,
+        "parQuantity": 19.6,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4918,6 +5227,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i310",
         "productId": "p310",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4925,6 +5235,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i311",
         "productId": "p311",
         "currentQuantity": 3,
+        "parQuantity": 3,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4932,6 +5243,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i312",
         "productId": "p312",
         "currentQuantity": 655,
+        "parQuantity": 655,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4939,6 +5251,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i313",
         "productId": "p313",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4946,6 +5259,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i314",
         "productId": "p314",
         "currentQuantity": 95,
+        "parQuantity": 95,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4953,6 +5267,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i315",
         "productId": "p315",
         "currentQuantity": 300,
+        "parQuantity": 300,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4960,6 +5275,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i316",
         "productId": "p316",
         "currentQuantity": 1800,
+        "parQuantity": 1800,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4967,6 +5283,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i317",
         "productId": "p317",
         "currentQuantity": 950,
+        "parQuantity": 950,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4974,6 +5291,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i318",
         "productId": "p318",
         "currentQuantity": 1850,
+        "parQuantity": 1850,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4981,6 +5299,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i319",
         "productId": "p319",
         "currentQuantity": 7,
+        "parQuantity": 7,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4988,6 +5307,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i320",
         "productId": "p320",
         "currentQuantity": 200,
+        "parQuantity": 200,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -4995,6 +5315,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i321",
         "productId": "p321",
         "currentQuantity": 500,
+        "parQuantity": 500,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5002,6 +5323,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i322",
         "productId": "p322",
         "currentQuantity": 14.17,
+        "parQuantity": 14.17,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5009,6 +5331,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i323",
         "productId": "p323",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5016,6 +5339,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i324",
         "productId": "p324",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5023,6 +5347,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i325",
         "productId": "p325",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5030,6 +5355,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i326",
         "productId": "p326",
         "currentQuantity": 3.7,
+        "parQuantity": 3.7,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5037,6 +5363,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i327",
         "productId": "p327",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5044,6 +5371,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i328",
         "productId": "p328",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5051,6 +5379,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i329",
         "productId": "p329",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5058,6 +5387,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i330",
         "productId": "p330",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5065,6 +5395,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i331",
         "productId": "p331",
         "currentQuantity": 5.13,
+        "parQuantity": 5.13,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5072,6 +5403,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i332",
         "productId": "p332",
         "currentQuantity": 0.71,
+        "parQuantity": 0.71,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5079,6 +5411,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i333",
         "productId": "p333",
         "currentQuantity": 4.935,
+        "parQuantity": 4.935,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5086,6 +5419,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i334",
         "productId": "p334",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5093,6 +5427,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i335",
         "productId": "p335",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5100,6 +5435,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i336",
         "productId": "p336",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5107,6 +5443,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i337",
         "productId": "p337",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5114,6 +5451,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i338",
         "productId": "p338",
         "currentQuantity": 0.1,
+        "parQuantity": 0.1,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5121,6 +5459,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i339",
         "productId": "p339",
         "currentQuantity": 0.315,
+        "parQuantity": 0.315,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5128,6 +5467,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i340",
         "productId": "p340",
         "currentQuantity": 18,
+        "parQuantity": 18,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5135,6 +5475,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i341",
         "productId": "p341",
         "currentQuantity": 3.47,
+        "parQuantity": 3.47,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5142,6 +5483,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i342",
         "productId": "p342",
         "currentQuantity": 0.08,
+        "parQuantity": 0.08,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5149,6 +5491,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i343",
         "productId": "p343",
         "currentQuantity": 0.975,
+        "parQuantity": 0.975,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5156,6 +5499,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i344",
         "productId": "p344",
         "currentQuantity": 4,
+        "parQuantity": 4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5163,6 +5507,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i345",
         "productId": "p345",
         "currentQuantity": 1,
+        "parQuantity": 1,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5170,6 +5515,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i346",
         "productId": "p346",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5177,6 +5523,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i347",
         "productId": "p347",
         "currentQuantity": 2.8,
+        "parQuantity": 2.8,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5184,6 +5531,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i348",
         "productId": "p348",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5191,6 +5539,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i349",
         "productId": "p349",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5198,6 +5547,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i350",
         "productId": "p350",
         "currentQuantity": 0.5,
+        "parQuantity": 0.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5205,6 +5555,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i351",
         "productId": "p351",
         "currentQuantity": 1.82,
+        "parQuantity": 1.82,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5212,6 +5563,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i352",
         "productId": "p352",
         "currentQuantity": 1.52,
+        "parQuantity": 1.52,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5219,6 +5571,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i353",
         "productId": "p353",
         "currentQuantity": 0.045,
+        "parQuantity": 0.045,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5226,6 +5579,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i354",
         "productId": "p354",
         "currentQuantity": 0.1,
+        "parQuantity": 0.1,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5233,6 +5587,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i355",
         "productId": "p355",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5240,6 +5595,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i356",
         "productId": "p356",
         "currentQuantity": 5,
+        "parQuantity": 5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5247,6 +5603,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i357",
         "productId": "p357",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5254,6 +5611,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i358",
         "productId": "p358",
         "currentQuantity": 9,
+        "parQuantity": 9,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5261,6 +5619,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i359",
         "productId": "p359",
         "currentQuantity": 1.4,
+        "parQuantity": 1.4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5268,6 +5627,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i360",
         "productId": "p360",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5275,6 +5635,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i361",
         "productId": "p361",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5282,6 +5643,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i362",
         "productId": "p362",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5289,6 +5651,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i363",
         "productId": "p363",
         "currentQuantity": 2,
+        "parQuantity": 2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5296,6 +5659,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i364",
         "productId": "p364",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5303,6 +5667,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i365",
         "productId": "p365",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5310,6 +5675,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i366",
         "productId": "p366",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5317,6 +5683,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i367",
         "productId": "p367",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5324,6 +5691,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i368",
         "productId": "p368",
         "currentQuantity": 10,
+        "parQuantity": 10,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5331,6 +5699,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i369",
         "productId": "p369",
         "currentQuantity": 12,
+        "parQuantity": 12,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5338,6 +5707,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i370",
         "productId": "p370",
         "currentQuantity": 500,
+        "parQuantity": 500,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5345,6 +5715,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i371",
         "productId": "p371",
         "currentQuantity": 61,
+        "parQuantity": 61,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5352,6 +5723,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i372",
         "productId": "p372",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5359,6 +5731,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i373",
         "productId": "p373",
         "currentQuantity": 8,
+        "parQuantity": 8,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5366,6 +5739,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i374",
         "productId": "p374",
         "currentQuantity": 25,
+        "parQuantity": 25,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5373,6 +5747,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i375",
         "productId": "p375",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5380,6 +5755,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i376",
         "productId": "p376",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5387,6 +5763,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i377",
         "productId": "p377",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5394,6 +5771,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i378",
         "productId": "p378",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5401,6 +5779,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i379",
         "productId": "p379",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5408,6 +5787,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i380",
         "productId": "p380",
         "currentQuantity": 1.4,
+        "parQuantity": 1.4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5415,6 +5795,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i381",
         "productId": "p381",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5422,6 +5803,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i382",
         "productId": "p382",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5429,6 +5811,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i383",
         "productId": "p383",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5436,6 +5819,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i384",
         "productId": "p384",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5443,6 +5827,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i385",
         "productId": "p385",
         "currentQuantity": 6,
+        "parQuantity": 6,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5450,6 +5835,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i386",
         "productId": "p386",
         "currentQuantity": 14,
+        "parQuantity": 14,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5457,6 +5843,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i387",
         "productId": "p387",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5464,6 +5851,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i388",
         "productId": "p388",
         "currentQuantity": 1,
+        "parQuantity": 1,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5471,6 +5859,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i389",
         "productId": "p389",
         "currentQuantity": 4,
+        "parQuantity": 4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5478,6 +5867,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i390",
         "productId": "p390",
         "currentQuantity": 5,
+        "parQuantity": 5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5485,6 +5875,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i391",
         "productId": "p391",
         "currentQuantity": 3,
+        "parQuantity": 3,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5492,6 +5883,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i392",
         "productId": "p392",
         "currentQuantity": 4,
+        "parQuantity": 4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5499,6 +5891,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i393",
         "productId": "p393",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5506,6 +5899,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i394",
         "productId": "p394",
         "currentQuantity": 10.155,
+        "parQuantity": 10.155,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5513,6 +5907,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i395",
         "productId": "p395",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5520,6 +5915,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i396",
         "productId": "p396",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5527,6 +5923,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i397",
         "productId": "p397",
         "currentQuantity": 0.7,
+        "parQuantity": 0.7,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5534,6 +5931,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i398",
         "productId": "p398",
         "currentQuantity": 0.7,
+        "parQuantity": 0.7,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5541,6 +5939,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i399",
         "productId": "p399",
         "currentQuantity": 1.4,
+        "parQuantity": 1.4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5548,6 +5947,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i400",
         "productId": "p400",
         "currentQuantity": 1.4,
+        "parQuantity": 1.4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5555,6 +5955,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i401",
         "productId": "p401",
         "currentQuantity": 1.4,
+        "parQuantity": 1.4,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5562,6 +5963,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i402",
         "productId": "p402",
         "currentQuantity": 3,
+        "parQuantity": 3,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5569,6 +5971,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i403",
         "productId": "p403",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5576,6 +5979,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i404",
         "productId": "p404",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5583,6 +5987,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i405",
         "productId": "p405",
         "currentQuantity": 8,
+        "parQuantity": 8,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5590,6 +5995,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i406",
         "productId": "p406",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5597,6 +6003,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i407",
         "productId": "p407",
         "currentQuantity": 1.2,
+        "parQuantity": 1.2,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5604,6 +6011,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i408",
         "productId": "p408",
         "currentQuantity": 3.06,
+        "parQuantity": 3.06,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5611,6 +6019,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i409",
         "productId": "p409",
         "currentQuantity": 960,
+        "parQuantity": 960,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5618,6 +6027,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i410",
         "productId": "p410",
         "currentQuantity": 960,
+        "parQuantity": 960,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5625,6 +6035,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i411",
         "productId": "p411",
         "currentQuantity": 960,
+        "parQuantity": 960,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5632,6 +6043,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i412",
         "productId": "p412",
         "currentQuantity": 300,
+        "parQuantity": 300,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5639,6 +6051,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i413",
         "productId": "p413",
         "currentQuantity": 760,
+        "parQuantity": 760,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5646,6 +6059,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i414",
         "productId": "p414",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5653,6 +6067,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i415",
         "productId": "p415",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5660,6 +6075,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i416",
         "productId": "p416",
         "currentQuantity": 1.5,
+        "parQuantity": 1.5,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5667,6 +6083,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i417",
         "productId": "p417",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5674,6 +6091,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i418",
         "productId": "p418",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5681,6 +6099,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i419",
         "productId": "p419",
         "currentQuantity": 7.6,
+        "parQuantity": 7.6,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5688,6 +6107,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i420",
         "productId": "p420",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5695,6 +6115,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i421",
         "productId": "p421",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5702,6 +6123,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i422",
         "productId": "p422",
         "currentQuantity": 0.8,
+        "parQuantity": 0.8,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5709,6 +6131,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i423",
         "productId": "p423",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5716,6 +6139,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i424",
         "productId": "p424",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5723,6 +6147,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i425",
         "productId": "p425",
         "currentQuantity": 0.8,
+        "parQuantity": 0.8,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     },
@@ -5730,6 +6155,7 @@ export const inventoryItems: InventoryItem[] = [
         "id": "i426",
         "productId": "p426",
         "currentQuantity": 0,
+        "parQuantity": 0,
         "minimumQuantity": 0,
         "criticalQuantity": 0
     }
