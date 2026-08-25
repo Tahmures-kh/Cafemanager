@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { formatDateTime, useCafeStorageStore } from "../../../lib/local-store";
 import { formatStockQuantity, getStockStatus, getStockStatusLabel, getStockStatusStyle } from "../../../lib/product-units";
+import { fetchLowStockThreshold } from "../../../lib/storage-api";
 import type { OrderStatus, Product } from "../../../lib/types";
 import { RoleGuard } from "../../../components/RoleGuard";
 import { PanelNav } from "../../../components/panels/PanelNav";
