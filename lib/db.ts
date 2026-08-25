@@ -285,6 +285,31 @@ function seedAccountsIfEmpty(database: Database.Database) {
     run();
 }
 
+const LOW_STOCK_ALERT_PERCENT_KEY = "low_stock_alert_percent";
+const DEFAULT_LOW_STOCK_ALERT_PERCENT = "20";
+
+/** Adds columns to tables that already existed before this column was
+ * introduced. CREATE TABLE IF NOT EXISTS only helps for brand-new
+ * databases — a live database with real data needs an explicit ALTER. */
+function migrateSchema(database: Database.Database) {
+    const inventoryColumns = database.prepare("PRAGMA table_info(inventory_items)").all() as Array<{ name: string }>;
+    const hasParQuantity = inventoryColumns.some((column) => column.name === "par_quantity");
+
+    if (!hasParQuantity) {
+        database.exec("ALTER TABLE inventory_items ADD COLUMN par_quantity REAL NOT NULL DEFAULT 0");
+        database.exec("UPDATE inventory_items SET par_quantity = current_quantity WHERE par_quantity = 0");
+    }
+}
+
+function seedSettingsIfEmpty(database: Database.Database) {
+    const existing = database.prepare("SELECT value FROM app_settings WHERE key = ?").get(LOW_STOCK_ALERT_PERCENT_KEY);
+    if (existing) return;
+
+    database
+        .prepare("INSERT INTO app_settings (key, value) VALUES (?, ?)")
+        .run(LOW_STOCK_ALERT_PERCENT_KEY, DEFAULT_LOW_STOCK_ALERT_PERCENT);
+}
+
 export function getDb(): Database.Database {
     if (db) return db;
 
@@ -293,12 +318,16 @@ export function getDb(): Database.Database {
     db.pragma("journal_mode = WAL");
     db.pragma("foreign_keys = ON");
     initSchema(db);
+    migrateSchema(db);
     seedInventoryIfEmpty(db);
     seedUnitTypesIfEmpty(db);
     seedAccountsIfEmpty(db);
+    seedSettingsIfEmpty(db);
 
     return db;
 }
+
+export const LOW_STOCK_ALERT_PERCENT_SETTING_KEY = LOW_STOCK_ALERT_PERCENT_KEY;
 
 export function createRecordId(prefix: string) {
     return createId(prefix);
