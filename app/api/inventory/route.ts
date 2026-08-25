@@ -20,6 +20,7 @@ type InventoryRow = {
     current_quantity: number;
     minimum_quantity: number;
     critical_quantity: number;
+    par_quantity: number;
 };
 
 type MovementRow = {
@@ -52,6 +53,7 @@ function mapInventoryItem(row: InventoryRow): InventoryItem {
         currentQuantity: row.current_quantity,
         minimumQuantity: row.minimum_quantity,
         criticalQuantity: row.critical_quantity,
+        parQuantity: row.par_quantity,
     };
 }
 
@@ -120,8 +122,8 @@ export async function POST(request: NextRequest) {
          VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
     );
     const insertInventory = db.prepare(
-        `INSERT INTO inventory_items (id, product_id, current_quantity, minimum_quantity, critical_quantity)
-         VALUES (?, ?, ?, ?, ?)`
+        `INSERT INTO inventory_items (id, product_id, current_quantity, minimum_quantity, critical_quantity, par_quantity)
+         VALUES (?, ?, ?, ?, ?, ?)`
     );
     const insertMovement = db.prepare(
         `INSERT INTO stock_movements (id, product_id, type, quantity, description, created_by, created_at)
