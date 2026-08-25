@@ -36,6 +36,34 @@ export async function createUnitType(name: string): Promise<string[]> {
     }
 }
 
+export async function fetchLowStockThreshold(): Promise<number> {
+    try {
+        const response = await fetch("/api/settings/low-stock-threshold", { cache: "no-store" });
+        if (!response.ok) return 20;
+
+        const data = await response.json();
+        return typeof data.percent === "number" ? data.percent : 20;
+    } catch {
+        return 20;
+    }
+}
+
+export async function updateLowStockThreshold(percent: number): Promise<number | null> {
+    try {
+        const response = await fetch("/api/settings/low-stock-threshold", {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ percent }),
+        });
+        if (!response.ok) return null;
+
+        const data = await response.json();
+        return typeof data.percent === "number" ? data.percent : null;
+    } catch {
+        return null;
+    }
+}
+
 export async function fetchInventoryData(): Promise<InventoryData> {
     try {
         const response = await fetch("/api/inventory", { cache: "no-store" });
