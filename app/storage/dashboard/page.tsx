@@ -664,9 +664,16 @@ export default function StorageDashboardPage() {
                                                         <td className="px-4 py-3 font-black text-[#007A00]">{formatStockQuantity(product, quantity)}</td>
                                                         <td className="px-4 py-3 font-black text-[#0B2F0B]">{formatAvailableQuantity(product, quantity)}</td>
                                                         <td className="px-4 py-3">
-                                                            <span className={`rounded-full px-3 py-1 text-[11px] font-black ring-1 ${getStockStatusStyle(tier)}`}>
-                                                                {getStockStatusLabel(tier)}
-                                                            </span>
+                                                            <div className="flex flex-wrap gap-1">
+                                                                <span className={`rounded-full px-3 py-1 text-[11px] font-black ring-1 ${getStockStatusStyle(tier)}`}>
+                                                                    {getStockStatusLabel(tier)}
+                                                                </span>
+                                                                {needsResupply(inventoryItem) && (
+                                                                    <span className="rounded-full bg-orange-50 px-3 py-1 text-[11px] font-black text-orange-700 ring-1 ring-orange-100">
+                                                                        نیاز به تامین
+                                                                    </span>
+                                                                )}
+                                                            </div>
                                                         </td>
                                                         <td className="px-4 py-3 text-xs font-bold text-slate-500">
                                                             {latestMovement ? (
