@@ -466,38 +466,65 @@ export default function StorageDashboardPage() {
                                     : "penza-card rounded-[1.5rem] p-5"
                             }
                         >
-                            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                                <div>
-                                    <h2 className={resupplyItems.length > 0 ? "text-lg font-black text-orange-800" : "text-lg font-black text-[#0B2F0B]"}>
-                                        {resupplyItems.length > 0
-                                            ? `${formatNumber(resupplyItems.length)} کالا به آستانه هشدار (٪${lowStockPercent}) رسیده — نیاز به تامین`
-                                            : `هشدار تامین کالا: ٪${lowStockPercent} از آخرین پرشدگی`}
-                                    </h2>
+                            <button
+                                type="button"
+                                onClick={() => setResupplyExpanded((current) => !current)}
+                                className="flex w-full items-center justify-between gap-3 text-right"
+                            >
+                                <h2 className={resupplyItems.length > 0 ? "text-lg font-black text-orange-800" : "text-lg font-black text-[#0B2F0B]"}>
+                                    {resupplyItems.length > 0
+                                        ? `${formatNumber(resupplyItems.length)} کالا به آستانه هشدار (٪${lowStockPercent}) رسیده — نیاز به تامین`
+                                        : `هشدار تامین کالا: ٪${lowStockPercent} از آخرین پرشدگی`}
+                                </h2>
+                                <span
+                                    className={
+                                        resupplyItems.length > 0
+                                            ? `shrink-0 text-orange-700 transition-transform ${resupplyExpanded ? "rotate-180" : ""}`
+                                            : `shrink-0 text-slate-400 transition-transform ${resupplyExpanded ? "rotate-180" : ""}`
+                                    }
+                                >
+                                    ▾
+                                </span>
+                            </button>
+
+                            {resupplyExpanded && (
+                                <div className="mt-4 space-y-4 border-t border-orange-200/60 pt-4">
                                     {resupplyItems.length > 0 && (
-                                        <p className="mt-1 text-sm font-bold text-orange-700">
-                                            {resupplyItems.map(({ product }) => product.name).join("، ")}
-                                        </p>
+                                        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                                            {resupplyItems.map(({ product, inventoryItem }) => (
+                                                <div key={product.id} className="rounded-2xl bg-white p-3 text-sm">
+                                                    <p className="font-black text-[#0B2F0B]">{product.name}</p>
+                                                    <p className="mt-1 text-xs font-bold text-orange-700">
+                                                        موجودی: {formatNumber(inventoryItem?.currentQuantity ?? 0)}
+                                                        {inventoryItem && inventoryItem.parQuantity > 0
+                                                            ? ` از ${formatNumber(inventoryItem.parQuantity)}`
+                                                            : ""}
+                                                    </p>
+                                                </div>
+                                            ))}
+                                        </div>
                                     )}
+
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-sm font-bold text-slate-500">آستانه هشدار:</span>
+                                        <input
+                                            value={thresholdInput}
+                                            onChange={(event) => setThresholdInput(event.target.value)}
+                                            className="h-11 w-20 rounded-2xl border border-green-900/15 bg-white px-3 text-center text-sm font-black text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                            inputMode="decimal"
+                                        />
+                                        <span className="text-sm font-bold text-slate-500">٪</span>
+                                        <button
+                                            type="button"
+                                            onClick={handleSaveThreshold}
+                                            disabled={savingThreshold || thresholdInput === String(lowStockPercent)}
+                                            className="rounded-2xl border border-green-900/15 bg-white px-4 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2] disabled:opacity-50"
+                                        >
+                                            {savingThreshold ? "..." : "ذخیره"}
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <span className="text-sm font-bold text-slate-500">آستانه هشدار:</span>
-                                    <input
-                                        value={thresholdInput}
-                                        onChange={(event) => setThresholdInput(event.target.value)}
-                                        className="h-11 w-20 rounded-2xl border border-green-900/15 bg-white px-3 text-center text-sm font-black text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
-                                        inputMode="decimal"
-                                    />
-                                    <span className="text-sm font-bold text-slate-500">٪</span>
-                                    <button
-                                        type="button"
-                                        onClick={handleSaveThreshold}
-                                        disabled={savingThreshold || thresholdInput === String(lowStockPercent)}
-                                        className="rounded-2xl border border-green-900/15 bg-white px-4 py-3 text-sm font-black text-[#007A00] hover:bg-[#f2fff2] disabled:opacity-50"
-                                    >
-                                        {savingThreshold ? "..." : "ذخیره"}
-                                    </button>
-                                </div>
-                            </div>
+                            )}
                         </div>
                     </section>
 
