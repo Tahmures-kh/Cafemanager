@@ -111,6 +111,18 @@ export default function ManagerDashboardPage() {
                             </div>
                         ))}
                     </div>
+
+                    {resupplyCount > 0 && (
+                        <div className="mt-3 rounded-[1.25rem] border border-orange-200 bg-orange-50 p-5">
+                            <p className="text-sm font-black text-orange-800">
+                                {formatNumber(resupplyCount)} کالا نیاز به تامین دارند
+                                {resupplyPercent !== null ? ` (٪${resupplyPercent} از آخرین پرشدگی یا موجودی صفر)` : ""}
+                            </p>
+                            <p className="mt-1 text-xs font-bold text-orange-700">
+                                برای مشاهده و اصلاح موجودی، با انبار هماهنگ کنید.
+                            </p>
+                        </div>
+                    )}
                 </section>
 
                 <section className="mt-5 grid gap-5 lg:grid-cols-[1fr_24rem]">
