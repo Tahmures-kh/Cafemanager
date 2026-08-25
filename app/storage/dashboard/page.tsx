@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { ChangeEvent, FormEvent, Fragment, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, Fragment, useEffect, useMemo, useState } from "react";
 import { formatDateTime, useCafeStorageStore, useUnitTypes } from "../../../lib/local-store";
+import { fetchLowStockThreshold, updateLowStockThreshold } from "../../../lib/storage-api";
 import {
     formatAvailableQuantity,
     formatStockQuantity,
