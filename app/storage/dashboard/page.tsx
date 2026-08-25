@@ -641,7 +641,7 @@ export default function StorageDashboardPage() {
                                             <th className="px-4 py-3">قابل درخواست</th>
                                             <th className="px-4 py-3">وضعیت</th>
                                             <th className="px-4 py-3">آخرین تغییر</th>
-                                            <th className="px-4 py-3">عملیات</th>
+                                            <th className="sticky left-0 z-10 bg-[#f2fff2] px-4 py-3 shadow-[1px_0_0_rgba(0,0,0,0.06)]">عملیات</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-green-900/10">
@@ -685,7 +685,7 @@ export default function StorageDashboardPage() {
                                                                 "بدون تغییر"
                                                             )}
                                                         </td>
-                                                        <td className="px-4 py-3">
+                                                        <td className="sticky left-0 z-10 bg-white px-4 py-3 shadow-[1px_0_0_rgba(0,0,0,0.06)]">
                                                             <div className="grid w-28 grid-cols-2 gap-1.5">
                                                                 <button
                                                                     type="button"
