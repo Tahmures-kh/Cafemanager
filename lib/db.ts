@@ -207,8 +207,8 @@ function seedInventoryIfEmpty(database: Database.Database) {
          VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
     );
     const insertInventory = database.prepare(
-        `INSERT INTO inventory_items (id, product_id, current_quantity, minimum_quantity, critical_quantity)
-         VALUES (?, ?, ?, ?, ?)`
+        `INSERT INTO inventory_items (id, product_id, current_quantity, minimum_quantity, critical_quantity, par_quantity)
+         VALUES (?, ?, ?, ?, ?, ?)`
     );
 
     const run = database.transaction(() => {
