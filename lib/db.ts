@@ -181,6 +181,17 @@ function initSchema(database: Database.Database) {
             value TEXT NOT NULL
         );
 
+        CREATE TABLE IF NOT EXISTS workshop_allocations (
+            id TEXT PRIMARY KEY,
+            department TEXT NOT NULL,
+            product_id TEXT NOT NULL,
+            quantity REAL NOT NULL,
+            created_by TEXT,
+            created_at TEXT NOT NULL
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_workshop_allocations_department ON workshop_allocations(department);
+        CREATE INDEX IF NOT EXISTS idx_workshop_allocations_created_at ON workshop_allocations(created_at);
         CREATE INDEX IF NOT EXISTS idx_sessions_account_id ON sessions(account_id);
         CREATE INDEX IF NOT EXISTS idx_recipe_ingredients_recipe_id ON recipe_ingredients(recipe_id);
         CREATE INDEX IF NOT EXISTS idx_audit_log_scope ON audit_log(scope);

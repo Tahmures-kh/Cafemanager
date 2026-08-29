@@ -26,7 +26,21 @@ export type StockMovementType =
     | "packed_for_cafe"
     | "sent_to_cafe"
     | "manual_correction"
-    | "damaged";
+    | "damaged"
+    | "workshop_allocation";
+
+/** The workshop is physically inside storage, so items are allocated
+ * directly from inventory to a department — no request/delivery flow. */
+export type WorkshopDepartment = "bakery" | "pastry" | "saucier" | "storage_costs";
+
+export type WorkshopAllocation = {
+    id: string;
+    department: WorkshopDepartment;
+    productId: string;
+    quantity: number;
+    createdBy: string;
+    createdAt: string;
+};
 
 export type User = {
     id: string;

@@ -3,7 +3,12 @@
 import Link from "next/link";
 import { ChangeEvent, FormEvent, Fragment, useEffect, useMemo, useState } from "react";
 import { formatDateTime, useCafeStorageStore, useUnitTypes } from "../../../lib/local-store";
-import { fetchLowStockThreshold, updateLowStockThreshold } from "../../../lib/storage-api";
+import {
+    createWorkshopAllocation,
+    fetchLowStockThreshold,
+    fetchWorkshopAllocations,
+    updateLowStockThreshold,
+} from "../../../lib/storage-api";
 import {
     formatAvailableQuantity,
     formatStockQuantity,
@@ -14,11 +19,64 @@ import {
     getStockStatusStyle,
     getStockUnit,
 } from "../../../lib/product-units";
-import type { Product, ProductCategory, StockMovement, StockMovementType } from "../../../lib/types";
+import type {
+    Product,
+    ProductCategory,
+    StockMovement,
+    StockMovementType,
+    WorkshopAllocation,
+    WorkshopDepartment,
+} from "../../../lib/types";
 import { RoleGuard } from "../../../components/RoleGuard";
 import { PanelNav } from "../../../components/panels/PanelNav";
 import { SuccessNotice } from "../../../components/SuccessNotice";
 import { STORAGE_NAV_LINKS } from "../../../lib/nav-links";
+
+const WORKSHOP_DEPARTMENTS: Array<{
+    id: WorkshopDepartment;
+    label: string;
+    hint: string;
+    gradient: string;
+    ring: string;
+    text: string;
+}> = [
+    {
+        id: "bakery",
+        label: "نانوایی",
+        hint: "تولید نان",
+        gradient: "from-amber-400/15 to-amber-500/0",
+        ring: "ring-amber-200",
+        text: "text-amber-700",
+    },
+    {
+        id: "pastry",
+        label: "شیرینی‌پزی",
+        hint: "تولید شیرینی و دسر",
+        gradient: "from-pink-400/15 to-pink-500/0",
+        ring: "ring-pink-200",
+        text: "text-pink-700",
+    },
+    {
+        id: "saucier",
+        label: "سوسیه",
+        hint: "بخش سس و پیش‌غذا",
+        gradient: "from-red-400/15 to-red-500/0",
+        ring: "ring-red-200",
+        text: "text-red-700",
+    },
+    {
+        id: "storage_costs",
+        label: "هزینه‌های انبار",
+        hint: "مصرف عمومی و بسته‌بندی",
+        gradient: "from-slate-400/15 to-slate-500/0",
+        ring: "ring-slate-300",
+        text: "text-slate-700",
+    },
+];
+
+function departmentLabel(id: WorkshopDepartment) {
+    return WORKSHOP_DEPARTMENTS.find((department) => department.id === id)?.label ?? id;
+}
 
 const categoryOptions: Array<{ id: ProductCategory; label: string }> = [
     { id: "coffee", label: "قهوه" },
@@ -106,6 +164,7 @@ function movementTypeLabel(type: StockMovementType) {
         sent_to_cafe: "تحویل درخواست",
         manual_correction: "ویرایش موجودی",
         damaged: "کسر موجودی",
+        workshop_allocation: "تخصیص به کارگاه",
     };
 
     return labels[type];
@@ -207,6 +266,7 @@ export default function StorageDashboardPage() {
         updateInventoryProduct,
         adjustInventoryQuantity,
         removeInventoryProduct,
+        refresh,
     } = useCafeStorageStore();
     const { unitTypes, addUnitType } = useUnitTypes();
 
@@ -222,6 +282,70 @@ export default function StorageDashboardPage() {
     const [thresholdInput, setThresholdInput] = useState("20");
     const [savingThreshold, setSavingThreshold] = useState(false);
     const [resupplyExpanded, setResupplyExpanded] = useState(false);
+
+    const [showWorkshopModal, setShowWorkshopModal] = useState(false);
+    const [workshopDepartment, setWorkshopDepartment] = useState<WorkshopDepartment | null>(null);
+    const [workshopProductId, setWorkshopProductId] = useState("");
+    const [workshopQuantity, setWorkshopQuantity] = useState("");
+    const [workshopSubmitting, setWorkshopSubmitting] = useState(false);
+    const [workshopError, setWorkshopError] = useState<string | null>(null);
+    const [workshopAllocations, setWorkshopAllocations] = useState<WorkshopAllocation[]>([]);
+    const [workshopHistoryExpanded, setWorkshopHistoryExpanded] = useState(false);
+
+    async function refreshWorkshopAllocations() {
+        setWorkshopAllocations(await fetchWorkshopAllocations());
+    }
+
+    useEffect(() => {
+        refreshWorkshopAllocations();
+    }, []);
+
+    function openWorkshopModal() {
+        setShowWorkshopModal(true);
+        setWorkshopDepartment(null);
+        setWorkshopProductId("");
+        setWorkshopQuantity("");
+        setWorkshopError(null);
+    }
+
+    function closeWorkshopModal() {
+        setShowWorkshopModal(false);
+    }
+
+    async function handleWorkshopSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        if (!workshopDepartment || !workshopProductId) return;
+
+        const quantity = Number(workshopQuantity);
+        if (!Number.isFinite(quantity) || quantity <= 0) {
+            setWorkshopError("مقدار باید عددی و بزرگ‌تر از صفر باشد.");
+            return;
+        }
+
+        setWorkshopSubmitting(true);
+        setWorkshopError(null);
+
+        const result = await createWorkshopAllocation({
+            department: workshopDepartment,
+            productId: workshopProductId,
+            quantity,
+        });
+
+        setWorkshopSubmitting(false);
+
+        if (!result.ok) {
+            setWorkshopError(result.error);
+            return;
+        }
+
+        const product = products.find((item) => item.id === workshopProductId);
+        setActionMessage(
+            `${formatStockQuantity(product, quantity)} «${product?.name ?? "کالا"}» به «${departmentLabel(workshopDepartment)}» تخصیص یافت.`
+        );
+        closeWorkshopModal();
+        refreshWorkshopAllocations();
+        refresh();
+    }
 
     useEffect(() => {
         fetchLowStockThreshold().then((percent) => {
@@ -528,6 +652,172 @@ export default function StorageDashboardPage() {
                             )}
                         </div>
                     </section>
+
+                    <section className="mt-5">
+                        <button
+                            type="button"
+                            onClick={openWorkshopModal}
+                            className="group relative w-full overflow-hidden rounded-[1.75rem] border border-green-900/10 bg-gradient-to-br from-[#0B2F0B] via-[#0f3d0f] to-[#00A300] p-6 text-right shadow-[0_20px_50px_rgba(0,80,0,0.25)] transition-transform hover:-translate-y-0.5"
+                        >
+                            <div className="relative z-10 flex items-center justify-between gap-4">
+                                <div>
+                                    <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/80 ring-1 ring-white/20">
+                                        تخصیص مستقیم از انبار
+                                    </p>
+                                    <h2 className="mt-3 text-2xl font-black text-white">کارگاه</h2>
+                                    <p className="mt-1 text-sm font-bold text-white/70">
+                                        تعیین کالا و مقدار برای نانوایی، شیرینی‌پزی، سوسیه و هزینه‌های انبار
+                                    </p>
+                                </div>
+                                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-2xl font-black text-white ring-1 ring-white/20 transition-transform group-hover:scale-105">
+                                    +
+                                </span>
+                            </div>
+                            <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
+                            <div className="pointer-events-none absolute -right-6 -bottom-10 h-32 w-32 rounded-full bg-[#8dffb0]/10 blur-2xl" />
+                        </button>
+                    </section>
+
+                    <section className="mt-5">
+                        <div className="penza-card rounded-[1.5rem] p-5">
+                            <button
+                                type="button"
+                                onClick={() => setWorkshopHistoryExpanded((current) => !current)}
+                                className="flex w-full items-center justify-between gap-3 text-right"
+                            >
+                                <h2 className="text-lg font-black text-[#0B2F0B]">
+                                    تاریخچه تخصیص‌های کارگاه ({formatNumber(workshopAllocations.length)})
+                                </h2>
+                                <span
+                                    className={`shrink-0 text-slate-400 transition-transform ${workshopHistoryExpanded ? "rotate-180" : ""}`}
+                                >
+                                    ▾
+                                </span>
+                            </button>
+
+                            {workshopHistoryExpanded && (
+                                <div className="mt-4 space-y-2">
+                                    {workshopAllocations.slice(0, 20).map((allocation) => {
+                                        const product = products.find((item) => item.id === allocation.productId);
+                                        return (
+                                            <div
+                                                key={allocation.id}
+                                                className="flex items-center justify-between gap-3 rounded-2xl bg-[#f8fff8] p-3 text-sm"
+                                            >
+                                                <div>
+                                                    <p className="font-black text-[#0B2F0B]">{product?.name ?? "کالا"}</p>
+                                                    <p className="mt-1 text-xs font-bold text-slate-500">
+                                                        {departmentLabel(allocation.department)} · {formatDateTime(allocation.createdAt)}
+                                                    </p>
+                                                </div>
+                                                <span className="shrink-0 rounded-full bg-white px-3 py-1 text-xs font-black text-[#007A00] ring-1 ring-green-900/10">
+                                                    {formatStockQuantity(product, allocation.quantity)}
+                                                </span>
+                                            </div>
+                                        );
+                                    })}
+                                    {workshopAllocations.length === 0 && (
+                                        <p className="text-sm font-bold text-slate-500">هنوز تخصیصی ثبت نشده است.</p>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    </section>
+
+                    {showWorkshopModal && (
+                        <div
+                            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+                            onClick={closeWorkshopModal}
+                        >
+                            <div
+                                className="w-full max-w-lg rounded-[1.75rem] bg-white p-6 shadow-2xl"
+                                onClick={(event) => event.stopPropagation()}
+                            >
+                                <div className="flex items-center justify-between gap-3">
+                                    <h2 className="text-xl font-black text-[#0B2F0B]">کارگاه</h2>
+                                    <button
+                                        type="button"
+                                        onClick={closeWorkshopModal}
+                                        className="rounded-full p-2 text-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+                                    >
+                                        ✕
+                                    </button>
+                                </div>
+
+                                {!workshopDepartment ? (
+                                    <>
+                                        <p className="mt-1 text-sm font-bold text-slate-500">یکی از بخش‌ها را انتخاب کن</p>
+                                        <div className="mt-5 grid grid-cols-2 gap-3">
+                                            {WORKSHOP_DEPARTMENTS.map((department) => (
+                                                <button
+                                                    key={department.id}
+                                                    type="button"
+                                                    onClick={() => setWorkshopDepartment(department.id)}
+                                                    className={`rounded-2xl bg-gradient-to-br ${department.gradient} p-4 text-right ring-1 ${department.ring} transition-transform hover:-translate-y-0.5 hover:shadow-md`}
+                                                >
+                                                    <p className={`text-base font-black ${department.text}`}>{department.label}</p>
+                                                    <p className="mt-1 text-xs font-bold text-slate-500">{department.hint}</p>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </>
+                                ) : (
+                                    <form onSubmit={handleWorkshopSubmit} className="mt-5">
+                                        <button
+                                            type="button"
+                                            onClick={() => setWorkshopDepartment(null)}
+                                            className="text-xs font-black text-[#007A00] hover:underline"
+                                        >
+                                            ← بازگشت به انتخاب بخش
+                                        </button>
+
+                                        <p className="mt-3 text-sm font-bold text-slate-500">
+                                            بخش انتخاب‌شده: <span className="font-black text-[#0B2F0B]">{departmentLabel(workshopDepartment)}</span>
+                                        </p>
+
+                                        <label className="mt-4 block text-sm font-black text-[#0B2F0B]">کالا</label>
+                                        <select
+                                            value={workshopProductId}
+                                            onChange={(event) => setWorkshopProductId(event.target.value)}
+                                            className="mt-2 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-3 text-sm font-bold text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                            required
+                                        >
+                                            <option value="">انتخاب کالا...</option>
+                                            {products.map((product) => (
+                                                <option key={product.id} value={product.id}>{product.name}</option>
+                                            ))}
+                                        </select>
+
+                                        <label className="mt-4 block text-sm font-black text-[#0B2F0B]">
+                                            مقدار{" "}
+                                            {workshopProductId
+                                                ? `(${getStockUnit(products.find((item) => item.id === workshopProductId))})`
+                                                : ""}
+                                        </label>
+                                        <input
+                                            value={workshopQuantity}
+                                            onChange={(event) => setWorkshopQuantity(event.target.value)}
+                                            className="mt-2 h-12 w-full rounded-2xl border border-green-900/15 bg-white px-4 text-center text-sm font-black text-[#0B2F0B] outline-none focus:border-[#00A300] focus:ring-4 focus:ring-green-100"
+                                            inputMode="decimal"
+                                            required
+                                        />
+
+                                        {workshopError && (
+                                            <p className="mt-3 rounded-2xl bg-red-50 px-4 py-3 text-xs font-bold text-red-600">{workshopError}</p>
+                                        )}
+
+                                        <button
+                                            type="submit"
+                                            disabled={workshopSubmitting}
+                                            className="penza-button mt-5 w-full rounded-2xl px-5 py-3 text-sm font-black disabled:opacity-50"
+                                        >
+                                            {workshopSubmitting ? "در حال ثبت..." : "ثبت تخصیص"}
+                                        </button>
+                                    </form>
+                                )}
+                            </div>
+                        </div>
+                    )}
 
                     <section className="mt-5">
                         <div className="penza-card rounded-[1.5rem] p-5">

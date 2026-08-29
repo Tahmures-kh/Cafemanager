@@ -1,6 +1,15 @@
 "use client";
 
-import type { CafeOrder, InventoryItem, OrderItem, OrderStatus, Product, StockMovement } from "./types";
+import type {
+    CafeOrder,
+    InventoryItem,
+    OrderItem,
+    OrderStatus,
+    Product,
+    StockMovement,
+    WorkshopAllocation,
+    WorkshopDepartment,
+} from "./types";
 
 export type InventoryData = {
     products: Product[];
@@ -61,6 +70,46 @@ export async function updateLowStockThreshold(percent: number): Promise<number |
         return typeof data.percent === "number" ? data.percent : null;
     } catch {
         return null;
+    }
+}
+
+export async function fetchWorkshopAllocations(): Promise<WorkshopAllocation[]> {
+    try {
+        const response = await fetch("/api/workshop-allocations", { cache: "no-store" });
+        if (!response.ok) return [];
+
+        const data = await response.json();
+        return Array.isArray(data.allocations) ? (data.allocations as WorkshopAllocation[]) : [];
+    } catch {
+        return [];
+    }
+}
+
+export type CreateWorkshopAllocationInput = {
+    department: WorkshopDepartment;
+    productId: string;
+    quantity: number;
+    createdBy?: string;
+};
+
+export async function createWorkshopAllocation(
+    input: CreateWorkshopAllocationInput
+): Promise<{ ok: true; allocation: WorkshopAllocation } | { ok: false; error: string }> {
+    try {
+        const response = await fetch("/api/workshop-allocations", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(input),
+        });
+        const data = await response.json().catch(() => null);
+
+        if (!response.ok || !data) {
+            return { ok: false, error: data?.error ?? "ثبت تخصیص ناموفق بود." };
+        }
+
+        return { ok: true, allocation: data.allocation as WorkshopAllocation };
+    } catch {
+        return { ok: false, error: "ارتباط با سرور برقرار نشد." };
     }
 }
 

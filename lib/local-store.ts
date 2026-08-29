@@ -67,6 +67,10 @@ export type CafeStorageStore = CafeStorageStoreState & {
     updateInventoryProduct: (productId: string, input: InventoryProductInput) => Promise<boolean>;
     adjustInventoryQuantity: (productId: string, deltaQuantity: number, reason?: string) => Promise<boolean>;
     removeInventoryProduct: (productId: string) => Promise<boolean>;
+    /** Re-fetches inventory/orders from the server. Needed after a mutation
+     * made through a different API (e.g. workshop allocations) that this
+     * hook doesn't own directly. */
+    refresh: () => Promise<void>;
 };
 
 const emptyState: CafeStorageStoreState = {
@@ -352,5 +356,6 @@ export function useCafeStorageStore(): CafeStorageStore {
         updateInventoryProduct,
         adjustInventoryQuantity,
         removeInventoryProduct,
+        refresh,
     };
 }

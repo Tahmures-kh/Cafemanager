@@ -44,6 +44,7 @@ function movementTypeLabel(type: StockMovementType) {
         sent_to_cafe: "تحویل درخواست",
         manual_correction: "اصلاح دستی",
         damaged: "کسر از موجودی",
+        workshop_allocation: "تخصیص به کارگاه",
     };
 
     return labels[type];
