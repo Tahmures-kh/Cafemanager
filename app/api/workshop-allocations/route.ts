@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createRecordId, getDb, nowIso } from "../../../lib/db";
+import { createRecordId, getDataDb, nowIso } from "../../../lib/db";
 import { requireAuth } from "../../../lib/session";
 import type { WorkshopAllocation, WorkshopDepartment } from "../../../lib/types";
 
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
     const auth = requireAuth(request, ["storage"]);
     if (!auth.ok) return auth.response;
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const rows = db
         .prepare("SELECT * FROM workshop_allocations ORDER BY created_at DESC LIMIT 200")
         .all() as AllocationRow[];
@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "کالا و مقدار معتبر الزامی است." }, { status: 400 });
     }
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const inventoryRow = db.prepare("SELECT * FROM inventory_items WHERE product_id = ?").get(productId) as
         | InventoryRow
         | undefined;

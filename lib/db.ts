@@ -1,12 +1,14 @@
 import path from "path";
-import { mkdirSync } from "fs";
+import { copyFileSync, existsSync, mkdirSync, rmSync } from "fs";
 import Database from "better-sqlite3";
 import { hashPassword } from "./password";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 const DB_FILE = path.join(DATA_DIR, "app.db");
+const DEMO_DB_FILE = path.join(DATA_DIR, "demo.db");
 
 let db: Database.Database | null = null;
+let demoDb: Database.Database | null = null;
 
 function createId(prefix: string) {
     return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
@@ -303,6 +305,25 @@ function seedAccountsIfEmpty(database: Database.Database) {
     run();
 }
 
+/** The demo account (username "demo") is a real row in the real `accounts`
+ * table — same login flow as everyone else — but everywhere else in the app
+ * its business-data reads/writes are redirected to a separate demo.db file
+ * (see getDataDb below), so nothing it does ever touches real data. Runs
+ * unconditionally (not just "if accounts table empty") so it also backfills
+ * onto an existing, already-seeded production database. */
+function seedDemoAccountIfMissing(database: Database.Database) {
+    const existing = database.prepare("SELECT id FROM accounts WHERE username = ?").get("demo");
+    if (existing) return;
+
+    const { hash, salt } = hashPassword("demo123");
+    database
+        .prepare(
+            `INSERT INTO accounts (id, username, password_hash, password_salt, role, display_name, is_active, created_at)
+             VALUES (?, ?, ?, ?, ?, ?, 1, ?)`
+        )
+        .run("account-seed-demo", "demo", hash, salt, "demo", "کاربر دمو", nowIso());
+}
+
 const LOW_STOCK_ALERT_PERCENT_KEY = "low_stock_alert_percent";
 const DEFAULT_LOW_STOCK_ALERT_PERCENT = "20";
 
@@ -328,21 +349,72 @@ function seedSettingsIfEmpty(database: Database.Database) {
         .run(LOW_STOCK_ALERT_PERCENT_KEY, DEFAULT_LOW_STOCK_ALERT_PERCENT);
 }
 
+function setupDatabase(database: Database.Database) {
+    database.pragma("journal_mode = WAL");
+    database.pragma("foreign_keys = ON");
+    initSchema(database);
+    migrateSchema(database);
+    seedInventoryIfEmpty(database);
+    seedUnitTypesIfEmpty(database);
+    seedAccountsIfEmpty(database);
+    seedDemoAccountIfMissing(database);
+    seedSettingsIfEmpty(database);
+}
+
 export function getDb(): Database.Database {
     if (db) return db;
 
     mkdirSync(DATA_DIR, { recursive: true });
     db = new Database(DB_FILE);
-    db.pragma("journal_mode = WAL");
-    db.pragma("foreign_keys = ON");
-    initSchema(db);
-    migrateSchema(db);
-    seedInventoryIfEmpty(db);
-    seedUnitTypesIfEmpty(db);
-    seedAccountsIfEmpty(db);
-    seedSettingsIfEmpty(db);
+    setupDatabase(db);
 
     return db;
+}
+
+/** Checkpoints the real database's WAL (so no recent write is left behind
+ * in app.db-wal) and copies it over demo.db, giving the demo account a
+ * fresh, realistic-looking snapshot of real data to click around in. */
+function checkpointAndCopyProdToDemo() {
+    const prod = getDb();
+    prod.pragma("wal_checkpoint(TRUNCATE)");
+
+    mkdirSync(DATA_DIR, { recursive: true });
+    for (const suffix of ["", "-wal", "-shm"]) {
+        const target = DEMO_DB_FILE + suffix;
+        if (existsSync(target)) rmSync(target);
+    }
+    copyFileSync(DB_FILE, DEMO_DB_FILE);
+}
+
+export function getDemoDb(): Database.Database {
+    if (demoDb) return demoDb;
+
+    if (!existsSync(DEMO_DB_FILE)) {
+        checkpointAndCopyProdToDemo();
+    }
+    demoDb = new Database(DEMO_DB_FILE);
+    setupDatabase(demoDb);
+
+    return demoDb;
+}
+
+/** Resets demo.db back to a fresh copy of the real database. Called on every
+ * demo-account login so a presenter always starts from real-looking,
+ * unmodified data — and so nothing a previous demo session touched lingers. */
+export function resetDemoDb() {
+    if (demoDb) {
+        demoDb.close();
+        demoDb = null;
+    }
+    checkpointAndCopyProdToDemo();
+}
+
+/** Every business-data API route should call this instead of getDb()
+ * directly, passing whether the acting account is the demo account. Auth
+ * itself (accounts/sessions) always uses the real getDb() — only business
+ * data (inventory, orders, recipes, ...) is ever redirected to demo.db. */
+export function getDataDb(isDemo: boolean): Database.Database {
+    return isDemo ? getDemoDb() : getDb();
 }
 
 export const LOW_STOCK_ALERT_PERCENT_SETTING_KEY = LOW_STOCK_ALERT_PERCENT_KEY;

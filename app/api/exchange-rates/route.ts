@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb, nowIso } from "../../../lib/db";
+import { getDataDb, nowIso } from "../../../lib/db";
 import { fetchLiveExchangeRates, isExchangeRateConfigured } from "../../../lib/exchange-rate";
 import { requireAuth } from "../../../lib/session";
 
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
     const auth = requireAuth(request, ["manager", "accountant"]);
     if (!auth.ok) return auth.response;
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const rows = db.prepare("SELECT * FROM exchange_rates").all() as RateRow[];
     const byCurrency = new Map(rows.map((row) => [row.currency, row]));
 

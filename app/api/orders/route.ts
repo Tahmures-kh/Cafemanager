@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createRecordId, getDb, nowIso } from "../../../lib/db";
+import { createRecordId, getDataDb, nowIso } from "../../../lib/db";
 import { normalizeOrderQuantity } from "../../../lib/product-units";
 import { requireAuth } from "../../../lib/session";
 import type { CafeOrder, OrderItem, Product } from "../../../lib/types";
@@ -74,7 +74,7 @@ export async function GET(request: NextRequest) {
     const auth = requireAuth(request);
     if (!auth.ok) return auth.response;
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const orderRows = db.prepare("SELECT * FROM cafe_orders ORDER BY created_at DESC").all() as OrderRow[];
     const itemRows = db.prepare("SELECT * FROM order_items").all() as OrderItemRow[];
 
@@ -107,7 +107,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "حداقل یک کالای معتبر برای درخواست الزامی است." }, { status: 400 });
     }
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const orderId = createRecordId("order");
     const now = nowIso();
 

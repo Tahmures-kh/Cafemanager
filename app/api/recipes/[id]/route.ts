@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createRecordId, getDb, nowIso } from "../../../../lib/db";
+import { createRecordId, getDataDb, nowIso } from "../../../../lib/db";
 import { requireAuth } from "../../../../lib/session";
 import type { Recipe } from "../../../../lib/types";
 
@@ -32,7 +32,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
         return NextResponse.json({ error: "نام رسپی و لیست مواد الزامی است." }, { status: 400 });
     }
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const existing = db.prepare("SELECT * FROM recipes WHERE id = ?").get(id) as RecipeRow | undefined;
 
     if (!existing) {
@@ -79,7 +79,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     if (!auth.ok) return auth.response;
 
     const { id } = await params;
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
 
     db.prepare("DELETE FROM recipes WHERE id = ?").run(id);
 

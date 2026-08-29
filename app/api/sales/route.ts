@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createRecordId, getDb, nowIso } from "../../../lib/db";
+import { createRecordId, getDataDb, nowIso } from "../../../lib/db";
 import { requireAuth } from "../../../lib/session";
 import type { SalesBatch } from "../../../lib/types";
 
@@ -60,7 +60,7 @@ export async function GET(request: NextRequest) {
     const from = request.nextUrl.searchParams.get("from");
     const to = request.nextUrl.searchParams.get("to");
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
 
     let batchRows: BatchRow[];
     if (from && to) {
@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "تاریخ شیفت، نوع منبع و حداقل یک آیتم فروش الزامی است." }, { status: 400 });
     }
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const batchId = createRecordId("salesbatch");
     const now = nowIso();
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb } from "../../../../../../lib/db";
+import { getDataDb } from "../../../../../../lib/db";
 import { normalizeOrderQuantity, stockToOrderQuantity } from "../../../../../../lib/product-units";
 import { requireAuth } from "../../../../../../lib/session";
 import type { OrderItem, Product } from "../../../../../../lib/types";
@@ -71,7 +71,7 @@ export async function PATCH(
         return NextResponse.json({ error: "مقدار آماده‌شده باید عددی باشد." }, { status: 400 });
     }
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const existingItem = db.prepare("SELECT * FROM order_items WHERE id = ? AND order_id = ?").get(itemId, id) as
         | OrderItemRow
         | undefined;

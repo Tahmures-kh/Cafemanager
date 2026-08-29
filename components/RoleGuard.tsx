@@ -19,7 +19,9 @@ export function RoleGuard({ role, children }: { role: PenzaRole | PenzaRole[]; c
         getCurrentAccount().then((account) => {
             if (cancelled) return;
 
-            if (account && (allowedRoles.includes(account.role) || account.role === "admin")) {
+            const demoBypass = account?.role === "demo" && !allowedRoles.includes("admin");
+
+            if (account && (allowedRoles.includes(account.role) || account.role === "admin" || demoBypass)) {
                 setActivePenzaRole(account.role);
                 setGuardState("allowed");
                 return;

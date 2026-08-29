@@ -21,11 +21,14 @@ export async function POST(request: NextRequest) {
         }
 
         recipes.push(
-            insertRecipe({
-                name: input.name,
-                category: typeof input.category === "string" ? input.category : undefined,
-                ingredients: input.ingredients,
-            })
+            insertRecipe(
+                {
+                    name: input.name,
+                    category: typeof input.category === "string" ? input.category : undefined,
+                    ingredients: input.ingredients,
+                },
+                auth.account.role === "demo"
+            )
         );
     }
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb } from "../../../../lib/db";
+import { getDataDb } from "../../../../lib/db";
 import { requireAuth } from "../../../../lib/session";
 import type { Supplier } from "../../../../lib/types";
 
@@ -27,7 +27,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
         return NextResponse.json({ error: "نام و شماره تماس فروشنده الزامی است." }, { status: 400 });
     }
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const existing = db.prepare("SELECT * FROM suppliers WHERE id = ?").get(id) as SupplierRow | undefined;
 
     if (!existing) {
@@ -52,7 +52,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     if (!auth.ok) return auth.response;
 
     const { id } = await params;
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
 
     db.prepare("DELETE FROM suppliers WHERE id = ?").run(id);
 

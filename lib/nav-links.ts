@@ -43,3 +43,5 @@ export const ADMIN_NAV_LINKS: PanelNavLink[] = [
     { href: "/admin/logs", label: "لاگ فعالیت‌ها" },
     { href: "/admin/sessions", label: "نشست‌های فعال" },
 ];
+
+export const DEMO_NAV_LINKS: PanelNavLink[] = [{ href: "/demo", label: "منو" }];

@@ -45,6 +45,12 @@ export function AccountMenu() {
             className="flex justify-end gap-2 px-4 pb-2 lg:px-6"
             style={{ paddingTop: "max(0.5rem, env(safe-area-inset-top))" }}
         >
+            {account.role === "demo" && (
+                <span className="flex items-center rounded-2xl border border-amber-400/40 bg-amber-50 px-4 py-2 text-xs font-black text-amber-700">
+                    حالت نمایشی — تغییرات ذخیره نمی‌شود
+                </span>
+            )}
+
             <div className="relative" ref={containerRef}>
                 <button
                     type="button"

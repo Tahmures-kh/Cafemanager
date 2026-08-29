@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createRecordId, getDb, nowIso } from "../../../../../lib/db";
+import { createRecordId, getDataDb, nowIso } from "../../../../../lib/db";
 import { requireAuth } from "../../../../../lib/session";
 import type { InventoryItem, StockMovement } from "../../../../../lib/types";
 
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
         return NextResponse.json({ error: "مقدار اصلاح باید عددی و غیرصفر باشد." }, { status: 400 });
     }
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const existingInventory = db.prepare("SELECT * FROM inventory_items WHERE product_id = ?").get(productId) as
         | InventoryRow
         | undefined;

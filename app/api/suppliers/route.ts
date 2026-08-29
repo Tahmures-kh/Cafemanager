@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createRecordId, getDb, nowIso } from "../../../lib/db";
+import { createRecordId, getDataDb, nowIso } from "../../../lib/db";
 import { requireAuth } from "../../../lib/session";
 import type { Supplier } from "../../../lib/types";
 
@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
     const auth = requireAuth(request, ["manager"]);
     if (!auth.ok) return auth.response;
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const rows = db.prepare("SELECT * FROM suppliers ORDER BY name ASC").all() as SupplierRow[];
 
     return NextResponse.json({ suppliers: rows.map(mapSupplier) });
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "نام و شماره تماس فروشنده الزامی است." }, { status: 400 });
     }
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const id = createRecordId("supplier");
     const now = nowIso();
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createRecordId, getDb, nowIso } from "../../../lib/db";
+import { createRecordId, getDataDb, nowIso } from "../../../lib/db";
 import { requireAuth } from "../../../lib/session";
 import type { InventoryItem, Product, StockMovement } from "../../../lib/types";
 
@@ -73,7 +73,7 @@ export async function GET(request: NextRequest) {
     const auth = requireAuth(request);
     if (!auth.ok) return auth.response;
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const limitParam = Number(request.nextUrl.searchParams.get("limit"));
     const limit = Number.isFinite(limitParam) && limitParam > 0 ? limitParam : 200;
 
@@ -103,7 +103,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "نام کالا، دسته و واحد الزامی است." }, { status: 400 });
     }
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
 
     const stockUnit = (typeof body.stockUnit === "string" ? body.stockUnit : unit).trim() || unit;
     const orderUnit = (typeof body.orderUnit === "string" ? body.orderUnit : stockUnit).trim() || stockUnit;

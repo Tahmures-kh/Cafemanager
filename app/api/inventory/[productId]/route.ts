@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createRecordId, getDb, nowIso } from "../../../../lib/db";
+import { createRecordId, getDataDb, nowIso } from "../../../../lib/db";
 import { requireAuth } from "../../../../lib/session";
 import type { InventoryItem, Product } from "../../../../lib/types";
 
@@ -61,7 +61,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
         return NextResponse.json({ error: "نام کالا، دسته و واحد الزامی است." }, { status: 400 });
     }
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const existingProduct = db.prepare("SELECT * FROM products WHERE id = ?").get(productId) as ProductRow | undefined;
     const existingInventory = db.prepare("SELECT * FROM inventory_items WHERE product_id = ?").get(productId) as
         | InventoryRow
@@ -130,7 +130,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     const { productId } = await params;
     const body = await request.json().catch(() => null);
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const existingInventory = db.prepare("SELECT * FROM inventory_items WHERE product_id = ?").get(productId) as
         | InventoryRow
         | undefined;

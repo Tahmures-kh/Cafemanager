@@ -78,7 +78,9 @@ export type AuthResult =
 
 /**
  * Gate for every API route. `admin` always passes regardless of
- * `allowedRoles` — admin gets access to everything.
+ * `allowedRoles` — admin gets access to everything. `demo` passes the same
+ * way EXCEPT on routes restricted to admin (allowedRoles containing
+ * "admin") — the demo account can see/do everything except admin actions.
  */
 export function requireAuth(request: NextRequest, allowedRoles?: string[]): AuthResult {
     const account = getSessionAccount(request);
@@ -87,7 +89,9 @@ export function requireAuth(request: NextRequest, allowedRoles?: string[]): Auth
         return { ok: false, response: NextResponse.json({ error: "ورود لازم است." }, { status: 401 }) };
     }
 
-    if (allowedRoles && account.role !== "admin" && !allowedRoles.includes(account.role)) {
+    const demoBypass = account.role === "demo" && !(allowedRoles && allowedRoles.includes("admin"));
+
+    if (allowedRoles && account.role !== "admin" && !demoBypass && !allowedRoles.includes(account.role)) {
         return { ok: false, response: NextResponse.json({ error: "دسترسی مجاز نیست." }, { status: 403 }) };
     }
 

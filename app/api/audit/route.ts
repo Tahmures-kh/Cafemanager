@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createRecordId, getDb, nowIso } from "../../../lib/db";
+import { createRecordId, getDataDb, nowIso } from "../../../lib/db";
 import { getClientIp, requireAuth } from "../../../lib/session";
 import type { AuditLogEntry } from "../../../lib/types";
 
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
         createdAt: nowIso(),
     };
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     db.prepare(
         `INSERT INTO audit_log (id, scope, action, description, actor_role, actor_name, ip, user_agent, created_at)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
@@ -79,7 +79,7 @@ export async function GET(request: NextRequest) {
     if (!auth.ok) return auth.response;
 
     const scope = request.nextUrl.searchParams.get("scope");
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
 
     const rows = scope
         ? (db

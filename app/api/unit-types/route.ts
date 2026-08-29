@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createRecordId, getDb, nowIso } from "../../../lib/db";
+import { createRecordId, getDataDb, nowIso } from "../../../lib/db";
 import { requireAuth } from "../../../lib/session";
 
 type UnitTypeRow = {
@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     const auth = requireAuth(request);
     if (!auth.ok) return auth.response;
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const rows = db.prepare("SELECT * FROM unit_types ORDER BY name COLLATE NOCASE ASC").all() as UnitTypeRow[];
 
     return NextResponse.json({ unitTypes: rows.map((row) => row.name) });
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "نام واحد الزامی است." }, { status: 400 });
     }
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const existing = db.prepare("SELECT * FROM unit_types WHERE name = ?").get(name) as UnitTypeRow | undefined;
 
     if (!existing) {

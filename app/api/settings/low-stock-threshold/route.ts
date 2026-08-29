@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb, LOW_STOCK_ALERT_PERCENT_SETTING_KEY } from "../../../../lib/db";
+import { getDataDb, LOW_STOCK_ALERT_PERCENT_SETTING_KEY } from "../../../../lib/db";
 import { requireAuth } from "../../../../lib/session";
 
 const DEFAULT_PERCENT = 20;
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     const auth = requireAuth(request, ["storage", "manager"]);
     if (!auth.ok) return auth.response;
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const row = db.prepare("SELECT value FROM app_settings WHERE key = ?").get(LOW_STOCK_ALERT_PERCENT_SETTING_KEY) as
         | { value: string }
         | undefined;
@@ -30,7 +30,7 @@ export async function PATCH(request: NextRequest) {
         return NextResponse.json({ error: "درصد هشدار باید عددی بین ۱ تا ۱۰۰ باشد." }, { status: 400 });
     }
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     db.prepare(
         `INSERT INTO app_settings (key, value) VALUES (?, ?)
          ON CONFLICT(key) DO UPDATE SET value = excluded.value`

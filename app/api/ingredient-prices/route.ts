@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb, nowIso } from "../../../lib/db";
+import { getDataDb, nowIso } from "../../../lib/db";
 import { requireAuth } from "../../../lib/session";
 
 type PriceRow = {
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     const auth = requireAuth(request, ["manager", "accountant"]);
     if (!auth.ok) return auth.response;
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const rows = db.prepare("SELECT * FROM ingredient_prices").all() as PriceRow[];
 
     return NextResponse.json({
@@ -38,7 +38,7 @@ export async function PUT(request: NextRequest) {
         return NextResponse.json({ error: "productId و unitPrice معتبر الزامی است." }, { status: 400 });
     }
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const now = nowIso();
 
     db.prepare(

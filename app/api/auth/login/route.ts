@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb } from "../../../../lib/db";
+import { getDb, resetDemoDb } from "../../../../lib/db";
 import { verifyPassword } from "../../../../lib/password";
 import { createSession, getClientIp, SESSION_COOKIE_NAME } from "../../../../lib/session";
 
@@ -27,6 +27,13 @@ export async function POST(request: NextRequest) {
 
     if (!account || !account.is_active || !verifyPassword(body.password, account.password_hash, account.password_salt)) {
         return NextResponse.json({ error: "نام کاربری یا رمز عبور اشتباه است." }, { status: 401 });
+    }
+
+    // Every demo login starts from a fresh, real-looking snapshot of
+    // production data — anything a previous demo session touched never
+    // lingers, and it's never the real database being modified.
+    if (account.role === "demo") {
+        resetDemoDb();
     }
 
     const ip = getClientIp(request);

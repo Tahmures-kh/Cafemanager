@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb } from "../../../../lib/db";
+import { getDataDb } from "../../../../lib/db";
 import { requireAuth } from "../../../../lib/session";
 import { sendSms } from "../../../../lib/sms";
 import type { PurchaseOrder } from "../../../../lib/types";
@@ -54,7 +54,8 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     const { id } = await params;
     const body = await request.json().catch(() => null);
 
-    const db = getDb();
+    const isDemo = auth.account.role === "demo";
+    const db = getDataDb(isDemo);
     const existing = db.prepare("SELECT * FROM purchase_orders WHERE id = ?").get(id) as OrderRow | undefined;
 
     if (!existing) {
@@ -69,7 +70,8 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
             return NextResponse.json({ error: "فروشنده این سفارش پیدا نشد." }, { status: 404 });
         }
 
-        const smsResult = await sendSms(supplier.phone, buildSmsMessage(itemRows));
+        // Demo mode must never send a real SMS to a real supplier.
+        const smsResult = isDemo ? { status: "sent" as const } : await sendSms(supplier.phone, buildSmsMessage(itemRows));
         db.prepare("UPDATE purchase_orders SET sms_status = ? WHERE id = ?").run(smsResult.status, id);
     } else if (typeof body?.status === "string") {
         db.prepare("UPDATE purchase_orders SET status = ? WHERE id = ?").run(body.status, id);
@@ -86,7 +88,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     if (!auth.ok) return auth.response;
 
     const { id } = await params;
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
 
     db.prepare("DELETE FROM purchase_orders WHERE id = ?").run(id);
 

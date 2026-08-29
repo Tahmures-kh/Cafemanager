@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createRecordId, getDb, nowIso } from "../../../../lib/db";
+import { createRecordId, getDataDb, nowIso } from "../../../../lib/db";
 import {
     formatNumber,
     getOrderUnit,
@@ -90,7 +90,7 @@ function safeNumber(value: number) {
 
 /** Ported from local-store.ts's applySentInventoryUpdate: clamps each item's final packed
  * quantity against requested/available stock, deducts inventory, logs a sent_to_cafe movement. */
-function applySentInventoryUpdate(db: ReturnType<typeof getDb>, order: OrderRow, createdBy: string | null) {
+function applySentInventoryUpdate(db: ReturnType<typeof getDataDb>, order: OrderRow, createdBy: string | null) {
     const itemRows = db.prepare("SELECT * FROM order_items WHERE order_id = ?").all(order.id) as OrderItemRow[];
     const getProduct = db.prepare("SELECT * FROM products WHERE id = ?");
     const getInventory = db.prepare("SELECT * FROM inventory_items WHERE product_id = ?");
@@ -140,7 +140,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     const { id } = await params;
     const body = await request.json().catch(() => null);
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const existing = db.prepare("SELECT * FROM cafe_orders WHERE id = ?").get(id) as OrderRow | undefined;
 
     if (!existing) {

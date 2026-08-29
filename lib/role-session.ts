@@ -1,11 +1,11 @@
 "use client";
 
-export type PenzaRole = "admin" | "manager" | "staff" | "storage" | "accountant";
+export type PenzaRole = "admin" | "manager" | "staff" | "storage" | "accountant" | "demo";
 
 export const PENZA_ROLE_SESSION_KEY = "penza-cafe-active-role";
 export const PENZA_ROLE_GUARD_MESSAGE_KEY = "penza-role-guard-message";
 
-const validRoles: PenzaRole[] = ["admin", "manager", "staff", "storage", "accountant"];
+const validRoles: PenzaRole[] = ["admin", "manager", "staff", "storage", "accountant", "demo"];
 
 export function isPenzaRole(value: string | null): value is PenzaRole {
     return Boolean(value && validRoles.includes(value as PenzaRole));
@@ -35,6 +35,7 @@ export function getRoleLabel(role: PenzaRole) {
         staff: "کاربر کافه",
         storage: "انباردار",
         accountant: "حسابدار",
+        demo: "دمو",
     };
 
     return labels[role];

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createRecordId, getDb, nowIso } from "../../../lib/db";
+import { createRecordId, getDataDb, nowIso } from "../../../lib/db";
 import { requireAuth } from "../../../lib/session";
 import type { Recipe } from "../../../lib/types";
 
@@ -36,8 +36,8 @@ function mapRecipe(row: RecipeRow, ingredientRows: IngredientRow[]): Recipe {
     };
 }
 
-export function insertRecipe(input: RecipeInput): Recipe {
-    const db = getDb();
+export function insertRecipe(input: RecipeInput, isDemo: boolean): Recipe {
+    const db = getDataDb(isDemo);
     const now = nowIso();
     const recipeId = createRecordId("recipe");
 
@@ -79,7 +79,7 @@ export async function GET(request: NextRequest) {
     const auth = requireAuth(request, ["manager", "accountant"]);
     if (!auth.ok) return auth.response;
 
-    const db = getDb();
+    const db = getDataDb(auth.account.role === "demo");
     const recipeRows = db.prepare("SELECT * FROM recipes ORDER BY created_at DESC").all() as RecipeRow[];
     const ingredientRows = db.prepare("SELECT * FROM recipe_ingredients").all() as IngredientRow[];
 
@@ -98,11 +98,14 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "نام رسپی و لیست مواد الزامی است." }, { status: 400 });
     }
 
-    const recipe = insertRecipe({
-        name: body.name,
-        category: typeof body.category === "string" ? body.category : undefined,
-        ingredients: body.ingredients,
-    });
+    const recipe = insertRecipe(
+        {
+            name: body.name,
+            category: typeof body.category === "string" ? body.category : undefined,
+            ingredients: body.ingredients,
+        },
+        auth.account.role === "demo"
+    );
 
     return NextResponse.json({ recipe });
 }
