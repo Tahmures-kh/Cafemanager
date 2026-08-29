@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dev-phase only: allows plain HTTP so the app can reach the local/LAN Next.js dev server.
+     Tighten this (remove cleartext, pin to the real host) once real hosting with HTTPS exists. -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

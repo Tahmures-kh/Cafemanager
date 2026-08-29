@@ -1,0 +1,4 @@
+- [Project overview](project_overview.md) — cafemanagment app, companion to staff-management-saas web backend, what's built vs. missing
+- [AGP/Kotlin plugin conflict](agp_kotlin_plugin_conflict.md) — don't re-add org.jetbrains.kotlin.android; AGP 9.2.1 self-applies it
+- [core-ktx/compileSdk 37 mismatch](core_ktx_compilesdk37_mismatch.md) — pin coreKtx to 1.18.0, not 1.19.0+, since project stays on compileSdk 36.1
+- [Manager inventory role leak fix](manager_inventory_role_leak_fix.md) — manager was getting storage's CRUD inventory screen; added separate read-only ManagerInventoryScreen
