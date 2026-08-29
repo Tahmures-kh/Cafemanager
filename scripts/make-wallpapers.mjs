@@ -24,9 +24,9 @@ async function run() {
         const outputPath = path.join(outDir, `wallpaper-${String(i + 1).padStart(2, "0")}.webp`);
         await sharp(inputPath)
             .resize(1920, 1920, { fit: "inside", withoutEnlargement: true })
-            .blur(14)
-            .modulate({ saturation: 0.9, brightness: 1.02 })
-            .webp({ quality: 62 })
+            .blur(5)
+            .modulate({ saturation: 0.95, brightness: 1.02 })
+            .webp({ quality: 68 })
             .toFile(outputPath);
         console.log("wrote", outputPath);
     }
