@@ -39,6 +39,9 @@ yarn-error.log*
 # runtime audit log data (server-side, not source)
 /data/
 
+# raw source photos for wallpaper generation (processed output lives in public/wallpapers)
+/pics/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

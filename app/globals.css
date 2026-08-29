@@ -51,11 +51,21 @@ body {
     radial-gradient(circle at 92% 8%, rgba(80, 230, 150, 0.22), transparent 30rem),
     radial-gradient(circle at 12% 96%, rgba(0, 163, 0, 0.12), transparent 28rem),
     radial-gradient(circle at 88% 100%, rgba(120, 220, 160, 0.16), transparent 26rem),
-    linear-gradient(180deg, #ffffff 0%, #f3fff3 55%, #eefcee 100%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(243, 255, 243, 0.85) 55%, rgba(238, 252, 238, 0.9) 100%);
   color: #0B2F0B;
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+.penza-wallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 0.6s ease;
 }
 
 .penza-hero {

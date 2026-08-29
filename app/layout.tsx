@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { AccountMenu } from "../components/AccountMenu";
+import { PageWallpaper } from "../components/PageWallpaper";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body>
+        <PageWallpaper />
         <AccountMenu />
         {children}
       </body>
