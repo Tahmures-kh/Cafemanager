@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { getCurrentAccount, logout, type CurrentAccount } from "../lib/auth-api";
 import { clearActivePenzaRole, getRoleLabel } from "../lib/role-session";
@@ -49,6 +50,15 @@ export function AccountMenu() {
                 <span className="flex items-center rounded-2xl border border-amber-400/40 bg-amber-50 px-4 py-2 text-xs font-black text-amber-700">
                     حالت نمایشی — تغییرات ذخیره نمی‌شود
                 </span>
+            )}
+
+            {account.role === "demo" && pathname !== "/demo" && (
+                <Link
+                    href="/demo"
+                    className="flex items-center rounded-2xl border border-green-900/15 bg-white px-4 py-2 text-xs font-black text-[#007A00] hover:bg-[#f2fff2]"
+                >
+                    خانه
+                </Link>
             )}
 
             <div className="relative" ref={containerRef}>

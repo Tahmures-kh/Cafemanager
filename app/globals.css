@@ -32,10 +32,7 @@ body {
 
 body {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top right, rgba(0, 163, 0, 0.12), transparent 32rem),
-    radial-gradient(circle at bottom left, rgba(148, 230, 148, 0.20), transparent 28rem),
-    #ffffff;
+  background: transparent;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
