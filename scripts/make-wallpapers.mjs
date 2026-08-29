@@ -23,10 +23,10 @@ async function run() {
         const inputPath = path.join(srcDir, selection[i]);
         const outputPath = path.join(outDir, `wallpaper-${String(i + 1).padStart(2, "0")}.webp`);
         await sharp(inputPath)
-            .resize(1920, 1920, { fit: "inside", withoutEnlargement: true })
-            .blur(5)
-            .modulate({ saturation: 0.95, brightness: 1.02 })
-            .webp({ quality: 68 })
+            .resize(2400, 1350, { fit: "cover", position: sharp.strategy.attention })
+            .blur(3)
+            .modulate({ saturation: 0.97, brightness: 1.02 })
+            .webp({ quality: 82 })
             .toFile(outputPath);
         console.log("wrote", outputPath);
     }

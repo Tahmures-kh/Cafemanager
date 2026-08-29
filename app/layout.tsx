@@ -28,8 +28,10 @@ export default function RootLayout({
     <html lang="fa" dir="rtl">
       <body>
         <PageWallpaper />
-        <AccountMenu />
-        {children}
+        <div className="relative z-10">
+          <AccountMenu />
+          {children}
+        </div>
       </body>
     </html>
   );
