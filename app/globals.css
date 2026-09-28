@@ -55,6 +55,20 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
+/** Wide tables (inventory, orders, logs, ...) scroll horizontally inside
+ * this instead of overflowing the viewport. overflow-x:auto alone is
+ * enough on desktop, but on some Android browsers a touch drag inside a
+ * plain overflow-x:auto block gets captured by the page's own vertical
+ * scroll instead of panning the table — these extra properties make the
+ * horizontal pan win once a touch drag starts inside it. */
+.penza-scroll-x {
+  overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  overscroll-behavior-x: contain;
+}
+
 .penza-wallpaper {
   position: fixed;
   inset: 0;

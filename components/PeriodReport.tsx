@@ -404,7 +404,7 @@ export function PeriodReport({ role }: { role: ReportRole }) {
                         <div className="border-b border-green-900/10 p-5">
                             <h2 className="text-xl font-black text-[#0B2F0B]">درخواست‌ها</h2>
                         </div>
-                        <div className="overflow-x-auto">
+                        <div className="penza-scroll-x">
                             <table className="w-full min-w-[760px] text-right text-sm">
                                 <thead className="bg-[#f2fff2] text-xs font-black text-[#0B2F0B]">
                                     <tr>
@@ -444,7 +444,7 @@ export function PeriodReport({ role }: { role: ReportRole }) {
                         <div className="border-b border-green-900/10 p-5">
                             <h2 className="text-xl font-black text-[#0B2F0B]">گردش موجودی</h2>
                         </div>
-                        <div className="overflow-x-auto">
+                        <div className="penza-scroll-x">
                             <table className="w-full min-w-[820px] text-right text-sm">
                                 <thead className="bg-[#f2fff2] text-xs font-black text-[#0B2F0B]">
                                     <tr>

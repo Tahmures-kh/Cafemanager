@@ -107,8 +107,8 @@ export function PayrollPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
         setRowStates((current) => ({ ...current, [employeeId]: { ...current[employeeId], [field]: value } }));
     }
 
-    /** روزانه = حقوق پایه / ۳۰. اضافه‌کاری و پاداش اضافه می‌شوند؛ جریمه،
-     * مساعده، قسط وام و بیمه از جمع کل کم می‌شوند. */
+    /** روزانه = حقوق پایه / ۳۰. اضافه‌کاری و پاداش اضافه می‌شوند؛ هر روز
+     * مرخصی، جریمه، مساعده، قسط وام و بیمه از جمع کل کم می‌شوند. */
     function rowTotal(employeeId: string) {
         const row = rowStates[employeeId];
         if (!row) return 0;
@@ -116,10 +116,12 @@ export function PayrollPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
         const baseSalary = Number(row.baseSalary) || 0;
         const dailyWage = baseSalary / 30;
         const overtimePay = dailyWage * (Number(row.overtimeDays) || 0);
+        const leaveDeduction = dailyWage * (Number(row.leaveDays) || 0);
 
         return (
             baseSalary +
-            overtimePay +
+            overtimePay -
+            leaveDeduction +
             (Number(row.bonusAmount) || 0) -
             (Number(row.penaltyAmount) || 0) -
             (Number(row.advanceAmount) || 0) -
@@ -305,7 +307,7 @@ export function PayrollPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
 
                     {employeesExpanded && (
                         <div className="mt-4 space-y-3">
-                            <div className="overflow-x-auto">
+                            <div className="penza-scroll-x">
                                 <table className="w-full min-w-[560px] text-sm">
                                     <thead>
                                         <tr className="text-right text-xs font-black text-slate-500">
@@ -470,13 +472,14 @@ export function PayrollPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
                 <section className="mt-5 penza-card rounded-[1.5rem] p-5">
                     <h2 className="text-xl font-black text-[#0B2F0B]">حقوق پرسنل — {month}</h2>
                     <p className="mt-1 text-xs font-bold leading-6 text-slate-500">
-                        جمع کل = حقوق پایه + (روز اضافه‌کاری × حقوق پایه ÷ ۳۰) + پاداش − جریمه − مساعده − قسط وام − بیمه
+                        جمع کل = حقوق پایه + (روز اضافه‌کاری × حقوق روزانه) − (روز مرخصی × حقوق روزانه) + پاداش − جریمه
+                        − مساعده − قسط وام − بیمه ( حقوق روزانه = حقوق پایه ÷ ۳۰ )
                     </p>
 
                     {activeEmployees.length === 0 ? (
                         <p className="mt-4 text-sm font-bold text-slate-400">هنوز پرسنل فعالی ثبت نشده است.</p>
                     ) : (
-                        <div className="mt-4 overflow-x-auto">
+                        <div className="mt-4 penza-scroll-x">
                             <table className="w-full min-w-[1400px] text-sm">
                                 <thead>
                                     <tr className="text-right text-xs font-black text-slate-500">

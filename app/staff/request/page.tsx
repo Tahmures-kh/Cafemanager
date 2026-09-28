@@ -231,7 +231,7 @@ export default function CafeRequestPage() {
                     <section className="penza-card mt-5 rounded-[1.5rem] p-4">
                         <h2 className="text-lg font-black text-[#0B2F0B]">★ کالاهای پرتکرار</h2>
 
-                        <div className="mt-3 flex gap-3 overflow-x-auto pb-1">
+                        <div className="mt-3 flex gap-3 penza-scroll-x pb-1">
                             {favoriteProducts.map((product) => {
                                 const quantity = quantities[product.id] ?? 0;
 
@@ -281,7 +281,7 @@ export default function CafeRequestPage() {
                                 </div>
                             </div>
 
-                            <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
+                            <div className="mt-4 flex gap-2 penza-scroll-x pb-1">
                                 <button
                                     type="button"
                                     onClick={() => setFavoritesOnly((current) => !current)}
