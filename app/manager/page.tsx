@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { LayoutDashboard, ClipboardList, Warehouse, ChefHat, TrendingUp, ShoppingCart } from "lucide-react";
+import { LayoutDashboard, ClipboardList, Warehouse, ChefHat, TrendingUp, ShoppingCart, Wallet } from "lucide-react";
 import { RoleGuard } from "../../components/RoleGuard";
 import { PanelNav } from "../../components/panels/PanelNav";
 import { MANAGER_NAV_LINKS } from "../../lib/nav-links";
@@ -14,6 +14,7 @@ export default function ManagerMainPage() {
         { href: "/manager/recipes", title: "رسپی‌ها", icon: ChefHat },
         { href: "/manager/sales", title: "فروش و تحلیل", icon: TrendingUp },
         { href: "/manager/purchases", title: "خریدهای روزانه", icon: ShoppingCart },
+        { href: "/manager/payroll", title: "حقوق و دستمزد", icon: Wallet },
     ];
 
     return (

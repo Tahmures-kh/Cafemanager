@@ -14,6 +14,7 @@ export const MANAGER_NAV_LINKS: PanelNavLink[] = [
     { href: "/manager/recipes", label: "رسپی‌ها" },
     { href: "/manager/sales", label: "فروش و تحلیل" },
     { href: "/manager/purchases", label: "خریدهای روزانه" },
+    { href: "/manager/payroll", label: "حقوق و دستمزد" },
     { href: "/manager/reports", label: "گزارش دوره‌ای" },
 ];
 
@@ -34,6 +35,7 @@ export const ACCOUNTANT_NAV_LINKS: PanelNavLink[] = [
     { href: "/accountant", label: "منو" },
     { href: "/accountant/recipes", label: "رسپی‌ها و قیمت‌گذاری" },
     { href: "/accountant/inventory", label: "موجودی انبار" },
+    { href: "/accountant/payroll", label: "حقوق و دستمزد" },
     { href: "/accountant/reports", label: "گزارش دوره‌ای" },
 ];
 

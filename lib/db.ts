@@ -192,6 +192,32 @@ function initSchema(database: Database.Database) {
             created_at TEXT NOT NULL
         );
 
+        CREATE TABLE IF NOT EXISTS employees (
+            id TEXT PRIMARY KEY,
+            full_name TEXT NOT NULL,
+            position TEXT,
+            base_salary REAL NOT NULL DEFAULT 0,
+            is_active INTEGER NOT NULL DEFAULT 1,
+            created_at TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS payroll_records (
+            id TEXT PRIMARY KEY,
+            employee_id TEXT NOT NULL REFERENCES employees(id) ON DELETE CASCADE,
+            month TEXT NOT NULL,
+            base_salary REAL NOT NULL DEFAULT 0,
+            overtime_amount REAL NOT NULL DEFAULT 0,
+            days_worked REAL NOT NULL DEFAULT 0,
+            leave_days REAL NOT NULL DEFAULT 0,
+            note TEXT,
+            created_by TEXT,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL,
+            UNIQUE(employee_id, month)
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_payroll_records_employee_id ON payroll_records(employee_id);
+        CREATE INDEX IF NOT EXISTS idx_payroll_records_month ON payroll_records(month);
         CREATE INDEX IF NOT EXISTS idx_workshop_allocations_department ON workshop_allocations(department);
         CREATE INDEX IF NOT EXISTS idx_workshop_allocations_created_at ON workshop_allocations(created_at);
         CREATE INDEX IF NOT EXISTS idx_sessions_account_id ON sessions(account_id);

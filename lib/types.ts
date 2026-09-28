@@ -175,6 +175,30 @@ export type PurchaseOrder = {
     items: PurchaseOrderItem[];
 };
 
+export type Employee = {
+    id: string;
+    fullName: string;
+    position?: string;
+    baseSalary: number;
+    isActive: boolean;
+    createdAt: string;
+};
+
+export type PayrollRecord = {
+    id: string;
+    employeeId: string;
+    /** "YYYY-MM" */
+    month: string;
+    baseSalary: number;
+    overtimeAmount: number;
+    daysWorked: number;
+    leaveDays: number;
+    note?: string;
+    createdBy?: string;
+    createdAt: string;
+    updatedAt: string;
+};
+
 export type AuditLogEntry = {
     id: string;
     scope: string;

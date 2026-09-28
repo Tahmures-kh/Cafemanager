@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Calculator, Package, FileBarChart2 } from "lucide-react";
+import { Calculator, Package, FileBarChart2, Wallet } from "lucide-react";
 import { RoleGuard } from "../../components/RoleGuard";
 import { PanelNav } from "../../components/panels/PanelNav";
 import { ACCOUNTANT_NAV_LINKS } from "../../lib/nav-links";
@@ -10,6 +10,7 @@ export default function AccountantMainPage() {
     const actionCards = [
         { href: "/accountant/recipes", title: "رسپی‌ها و قیمت‌گذاری", icon: Calculator },
         { href: "/accountant/inventory", title: "موجودی انبار", icon: Package },
+        { href: "/accountant/payroll", title: "حقوق و دستمزد", icon: Wallet },
         { href: "/accountant/reports", title: "گزارش دوره‌ای", icon: FileBarChart2 },
     ];
 
