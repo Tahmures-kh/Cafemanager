@@ -100,9 +100,14 @@ export type PayrollRecordInput = {
     employeeId: string;
     month: string;
     baseSalary: number;
-    overtimeAmount: number;
+    overtimeDays: number;
     daysWorked: number;
     leaveDays: number;
+    bonusAmount: number;
+    penaltyAmount: number;
+    advanceAmount: number;
+    loanInstallment: number;
+    insuranceAmount: number;
     note?: string;
 };
 

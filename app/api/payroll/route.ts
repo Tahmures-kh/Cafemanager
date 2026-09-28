@@ -8,9 +8,14 @@ type PayrollRow = {
     employee_id: string;
     month: string;
     base_salary: number;
-    overtime_amount: number;
+    overtime_days: number;
     days_worked: number;
     leave_days: number;
+    bonus_amount: number;
+    penalty_amount: number;
+    advance_amount: number;
+    loan_installment: number;
+    insurance_amount: number;
     note: string | null;
     created_by: string | null;
     created_at: string;
@@ -23,14 +28,23 @@ function mapRecord(row: PayrollRow): PayrollRecord {
         employeeId: row.employee_id,
         month: row.month,
         baseSalary: row.base_salary,
-        overtimeAmount: row.overtime_amount,
+        overtimeDays: row.overtime_days,
         daysWorked: row.days_worked,
         leaveDays: row.leave_days,
+        bonusAmount: row.bonus_amount,
+        penaltyAmount: row.penalty_amount,
+        advanceAmount: row.advance_amount,
+        loanInstallment: row.loan_installment,
+        insuranceAmount: row.insurance_amount,
         note: row.note ?? undefined,
         createdBy: row.created_by ?? undefined,
         createdAt: row.created_at,
         updatedAt: row.updated_at,
     };
+}
+
+function nonNegativeNumber(value: unknown) {
+    return Number.isFinite(Number(value)) ? Math.max(0, Number(value)) : 0;
 }
 
 export async function GET(request: NextRequest) {
@@ -70,10 +84,15 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "پرسنل پیدا نشد." }, { status: 404 });
     }
 
-    const baseSalary = Number.isFinite(Number(body.baseSalary)) ? Math.max(0, Number(body.baseSalary)) : 0;
-    const overtimeAmount = Number.isFinite(Number(body.overtimeAmount)) ? Math.max(0, Number(body.overtimeAmount)) : 0;
-    const daysWorked = Number.isFinite(Number(body.daysWorked)) ? Math.max(0, Number(body.daysWorked)) : 0;
-    const leaveDays = Number.isFinite(Number(body.leaveDays)) ? Math.max(0, Number(body.leaveDays)) : 0;
+    const baseSalary = nonNegativeNumber(body.baseSalary);
+    const overtimeDays = nonNegativeNumber(body.overtimeDays);
+    const daysWorked = nonNegativeNumber(body.daysWorked);
+    const leaveDays = nonNegativeNumber(body.leaveDays);
+    const bonusAmount = nonNegativeNumber(body.bonusAmount);
+    const penaltyAmount = nonNegativeNumber(body.penaltyAmount);
+    const advanceAmount = nonNegativeNumber(body.advanceAmount);
+    const loanInstallment = nonNegativeNumber(body.loanInstallment);
+    const insuranceAmount = nonNegativeNumber(body.insuranceAmount);
     const note = typeof body.note === "string" && body.note.trim() ? body.note.trim() : null;
     const now = nowIso();
 
@@ -82,28 +101,52 @@ export async function POST(request: NextRequest) {
         .get(employeeId, month) as { id: string } | undefined;
 
     const id = existing?.id ?? createRecordId("payroll");
+    const createdBy = auth.account.displayName ?? auth.account.username;
 
     if (existing) {
         db.prepare(
             `UPDATE payroll_records
-             SET base_salary = ?, overtime_amount = ?, days_worked = ?, leave_days = ?, note = ?, created_by = ?, updated_at = ?
+             SET base_salary = ?, overtime_days = ?, days_worked = ?, leave_days = ?,
+                 bonus_amount = ?, penalty_amount = ?, advance_amount = ?, loan_installment = ?, insurance_amount = ?,
+                 note = ?, created_by = ?, updated_at = ?
              WHERE id = ?`
-        ).run(baseSalary, overtimeAmount, daysWorked, leaveDays, note, auth.account.displayName ?? auth.account.username, now, id);
+        ).run(
+            baseSalary,
+            overtimeDays,
+            daysWorked,
+            leaveDays,
+            bonusAmount,
+            penaltyAmount,
+            advanceAmount,
+            loanInstallment,
+            insuranceAmount,
+            note,
+            createdBy,
+            now,
+            id
+        );
     } else {
         db.prepare(
             `INSERT INTO payroll_records
-                (id, employee_id, month, base_salary, overtime_amount, days_worked, leave_days, note, created_by, created_at, updated_at)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+                (id, employee_id, month, base_salary, overtime_days, days_worked, leave_days,
+                 bonus_amount, penalty_amount, advance_amount, loan_installment, insurance_amount,
+                 note, created_by, created_at, updated_at)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
         ).run(
             id,
             employeeId,
             month,
             baseSalary,
-            overtimeAmount,
+            overtimeDays,
             daysWorked,
             leaveDays,
+            bonusAmount,
+            penaltyAmount,
+            advanceAmount,
+            loanInstallment,
+            insuranceAmount,
             note,
-            auth.account.displayName ?? auth.account.username,
+            createdBy,
             now,
             now
         );

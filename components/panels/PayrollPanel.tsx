@@ -33,22 +33,43 @@ function downloadBlob(blob: Blob, fileName: string) {
 
 type RowState = {
     baseSalary: string;
-    overtimeAmount: string;
+    overtimeDays: string;
     daysWorked: string;
     leaveDays: string;
+    bonusAmount: string;
+    penaltyAmount: string;
+    advanceAmount: string;
+    loanInstallment: string;
+    insuranceAmount: string;
     note: string;
 };
 
 function emptyRowState(baseSalary: number): RowState {
-    return { baseSalary: String(baseSalary), overtimeAmount: "0", daysWorked: "0", leaveDays: "0", note: "" };
+    return {
+        baseSalary: String(baseSalary),
+        overtimeDays: "0",
+        daysWorked: "0",
+        leaveDays: "0",
+        bonusAmount: "0",
+        penaltyAmount: "0",
+        advanceAmount: "0",
+        loanInstallment: "0",
+        insuranceAmount: "0",
+        note: "",
+    };
 }
 
 function recordToRowState(record: PayrollRecord): RowState {
     return {
         baseSalary: String(record.baseSalary),
-        overtimeAmount: String(record.overtimeAmount),
+        overtimeDays: String(record.overtimeDays),
         daysWorked: String(record.daysWorked),
         leaveDays: String(record.leaveDays),
+        bonusAmount: String(record.bonusAmount),
+        penaltyAmount: String(record.penaltyAmount),
+        advanceAmount: String(record.advanceAmount),
+        loanInstallment: String(record.loanInstallment),
+        insuranceAmount: String(record.insuranceAmount),
         note: record.note ?? "",
     };
 }
@@ -86,10 +107,25 @@ export function PayrollPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
         setRowStates((current) => ({ ...current, [employeeId]: { ...current[employeeId], [field]: value } }));
     }
 
+    /** روزانه = حقوق پایه / ۳۰. اضافه‌کاری و پاداش اضافه می‌شوند؛ جریمه،
+     * مساعده، قسط وام و بیمه از جمع کل کم می‌شوند. */
     function rowTotal(employeeId: string) {
         const row = rowStates[employeeId];
         if (!row) return 0;
-        return (Number(row.baseSalary) || 0) + (Number(row.overtimeAmount) || 0);
+
+        const baseSalary = Number(row.baseSalary) || 0;
+        const dailyWage = baseSalary / 30;
+        const overtimePay = dailyWage * (Number(row.overtimeDays) || 0);
+
+        return (
+            baseSalary +
+            overtimePay +
+            (Number(row.bonusAmount) || 0) -
+            (Number(row.penaltyAmount) || 0) -
+            (Number(row.advanceAmount) || 0) -
+            (Number(row.loanInstallment) || 0) -
+            (Number(row.insuranceAmount) || 0)
+        );
     }
 
     async function handleSaveRow(employeeId: string) {
@@ -101,9 +137,14 @@ export function PayrollPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
             employeeId,
             month,
             baseSalary: Number(row.baseSalary) || 0,
-            overtimeAmount: Number(row.overtimeAmount) || 0,
+            overtimeDays: Number(row.overtimeDays) || 0,
             daysWorked: Number(row.daysWorked) || 0,
             leaveDays: Number(row.leaveDays) || 0,
+            bonusAmount: Number(row.bonusAmount) || 0,
+            penaltyAmount: Number(row.penaltyAmount) || 0,
+            advanceAmount: Number(row.advanceAmount) || 0,
+            loanInstallment: Number(row.loanInstallment) || 0,
+            insuranceAmount: Number(row.insuranceAmount) || 0,
             note: row.note,
         });
         setSavingId(null);
@@ -137,7 +178,20 @@ export function PayrollPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
     }
 
     function exportExcel() {
-        const headerRow = ["نام پرسنل", "سمت", "حقوق پایه", "اضافه‌کاری", "روزهای حضور", "مرخصی", "جمع کل"];
+        const headerRow = [
+            "نام پرسنل",
+            "سمت",
+            "حقوق پایه",
+            "روز اضافه‌کاری",
+            "روزهای حضور",
+            "مرخصی",
+            "پاداش",
+            "جریمه",
+            "مساعده",
+            "قسط وام",
+            "بیمه",
+            "جمع کل",
+        ];
         const rows: Array<Array<string | number>> = [headerRow];
 
         for (const employee of activeEmployees) {
@@ -147,9 +201,14 @@ export function PayrollPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
                 employee.fullName,
                 employee.position ?? "",
                 Number(row.baseSalary) || 0,
-                Number(row.overtimeAmount) || 0,
+                Number(row.overtimeDays) || 0,
                 Number(row.daysWorked) || 0,
                 Number(row.leaveDays) || 0,
+                Number(row.bonusAmount) || 0,
+                Number(row.penaltyAmount) || 0,
+                Number(row.advanceAmount) || 0,
+                Number(row.loanInstallment) || 0,
+                Number(row.insuranceAmount) || 0,
                 rowTotal(employee.id),
             ]);
         }
@@ -410,19 +469,27 @@ export function PayrollPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
 
                 <section className="mt-5 penza-card rounded-[1.5rem] p-5">
                     <h2 className="text-xl font-black text-[#0B2F0B]">حقوق پرسنل — {month}</h2>
+                    <p className="mt-1 text-xs font-bold leading-6 text-slate-500">
+                        جمع کل = حقوق پایه + (روز اضافه‌کاری × حقوق پایه ÷ ۳۰) + پاداش − جریمه − مساعده − قسط وام − بیمه
+                    </p>
 
                     {activeEmployees.length === 0 ? (
                         <p className="mt-4 text-sm font-bold text-slate-400">هنوز پرسنل فعالی ثبت نشده است.</p>
                     ) : (
                         <div className="mt-4 overflow-x-auto">
-                            <table className="w-full min-w-[820px] text-sm">
+                            <table className="w-full min-w-[1400px] text-sm">
                                 <thead>
                                     <tr className="text-right text-xs font-black text-slate-500">
                                         <th className="px-3 py-2">نام</th>
                                         <th className="px-3 py-2">حقوق پایه</th>
-                                        <th className="px-3 py-2">اضافه‌کاری</th>
+                                        <th className="px-3 py-2">روز اضافه‌کاری</th>
                                         <th className="px-3 py-2">روزهای حضور</th>
                                         <th className="px-3 py-2">مرخصی</th>
+                                        <th className="px-3 py-2">پاداش</th>
+                                        <th className="px-3 py-2">جریمه</th>
+                                        <th className="px-3 py-2">مساعده</th>
+                                        <th className="px-3 py-2">قسط وام</th>
+                                        <th className="px-3 py-2">بیمه</th>
                                         <th className="px-3 py-2">جمع کل</th>
                                         <th className="px-3 py-2">عملیات</th>
                                     </tr>
@@ -446,9 +513,9 @@ export function PayrollPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
                                                 <td className="px-3 py-2">
                                                     <input
                                                         type="number"
-                                                        value={row.overtimeAmount}
-                                                        onChange={(event) => updateRow(employee.id, "overtimeAmount", event.target.value)}
-                                                        className="h-10 w-24 rounded-xl border border-green-900/15 px-3 text-sm"
+                                                        value={row.overtimeDays}
+                                                        onChange={(event) => updateRow(employee.id, "overtimeDays", event.target.value)}
+                                                        className="h-10 w-20 rounded-xl border border-green-900/15 px-3 text-sm"
                                                     />
                                                 </td>
                                                 <td className="px-3 py-2">
@@ -465,6 +532,46 @@ export function PayrollPanel({ navLinks }: { navLinks: PanelNavLink[] }) {
                                                         value={row.leaveDays}
                                                         onChange={(event) => updateRow(employee.id, "leaveDays", event.target.value)}
                                                         className="h-10 w-20 rounded-xl border border-green-900/15 px-3 text-sm"
+                                                    />
+                                                </td>
+                                                <td className="px-3 py-2">
+                                                    <input
+                                                        type="number"
+                                                        value={row.bonusAmount}
+                                                        onChange={(event) => updateRow(employee.id, "bonusAmount", event.target.value)}
+                                                        className="h-10 w-24 rounded-xl border border-green-900/15 px-3 text-sm"
+                                                    />
+                                                </td>
+                                                <td className="px-3 py-2">
+                                                    <input
+                                                        type="number"
+                                                        value={row.penaltyAmount}
+                                                        onChange={(event) => updateRow(employee.id, "penaltyAmount", event.target.value)}
+                                                        className="h-10 w-24 rounded-xl border border-green-900/15 px-3 text-sm"
+                                                    />
+                                                </td>
+                                                <td className="px-3 py-2">
+                                                    <input
+                                                        type="number"
+                                                        value={row.advanceAmount}
+                                                        onChange={(event) => updateRow(employee.id, "advanceAmount", event.target.value)}
+                                                        className="h-10 w-24 rounded-xl border border-green-900/15 px-3 text-sm"
+                                                    />
+                                                </td>
+                                                <td className="px-3 py-2">
+                                                    <input
+                                                        type="number"
+                                                        value={row.loanInstallment}
+                                                        onChange={(event) => updateRow(employee.id, "loanInstallment", event.target.value)}
+                                                        className="h-10 w-24 rounded-xl border border-green-900/15 px-3 text-sm"
+                                                    />
+                                                </td>
+                                                <td className="px-3 py-2">
+                                                    <input
+                                                        type="number"
+                                                        value={row.insuranceAmount}
+                                                        onChange={(event) => updateRow(employee.id, "insuranceAmount", event.target.value)}
+                                                        className="h-10 w-24 rounded-xl border border-green-900/15 px-3 text-sm"
                                                     />
                                                 </td>
                                                 <td className="px-3 py-2 font-black text-[#007A00]">{formatToman(rowTotal(employee.id))}</td>

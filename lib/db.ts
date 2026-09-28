@@ -206,9 +206,14 @@ function initSchema(database: Database.Database) {
             employee_id TEXT NOT NULL REFERENCES employees(id) ON DELETE CASCADE,
             month TEXT NOT NULL,
             base_salary REAL NOT NULL DEFAULT 0,
-            overtime_amount REAL NOT NULL DEFAULT 0,
+            overtime_days REAL NOT NULL DEFAULT 0,
             days_worked REAL NOT NULL DEFAULT 0,
             leave_days REAL NOT NULL DEFAULT 0,
+            bonus_amount REAL NOT NULL DEFAULT 0,
+            penalty_amount REAL NOT NULL DEFAULT 0,
+            advance_amount REAL NOT NULL DEFAULT 0,
+            loan_installment REAL NOT NULL DEFAULT 0,
+            insurance_amount REAL NOT NULL DEFAULT 0,
             note TEXT,
             created_by TEXT,
             created_at TEXT NOT NULL,
@@ -363,6 +368,20 @@ function migrateSchema(database: Database.Database) {
     if (!hasParQuantity) {
         database.exec("ALTER TABLE inventory_items ADD COLUMN par_quantity REAL NOT NULL DEFAULT 0");
         database.exec("UPDATE inventory_items SET par_quantity = current_quantity WHERE par_quantity = 0");
+    }
+
+    const payrollColumns = (database.prepare("PRAGMA table_info(payroll_records)").all() as Array<{ name: string }>).map(
+        (column) => column.name
+    );
+
+    if (payrollColumns.includes("overtime_amount") && !payrollColumns.includes("overtime_days")) {
+        database.exec("ALTER TABLE payroll_records RENAME COLUMN overtime_amount TO overtime_days");
+    }
+
+    for (const column of ["bonus_amount", "penalty_amount", "advance_amount", "loan_installment", "insurance_amount"]) {
+        if (!payrollColumns.includes(column)) {
+            database.exec(`ALTER TABLE payroll_records ADD COLUMN ${column} REAL NOT NULL DEFAULT 0`);
+        }
     }
 }
 

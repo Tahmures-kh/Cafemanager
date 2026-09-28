@@ -190,9 +190,21 @@ export type PayrollRecord = {
     /** "YYYY-MM" */
     month: string;
     baseSalary: number;
-    overtimeAmount: number;
+    /** Paid at (baseSalary / 30) per day. */
+    overtimeDays: number;
     daysWorked: number;
     leaveDays: number;
+    /** Added to the total. */
+    bonusAmount: number;
+    /** Subtracted from the total. */
+    penaltyAmount: number;
+    /** Paid out mid-month, ahead of the regular payday — subtracted from
+     * the end-of-month total since the employee already received it. */
+    advanceAmount: number;
+    /** Subtracted from the total. */
+    loanInstallment: number;
+    /** Subtracted from the total. */
+    insuranceAmount: number;
     note?: string;
     createdBy?: string;
     createdAt: string;
